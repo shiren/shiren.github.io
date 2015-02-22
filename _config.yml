@@ -1,0 +1,12 @@
+# Site settings
+title: Shiren's Adventure 
+email: shirenbeat@gmail.com
+description: > # this means to ignore newlines until "baseurl:"
+    Let the games begin!
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://shiren.github.io" # the base hostname & protocol for your site
+twitter_username: shirenbeat 
+github_username: shiren 
+
+# Build settings
+markdown: kramdown
