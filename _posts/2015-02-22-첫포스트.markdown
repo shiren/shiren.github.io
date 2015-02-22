@@ -2,7 +2,7 @@
 layout: post
 title:  "지킬 테스트할겸 첫 포스트!"
 date:   2015-02-22 15:07:08
-categories: jekyll update
+categories: etc
 ---
 Github덕에 정말 간편하고 아무걱정없이 블로그를 만들수가 있구나..
 Node.js를 애정하는 관계로 Hexo와 고민하다가 결국 Jekyll로 결정.
