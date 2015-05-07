@@ -13,7 +13,7 @@ categories: javascript
     자바스크립트 상속에 대한 일반적인 오해들
 
 > 원문
-https://medium.com/javascript-scene/common-misconceptions-about-inheritance-in-javascript-d5d9bab29b0a
+https://medium.com/javascript-scene/common-misㅛconceptions-about-inheritance-in-javascript-d5d9bab29b0a
 
 <br>
 
