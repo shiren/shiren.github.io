@@ -9,11 +9,11 @@ categories: javascript
 내용상 중요하지 않은 부분은 생략했습니다.
 오역에 대한 제보 언제든지 환영합니다.
 
-    Common Misconceptions About Inheritance in JavaScript
+    Common Misconceptions About Inheritance in JavaScript by Eric Elliott
     자바스크립트 상속에 대한 일반적인 오해들
 
 > 원문
-https://medium.com/javascript-scene/common-misㅛconceptions-about-inheritance-in-javascript-d5d9bab29b0a
+https://medium.com/javascript-scene/common-misconceptions-about-inheritance-in-javascript-d5d9bab29b0a
 
 <br>
 
