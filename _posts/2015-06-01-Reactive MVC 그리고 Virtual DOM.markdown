@@ -37,7 +37,6 @@ categories: javascript
 React/Flux 콤보는 명확하게 Reactive 프로그래밍 원리에 영향을 받았지만 API와 아키택처는 일관성 없이 interactive와 reactive 패턴의 잡종이다.
 이게 무슨 의미인지 그리고 어떤 더 좋은 방법이 있는지는 이어서 설명하겠다.
 
-<br>
 ## 모듈간 통신의 이중성
 
 이중성(Duality)은 가끔 수학(물론 프로그래밍도)에서 직면할 수 있는 오래되고 강력한 컨셉이다.
@@ -46,6 +45,7 @@ React/Flux 콤보는 명확하게 Reactive 프로그래밍 원리에 영향을 �
 재미있는 이중성의 예는 The Legend of Zelda:A link to the Past라는 게임의 "어두운 세상"과 "밝은 세상"에서 볼 수 있다.
 어떤 퀘스트가 "밝은 세상"에서는 해결이 불가능한데 그럴 때는 "어두운 세상"으로 가서 이를 해결할 수 있다. 비록 두 종류의 월드는 같은 장소에 대한
 다른 관점일 뿐인데도 말이다.
+
 > 역: 같은 맵이 다크월드 컨셉과 라이트월트컨셉으로 나뉘는 것 같음
 
 ![Light and Dark Hyrule in the Legend of Zelda: Link to the Past](https://flockler.com/thumbs/1992/zelda_s830x0_q80_noupscale.jpg)
@@ -85,7 +85,6 @@ foo에서 bar로 향하는 화살표의 의미는 bar에 있는 데이터가 업
 리액티브가 인터랙티브에 비해서 주로 줄 수 있는 이점은 관심사의 분리이다. 인터랙티브에서는 무엇이 X에 영향을 주는지 알려면 x.update()와 같은 형태로 x를 사용하는 것들을 모두 검색해야 했다. 그러나 리액티브에서는 이런 것들이 모두 X에 정의되어 있으니 X만 살펴보면 된다.
 이런 속성은 스프레드시트 계산에서 일반적이다. 예를 들면 하나의 셀의 컨텐츠의 정의는 종속된 다른 셀의 변화에 관계없이 언제나 셀안에서 정의된다.
 
-<br>
 ##  어떻게 리액티브 패턴을 구현할 것인가?
 
 일반적인 리액티브 패턴의 구현은 이벤트 이미터(event emitters)로 알려진 것이다. 그래서 모듈X는 간단하게 모듈Y의 이벤트를 구독할 수 있고 X는 Y의 데이터를 통해
@@ -121,7 +120,6 @@ module.exports = {
 }
 ```
 
-<br>
 ##  Reactive MVC?
 
 모든 컴포넌트들이 리액티브한 싱글 페이지 앱의 MVC-like 아키텍처는 어떻게 보일까? 
@@ -138,7 +136,6 @@ module.exports = {
 
 그 리액티브 컨트롤러를 "인텐트(Intent)"라고 부른다. 
 
-<br>
 ##  Model-View-Intent
 
 인텐트는 유저의 인풋 이벤트를 모델이 이해하는 이벤트로 번역해주는 책임을 지고있다. 모델의 업데이트 측면에서 유저가 뭘하려 하는지를 설명하고
@@ -174,7 +171,6 @@ Circular Imports를 피하기 위해서 우리는 nodejs의 require를 이용하
 
 모델 간의 의존성을 가지려면 한 개의 모델이 다른 모델의 이벤트를 구독해야 하고 인텐트 간의 의존성도 같은 방식으로 구현한다.
 
-<br>
 ##  Virtual DOM에서 DOM으로
 
 정의에 따른다면 리액티브 컴포넌트들은 자신 외에 다른 컴포넌트에 직접적으로 변화를 주면 안된다. 그래서 MVI 트리오 역시 그렇게 하지 않는다.
@@ -195,12 +191,10 @@ Circular Imports를 피하기 위해서 우리는 nodejs의 require를 이용하
 명백히 리액트는 renderToString()를 가지고 있지만(백엔드에서 사용할 수 있도록) 이것은 아웃풋 뷰를 테스트하는 좋은 포맷은 아니다.
 MVI에서는 쉽게 순수한 버츄얼 엘리먼트들을 테스트할 수 있다.
 
-<br>
 ##  Example
 
 몇 주전 나는 [이런 리액트의 사용 예시](http://binarymuse.github.io/react-primer/build/index.html)들을 보게 되었고 이것들 중 하나를 [MVI와 Virtual DOM을 이용해 구현](http://staltz.com/mvi-example)해 봤다. 이를 통해 리액트와 비교해 볼 수 있을 것이다.
 
-<br>
 ##  React/Flux와의 차이점이 어떻게 되는가?
 
 MVI는 렌더링에 Virtual DOM을 사용하는 방향성이 있는 데이터 흐름의 아키텍처이다. React/Flux 역시 같은데 유사점은 거기까지다. MVI와의 다른 점은 아래와 같다. 
