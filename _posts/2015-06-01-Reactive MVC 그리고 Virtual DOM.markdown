@@ -251,8 +251,7 @@ MVI 뷰들에게 상태를 구현하게 하는 자유가 있기 때문에 제한
 MVI가 집중하는것은 펑션 같은 모듈들의 관심사의 분리를 가능케 하는 것이다. 현재 MVI에서도 올바르게 재사용가능한 UI 컴포넌트를 만드는건 아직 문제이다.
 왜냐하면 리액트 뷰 컴포넌트는 3개의 모델과 뷰 그리고 Intent 책임들을 가지고 있기 때문이다. 
 나는 이 문제의 가장 이상적인 해결책은 Virtual DOM 컨텍스트 안에서 사용 가능한 [Web Component](http://webcomponents.org/)라고 생각한다.
-이상적으로 우리는 내부 상태와 복잡한 동작을 포함하고 있는 <custom-element>를 만들어 사용할 수 있어야 한다. 마치 `<div>`처럼말이다.
-[자세한 내용은 여기를 참고하기 바란다](http://futurice.com/blog/combining-react-flux-and-web-components)
+이상적으로 우리는 내부 상태와 복잡한 동작을 포함하고 있는 `<custom-element>`를 만들어 사용할 수 있어야 한다. 마치 `<div>`처럼말이다. [자세한 내용은 여기를 참고하기 바란다](http://futurice.com/blog/combining-react-flux-and-web-components)
 
 ### 향후 계획
 
@@ -263,8 +262,7 @@ Model-View-Intent는 프레임웍으로 진화하게 될 것이거나 혹은 프
 나는 리액트를 사용하기 전에 virtual-dom을 사용해보기를 프론트엔드 개발자에게 강력하게 추천한다.
 API가 간단하고 한가지만 하는데, 나머지 작업은 약간의 자바스크립트로 직접 구현하면 된다.
 
-내 생각엔 "Just the UI"에 대해 리액트 보다는 조금 더 신용할 수 있는 것 같다. virtual-dom은 잘못된 인풋의 이벤트에 대해 유용한 에러를 던진다.
-[그리고 유용한 것들이 더 있다.](https://github.com/Matt-Esch/virtual-dom/wiki)
+내 생각엔 "Just the UI"에 대해 리액트 보다는 조금 더 신용할 수 있는 것 같다. virtual-dom은 잘못된 인풋의 이벤트에 대해 유용한 에러를 던진다. [그리고 유용한 것들이 더 있다.](https://github.com/Matt-Esch/virtual-dom/wiki)
 
 또 다른 유용한 것들은 RxJS이다. 이것은 다른 프레임웍에서 제공하고있는 저레벨의 이벤트 유틸리티 같은 것 들을 작성할 필요가 없게 해준다.
 애초에 프레임웍 자체가 필요 없을 수도 있다.
