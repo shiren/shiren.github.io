@@ -2,7 +2,7 @@
 layout: post
 title:  "Reactive MVC 그리고 Virtual DOM"
 date:   2015-06-01 11:50:00
-categories: javascript 
+categories: javascript
 ---
 
 ### "Reactive MVC 그리고 Virtual DOM"
