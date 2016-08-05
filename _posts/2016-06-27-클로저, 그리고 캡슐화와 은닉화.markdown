@@ -1,0 +1,256 @@
+---
+layout: post
+title:  "클로저, 그리고 객체화와 은닉화"
+date:   2016-06-27 10:07:08
+categories: javascript
+---
+
+![tit](https://cloud.githubusercontent.com/assets/389021/16572615/630f8574-42a5-11e6-8947-b77610584848.jpg)
+
+## 클로저와 객체
+
+클로저를 처음 접했을때 전혀 이해가 되지 않았던 기억이 난다. 클로저를 제대로 이해하려면 자바스크립트 코어에대한 지식이 적지 않게 필요하기 때문이다. 개인적으로는 자신이 사라지기전까지 스코프의 종결을 미루기에, 바꿔 말하면 자신의 사라지면 자신의 스코프도 종결해 버리기에 Closure(종결) 라고 한때 간단하게 정리 했었다.(뭐 틀린말은 아니다) 클로저에 관한 설명은 [여기](http://meetup.toast.com/posts/86) 링크에서 자세하게 알아 볼 수 있다. 참으로 훌륭한 글이다. 간단하고 빠르게 이해를 하기에는 MDN의 [클로저 파트](http://developer.mozilla.org/en/docs/Web/JavaScript/Closures) 상단에 적혀 있는 내용이 적절 하다고 생각한다.
+
+> Closures are functions that refer to independent (free) variables (variables that are used locally, but defined in an enclosing scope). In other words, these functions 'remember' the environment in which they were created.
+
+즉 생성될 당시의 환경을 기억하는 함수를 말한다. 환경이라고 하면 스코프체인 자체를 말하는데 스코프체인을 통해 접근 할 수 있는 변수나 함수가 스코프가 해제되어야 할 시점에도 사라지지 않는다는 말이다. 이런 스코프는 객체가 갖는 성질인 캡슐화와 은닉화를 구현하는데 사용될 수 있다. 클로저가 생성 되면서 **스테이트를 포함한 행위** 를 묶을 수 있게 되는데 이렇게 묶여 있는 클로저를 객체를 생성하는 또 다른 방법이라고 생각할 수 있다.(물론 객체를 어떻게 정의하냐에 따라 다를 수 있겠지만..) 컨텍스트를 this로 접근하는 객체와는 다르게 컨텍스트를 스코프로 접근하는 객체인것이다.
+
+이 아티클은 클로저를 활용하는 몇가지 방법에 대해 이야기하려 한다.
+
+## 카운터구현
+
+카운터의 구현은 클로저를 설명하는 예제로 자주 등장하는데 사실 클로저를 설명하는데 이만한게 없는것 같다.
+이번에도 카운터 구현으로 이야기를 진행 한다
+
+### 일반 객체를 이용한 카운터
+
+일반적인 객체를 이용해서 카운터를 구성한다면 다음과 같은 코드를 만들게 된다.
+
+``` javascript
+    var counter = {
+        _count: 0,
+         count: function() {
+            return this._count += 1;
+        }
+    }
+
+    console.log(counter.count()); // 1
+    console.log(counter.count()); // 2
+```
+
+객체리터럴로 객체를 생성하고 객체안에 \_count라는 어트리뷰트를 이용해 숫자를 하나씩 카운팅 하고 있다. 특별할것은 없다.
+한개의 카운터만으로는 부족하니 카운터를 여러개 만들수 있도록 생성자로 구현해보자
+
+``` javascript
+    function Counter(){
+        this._count = 0;
+    }
+
+    Counter.prototype.count = function() {
+        return this._count += 1;
+    };
+
+    var counter = new Counter();
+    var counter2 = new Counter();
+
+    console.log(counter.count()) //1
+    console.log(counter.count()) //2
+    console.log(counter2.count()) //1
+```
+
+this를 이용해 컨텍스트에 접근하는 일반적인 객체의 모습이다.
+여기서 중요한것은 **\_count라는 변수를 사용했다는 점이고 그 변수의 값을 증가시키는 행위를 하는 함수가 존재** 한다는 점이다.
+
+-   숫자를 저장할 \_count라는 멤버 변수
+-   값을 증가시키는 행위를 하는 멤버 함수 count()
+
+### 클로저를 이용한 카운터
+
+위와같은 내용을 클로저를 통해 구현해보자.
+
+``` javascript
+    var counter = (function() {
+        var _count = 0;
+
+        return function() {
+            return _count += 1;
+        };
+    })();
+
+    console.log(counter());
+    console.log(counter());
+```
+
+코드는 조금 다를지 몰라도 생성된 객체로만 본다면 컨텍스트의 \_count라는 변수를 this를 통해서 접근했고 이번엔 스코프를 이용해서 접근한것만 차이가 있을 뿐 큰 차이가 없는 동일한 동작을 한다. 구성요소도 동일하게 숫자를 저장하는 \_count라는 변수가 있고 count를 하는 함수가 있다. 객체의 캡슐화와 은닉화에 부합한다.
+카운터를 여러개 만들 수 있도록 생성함수를 만들어보자 [IIFE ](https://en.wikipedia.org/wiki/Immediately-invoked_function_expression)를 기명함수로 바꾸면 된다. 함수는 팩토리라고 이름을 지었다.
+
+``` javascript
+    function counterFactory() {
+        var _count = 0;
+
+        return function() {
+            _count += 1;
+
+          return _count;
+       };
+    }
+
+    var counter = counterFactory();
+    var counter2 = counterFactory();
+
+    console.log(counter()); //1
+    console.log(counter()); //2
+    console.log(counter2()); //1
+```
+
+물론 여기서 생성되는 함수의 갯수로 인한 성능에 대해 의문을 품을수 있겠지만 여기서는 성능보다는 구현 내용에 집중하고자 한다.
+그때 그때 상황에 맞게 활용할 수 있다는게 더 중요한 점이다. 긴 함수들은 나누고 위치를 옮겨 중복을 제거하는 방법도 있다
+
+이렇게 클로저를 이용해 구현하게 되면 컨텍스트에 접근할때 스코프를 이용해 접근하기 때문에 this라는 키워드를 쓸필요도 없다. 이렇게 만들어진 카운터는 어느 객체에 붙여서 사용해도 동일한 컨텍스트의 결과를 내주고 이벤트 리스너로 사용해도 동일한 컨텍스트를 유지한 상태로 사용할 수 있다.
+
+``` javascript
+    var counter = counterFactory();
+
+    var app = {
+        counter: counter
+    };
+
+    var app2 = {
+        counter: counter
+    };
+
+    console.log(app.counter()); //1
+    console.log(app.counter()); //2
+
+    console.log(app2.counter()); //3
+```
+
+은닉화의 측면에서 본다면 오히려 객체보다는 클로저의 활용에서 더 극대화 된다. \_count라는 변수는 외부에서 접근 할 방법이 전혀 없기 때문이다.
+자바스크립트의 모든 객체는 프로퍼티들의 외부접근이 모두 허용된다. 클로저외에는 차단할 방법이 전혀 없다.
+
+### 커링을 이용한 카운터
+
+지금까지 만들어본 카운터는 숫자를 1씩 증가시키도록 만들었는데 이제 증가값을 달리하는 팩토리를 만들어보자. 만들 함수는 엄밀히 따지만 팩토리의 팩토리이다. 그래서 팩토리 메이커라고 정했다. 여기서는 간단한 커링을 이용해 만드는데 자바스크립트에서의 커링은 클로저로 쉽게 구현된다.
+
+``` javascript
+    function counterFactoryMaker(incValue) {
+        return function factory(initValue) {
+            var _count = initValue;
+
+            return function counter() {
+                return _count += incValue;
+            };
+        };
+    }
+
+    var counterFactory = counterFactoryMaker(2);
+    var counter = counterFactory(0);
+    var counter2 = counterFactory(1);
+
+    console.log(counter()); // 2
+    console.log(counter()); // 4
+
+    console.log(counter2()); // 3
+    console.log(counter2()); // 5
+```
+
+애초에 인자가 하나라 커링이 성립되지 않는다는 의견을 피하고자 초기값도 받을수 있도록 만들어봤다. 각각의 함수에 이해를 돕고자 기명함수를 이용해서 함수를 리턴했다. factory()입장에서는 counterFactoryMaker()라는 한개의 스코프를 물고있는 클로저고 counter()입장에선 counterFactoryMaker()와 factory()의 스코프 두개를 물고있는 클로저다. 사실 자바스크립트 개발을 할때 커링을 적극적으로 응용해서 개발을 하고 있지는 않지만 lodash같은 함수형 프로그래밍 라이브러리에서 사용하는 하스켈 기법인 [Lazy evalution](https://en.wikipedia.org/wiki/Lazy_evaluation) 같은 경우는 커링 즉 파셜 어플리케이션의 장점을 최대한 살려 큰 퍼포먼스의 향상을 얻을수 있게 하니 충분한 이해가 필요하다고 생각한다. 최근엔 일반화된 파이프라인을 제공하는 함수형 프로그래밍 라이브러리인 [Ramda](http://ramdajs.com/0.21.0/index.html) 도 등장했다.
+
+### 객체와 클로저를 혼용한 카운터
+
+자바스크립트로 무언가를 개발할때는 객체와 클로저를 적절히 혼용하면서 개발하게 된다. 클로저를 사용하지 않고서는 이벤트 리스너를 적용할때 애로 사항이 꽃피게되고 또 클로저로 모든것을 만들게 되면 그것 또한 애로 사항이 꽃피게 된다. 그래서 적절하게 혼용해서 사용한다. 객체 리터럴로 객체를 생성하면서 클로저를 조합하면 자바스크립트에는 존재하지 않는 접근제한자를 흉내낼수가 있다. 이번에는 동작에 해당하는 메서드들이 조금 더 추가된다.
+
+``` javascript
+    function counterFactory2() {
+        var _count = 0;
+
+        function count(value) {
+            _count = value || _count;
+
+            return _count;
+        }
+
+        return {
+            count: count,
+            inc: function() {
+                return count(count() + 1);
+            },
+            dec: function() {
+                return count(count() - 1);
+            }
+        };
+    }
+
+    var counter = counterFactory2();
+
+    console.log(counter.inc());
+    console.log(counter.inc());
+    console.log(counter.dec());
+```
+
+자바스크립트 싱글톤 객제를 구현할때 자주 사용하는 [Module Pattern](https://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatternjavascript) 의 전형적인 모습이다. 숨길 내용은 클로저 내부에 숨기고 인터페이스들만 외부로 노출한다. inc() 메서드와 dec() 메서드는 각각 값을 증가시키고 값을 감소 시켜주는 동작을 한다. 접근제한자를 사용하진 않았지만 여기서는 \_count라는 멤버가 클로저에 숨어 있는 private 멤버라고 할 수 있다. 앞서 설명 했듯 클로저에만 존재하는 변수는 외부에서 어떤 방법으로도 접근이 불가능 하다. 하지만 더글러스 크록포드가 말했던 *privileged method* 를 따로 만들어 직접적이진 않지만 간접적으로 private한 멤버에 접근하는 방법을 마련해 줄수 있다. 여기서는 count() 함수가 바로 *privileged method* 역할을 한다. count() 함수에 인자를 넘기면 \_count변수에 값이 세팅되고 인자를 넘기거나 넘기지 않더라도 \_count의 값을 리턴 해준다. 즉 값을 넘기면 세터로 값을 넘기지 않으면 게터로 동작한다. Objective-C에서 property로 멤버를 선언 하게되면 자동으로 만들어주는 접근자 메서드와 비슷한 역할을 하게된다. 이렇게 *privileged method* 를 구현하면 오버라이드로 외부에서 객체를 확장하는것도 가능하다.
+이 counterFactory2가 만드는 카운터를 확장해 보자.
+
+``` javascript
+    function counterFactory2Ext() {
+        var counter = counterFactory2();
+        var count = counter.count;
+
+        counter.inc = function() {
+            return count(count() + 2);
+        };
+
+        return counter;
+    }
+
+    var counterExt = counterFactory2Ext();
+
+    console.log(counterExt.inc()); // 2
+    console.log(counterExt.inc()); // 4
+    console.log(counterExt.inc()); // 6
+    console.log(counterExt.dec()); // 5
+```
+
+counterFactory2()를 통해 만들어진 객체의 메소드를 덮어써 오버라이드 했다. 이제 카운터는 inc() 함수로 2씩 값을 증가 시키게 된다. 위 구현 내용은 데이터를 들고있는 클로저 하나와 행위를 가지고 있는 객체의 조합이다. 이런 방식의 구현 내용이 자주 쓰이지는 않겠지만 상황에 따라서는 좋은 방법이 될 수 있다. 위 내용을 생성자를 이용해서 다시 만들어 보면 아래와 같이 구현도 가능하다.
+
+``` javascript
+    function Counter() {
+        var _count = 0;
+
+        this.count = function(value) {
+            _count = value || _count;
+            return _count;
+        }
+    }
+
+    Counter.prototype.inc = function() {
+        var count = this.count;
+
+        return count(count() + 1);
+    };
+
+    Counter.prototype.dec = function() {
+        var count = this.count;
+
+        return count(count() - 1);
+    };
+
+    var counter = new Counter();
+
+    console.log(counter.inc()); // 1
+    console.log(counter.inc()); // 2
+    console.log(counter.inc()); // 3
+```
+
+생성자를 클로저 스코프로 활용했다. 이런 류의 구현은 숨기고자 하는 맴버가 원시타입이 아닌 객체 일때 세터는 두지않고 게터만 클로저로 사용하는 방식이 조금 더 실용적인 구현이 될 수 있겠다.
+
+## 정리
+
+클로저를 두고 객체다 라고 정리한다면 당연히 무리가 따르겠지만 캡슐화와 은닉화를 구현하는 또 다른 방법이라고 클로저를 이해한다면 조금 더 쉽게 접근 할수 있다고 생각한다. 클로저와 객체를 잘 조합해 자바스크립트만의 장점을 살린 객체지향 프로그래밍을 구현하는데 도움이 되었으면 한다. 짧은 내용이 될수도 있지만 클로저를 메모리 성능에 관점에서 살펴보는 주제로 다음 기회에 다시 다뤄보려고 한다.
+
+## 참고
+
+-   [자바스크립트의 스코프와 클로저](http://meetup.toast.com/posts/86)
+-   [Mozilla Developer Network Closures](https://developer.mozilla.org/en/docs/Web/JavaScript/Closures)
+-   [Private Members in JavaScript](http://javascript.crockford.com/private.html)
+-   [Learning Javascript Design Patterns by Addy Osmani](https://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatternjavascript)
