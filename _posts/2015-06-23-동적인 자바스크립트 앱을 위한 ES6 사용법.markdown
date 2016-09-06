@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "동적인 자바스크립트 앱을 위한 ES6 사용법"
+title:  "(번역)동적인 자바스크립트 앱을 위한 ES6 사용법"
 date:   2015-06-23 14:50:00
 categories: javascript
 ---
@@ -17,7 +17,7 @@ http://medium.com/javascript-scene/how-to-use-es6-for-isomorphic-javascript-apps
 이제 먼지는 좀 가라앉았고, 나는 결국 프로덕션 앱에 ES6를 사용하기 시작했다.
 그리고 [isomorphic Javascript](https://github.com/ericelliott/isomorphic-express-boilerplate)를 작업하기 때문에 Node.js와 Browser 둘 다 작동 해야한다.
 
-이글은 ES6의 기능이나 동적인 자바스크립트에 대한 깊은 튜토리얼은 아닐것이다. 기본적인 내용으로 Babel 환경에서 개발하고 실행할 수 있게 
+이글은 ES6의 기능이나 동적인 자바스크립트에 대한 깊은 튜토리얼은 아닐것이다. 기본적인 내용으로 Babel 환경에서 개발하고 실행할 수 있게
 하는데에 촛점을 두고있다.
 
 ### Use Babel
@@ -86,11 +86,11 @@ $ npm install --save-dev eslint
 
 `env`와 `ecmaFeatures` 키에 해당되는 내용을 살펴보면 ESLint가 ES6 코드를 만났을때 에러가 발생하는 것을 방지할 수 있다.
 
-리액트 코드에서 자주쓰이는 ES7의 오브젝트 rest나 spread 프로퍼티를 사용하고자 한다면 `babel-eslint`가 필요할 것이다. 
+리액트 코드에서 자주쓰이는 ES7의 오브젝트 rest나 spread 프로퍼티를 사용하고자 한다면 `babel-eslint`가 필요할 것이다.
 
 #### Compiling
 
-바벨 문서에는 컴파일링이 쉬운것 처럼 말한다. 
+바벨 문서에는 컴파일링이 쉬운것 처럼 말한다.
 
 ```
 $ babel script.js --out-file script-compiled.js
