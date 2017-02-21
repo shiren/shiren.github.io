@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "쉽게 이해하는 자바스크립트 프로토타입 체인"
-date:   2015-02-21 13:58:08
+date:   2017-02-21 13:58:08
 categories: javascript
 ---
 
