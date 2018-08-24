@@ -26,8 +26,8 @@ navbar-links:
   About Me: "aboutme"
   SoundCloud: "http://www.soundcloud.com/shiren"
   Project:
-    - ToastUI Editor: "https://nhnent.github.io/tui.editor/"
-    - ToastUI Chart: "https://nhnent.github.io/tui.chart/"
+    - ToastUI Editor: "https://github.com/nhnent/tui.editor"
+    - ToastUI Chart: "https://github.com/nhnent/tui.chart"
     - Upbo emacs karma integration: "https://github.com/shiren/upbo"
     - Narrow Karma Reporter: "https://www.npmjs.com/package/karma-narrow-reporter"
 
