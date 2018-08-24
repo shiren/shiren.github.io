@@ -25,7 +25,7 @@ description: Let the games begin.
 navbar-links:
   About Me: "aboutme"
   SoundCloud: "http://www.soundcloud.com/shiren"
-  Project:
+  Opensources:
     - ToastUI Editor: "https://github.com/nhnent/tui.editor"
     - ToastUI Chart: "https://github.com/nhnent/tui.chart"
     - Upbo emacs karma integration: "https://github.com/shiren/upbo"
