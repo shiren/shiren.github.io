@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "코드리뷰로 시작하는 건강한 개발 문화"
-date:   2020-01-10 15:00:00
+date:   2020-01-10 16:00:00
 categories: codereview, development
 ---
 
