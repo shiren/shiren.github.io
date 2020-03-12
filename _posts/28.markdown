@@ -1,0 +1,231 @@
+---
+layout: post
+title:  "은닉을 향한 자바스크립트의 여정"
+date:   2020-03-12 11:34:00
+categories: javascript, ecmascript, private
+---
+
+# 은닉을 향한 자바스크립트의 여정
+
+ECMAScript 클래스 필드(class field) 명세중에 `Private field` 즉 `Private Property` (이하 Private 속성) 가 있다. 클래스 필드 스펙은 Stage 3(Candidate)까지 올랐으니 아마 곧 Stage 4(Finished)를 거쳐 표준 스펙이 될 것이다. 사실 초기에 명세 문서를 봤을 때는 "드디어 private이 생기는건가?"하는 기대감과 "문법이 좀 별론데"라는 실망감이 있었을 뿐 뭔가 현실감은 없었다. 그렇게 시간이 흘러 기억 속에서 잊힌 채로 지내다가 얼마전에 타입스크립트 3.8에서 정식으로 지원한다는 소식을 들었고 이를 계기로 Private 속성 에 대해 제대로 알아보기로 했다. 물론 이제 프로젝트에서도 적극적으로 사용할 생각이다. public 한 클래스 필드는 바벨 플러그인 [babel-plugin-proposal-class-properties](https://babeljs.io/docs/en/babel-plugin-proposal-class-properties)을 통해 이미 예전부터 아주 유용하게 사용하고 있었다.
+
+
+## 프라이버시가 없는 설움
+
+객체의 private 한 속성을 만들 수 없었던 자바스크립트에서는 몇 가지 대안을 사용해왔다. 다른 클래스 기반의 언어처럼 근본적으로는 private 하게 만들 수 없었기 때문에 컨벤션으로 약속하거나 비슷한 효과를 주는 꼼수를 사용했었다.
+
+컨벤션을 이용한 방법으로는 관용적으로 가장 많이 사용되는 것이 `_` 즉 언더스코어 프리픽스를 속성 명에 사용하는 것이다. 이런 방법은 파이썬에서도 사용된다.
+
+```javascript
+function SomeConstructor() {
+  this._privateProp = 'don't touch this';
+  this.publicProp = 'you can touch this';
+}
+```
+
+더 올드하고 구질구질해 보이기 위해 예제코드에서 class 키워드 대신 함수 생성자를 사용했다.
+
+이 방법은 컨벤션을 이용해 private로 취급할 뿐이지 실제로는 public으로 동작하기 때문에 외부에서 얼마든지 접근할 수 있었다. 하지만 `_` 가 붙은 필드나 메서드는 외부에서 사용하면 안 된다는 약속은 코드 가독성을 꽤 높이는 데 일조를 했었다고 생각한다. 마치 `for`문에 사용하는 인덱스 변수를 아무 생각 없이 `i`로 사용했었던 것과 마찬가지로, 약속대로 일관성 있게만 사용한다면 꽤 유용한 방법이었다. 더글라스 크록포드(Douglas Crockford, 이하 더글라스)는 [블로그](https://www.crockford.com/code.html)를 통해 이런 방법은 private이 아닌 필드를 마치 private로 동작하는 것으로 오인할 수 있으니 피해야 한다고 했지만 개발자 간의 약속이 확실하고 일관성만 유지된다면 괜찮은 방법이었다고 생각한다. JSDoc이 보편화된 뒤로는 문서 작성을 자동화 할 수 있는 본래의 목적 외에도 코드 내의 JSDoc 태그를 이용해서 여러 가지 정보와 편의 기능을 제공하는 에디터가 늘었다. JSDoc은 문서 자동화 도구임과 동시에 언어의 표현력을 주석으로 극복한 확장 문법이 되었다. JSDoc에서는 `@private` 태그를 사용해 해당 멤버가 private 함을 표현했다. `_` 보다는 훨씬 명시적이고 문서도 자동으로 만들어지니 얼마나 좋은가? 자바스크립트 진영에서는 점점 `_` 를 사용하지 않게 된다. 나 역시 동일한 이유로 `_` 의 사용을 컨벤션으로 금지하는 것에 찬성했다.
+
+근본적으로 접근이 불가능한 private 속성을 만드는 방법으로는 클로저를 이용한 방법이 있다. 이는 더글라스가 `_` 대신 사용하라고 제안한 방법이기도 하다. 자바스크립트가 늘 그랬듯 이상하거나 획기적인 다른 방법이 있을 수도 있겠지만 클로저를 사용하는 방법이 제일 많이 사용된다. 사실 클로저를 적절히 사용한 예이기도 하다.([참조: 클로저, 그리고 캡슐화와 은닉화](https://blog.shiren.dev/2016-06-27-%ED%81%B4%EB%A1%9C%EC%A0%80,-%EA%B7%B8%EB%A6%AC%EA%B3%A0-%EC%BA%A1%EC%8A%90%ED%99%94%EC%99%80-%EC%9D%80%EB%8B%89%ED%99%94/))
+
+```javascript
+function SomeConstructor() {
+  const privateProp = 'dont touch this';
+  this.publicProp = 'you can touch this';
+
+  this.doSomethingWithPravateProp = () => { ... }
+}
+```
+
+`this`를 사용해 데이터에 접근하는 문법과 모양새가 달라지기 때문에 `this` 컨텍스트와 혼용할 때는 코드의 일관성을 잃어 가독성이 떨어질 수 있겠지만 효과적으로 데이터를 격리할 수 있었다. 인스턴스 컨텍스트와 차원이 분리될 정도의 격리다. 이러한 접근 방법은 데이터를 숨기는 것에도 유용하지만 메서드를 숨기는 데도 유용하다. 이런 특성을 이용해서 흔히 말하는 [모듈 패턴](https://coryrylan.com/blog/javascript-module-pattern-basics)을 구현했었다.
+
+```javascript
+function SomeModule() {
+  const privateProp = 'dont touch this';
+  const publicProp = 'you can touch this';
+
+  _doSomethingWithPrivateProp = () => { ... }
+
+  const publicMethod = () => {
+    _doSomethingWithPrivateProp();
+    // ...
+  }
+
+  return {
+    publicProp,
+    publicMethod
+  }   
+}
+```
+
+모듈 패턴은 특정 부분(고수준 인터페이스나 ES6의 Module을 사용할 수 없는 상황)에선 아직 유용하지만 ES6 Module(이후 ESM)의 등장으로 FE 프로젝트 코드 베이스에서 사라져갔다. 내가 실제로 모듈 패턴을 사용해서 개발했던 때가 언제인지도 사실 기억이 나질 않는다. 최소 5년은 넘는다. 사실 이런 류의 모듈 패턴이 ESM 모태이기도 하고 해결하고자 하는 문제도 동일하다. 심지어 웹팩을 통해 변환된 ESM의 변환 코드를 보면 기존의 모듈 패턴과 비슷한 방법이 사용된다. private과 같은 은닉성에 대한 갈증은 사실 ESM을 통해 어느 정도 해결되기도 했지만, 생성자의 인스턴스 컨텍스트별로 private 데이터를 만들어야 할 상황에서는 크게 달라진 점이 없었다. 애초에 방향이 다르다.
+
+`Symbol`을 사용하면 조금 더 ECMAScript 다운 꼼수의 prviate 속성을 만들 수 있다. 사실 꼼수라기보다는 ES6의 자원을 적절히 사용한 최적의 방법이라고 생각한다. 예전에 생각해보곤 멋진 생각이라고 지혼자 좋아했었는데 아직 실무에서 사용해보진 못했다. 그리고 뭐 이제 private을 정식으로 지원하니까..
+
+```typescript
+const privateMethodName = Symbol();
+const privatePropName = Symbol();
+
+class SomeClass {
+  [privatePropName] = 'dont touch this';;
+  publicProp = 'you can touch this';
+
+  [privateMethodName]() {
+    console.log('private method');
+  }
+
+  publicMethod() {
+    this[privateMethodName](this[privatePropName]);
+  }
+}
+```
+
+모듈 스코프 안에서는 symbol을 사용할 수 있어 해당 필드나 메서드에 접근할 수 있지만, symbol을 export 하지 않는 한 외부에서는 접근할 방법이 없다. 접근할 필드의 이름이 무엇인지 모르니까 말이다. 이 방법은 속성의 이름을 다른 차원으로 격리한 케이스다.
+
+
+## 나이스 샵(#)
+
+아무튼, 드디어 자바스크립트에서도 진정한 의미의, 꼼수가 아닌 언어가 제공하는 정상적인 방법으로 클래스에 private 속성을 만들 수 있게 되었다. [TC39의 스펙문서](https://github.com/tc39/proposal-class-fields/)를 토대로 간단하게 특징을 요약하면 아래와 같다.
+
+-   Stage-3 단계에 있는 스펙으로 특별한 결격 사유가 없는 한 표준 스펙이 될 것이다. 물론 변경되거나 개선될 여지는 있다.
+-   `private`과 같은 키워드를 사용하지 않는다. 대신 `#` 즉 샵 프리픽스를 사용한다. **키워드가 아니라 프리픽스다.** 속성 명 앞에 `#`이 붙으면 Private 필드로 동작한다. - Class Field Decalarations 스펙의 일부다. public과 다른 점은 클래스의 필드 선언을 통해서만 만들 수 있다. 즉 동적으로 객체에 private 필드를 추가할 수 없다.
+-   메서드에는 제한적이다. **메서드 선언으로 사용할 수 없다.** private 메서드를 만들려면 함수 표현식으로 정의해야 한다.
+    -   어디까지나 현재로서는 그렇다는 말이다. 스펙이 업데이트될 수도 있다. ([Class fields and private methods: Stage 3 update](https://docs.google.com/presentation/d/1Q9upYkWnPjJaVc8k9q3U6NekDch8tsz7CgV-Xm55-5Y/edit#slide=id.p))
+-   **Computed Property Name을 사용할 수 없다.** `#foo` 자체만 식별자로 허용되고 `#[fooName]` 이건 문법 오류다.
+-   **모든 Private 필드는 소속된 클래스에 고유한 스코프를 갖는다.** 그렇기 때문에 독특한 특징이 있다.(그 특징은 뒷부분에서 다룬다)
+
+아직은 보통의 클래스 기반 언어만큼의 지원은 아니다. 약간의 제약은 있지만, 아직 stage-3이고 언제든 업데이트되거나 개선될 여지가 있다. 왜 private method가 초반에 같이 논의되지 않았는지는 궁금하다.
+
+이제 사용해보자. (에러 메시지를 확인하기 위해 타입스크립트 컴파일러를 사용한다. 하지만 예제코드는 ECMAScript 문법만 사용한다)
+
+```typescript
+class Human {
+  #age = 10;
+}
+
+const person = new Human();
+```
+
+간단하게 `#` 프리픽스를 이용해서 `Human` 클래스에 `#age`라는 속성을 만들어봤다.
+
+정말 private 한지 돌직구로 접근해보자.
+
+```typescript
+console.log(person.#age); // Error TS18013: Property '#age' is not accessible outside class 'Human' because it has a private identifier.
+```
+
+당연히 클래스 외부에서 접근할 수 없는 속성이라는 에러 메시지가 출력된다.
+
+그리고 미리 말했듯 `#`은 키워드가 아니라 속성 이름의 프리픽스다.
+
+```typescript
+class Human {
+  #age = 10;
+
+  getAge() {
+    return this.age; // Error TS2551: Property 'age' does not exist on type 'Human'. Did you mean '#age'?
+  }
+}      
+```
+
+`#` 없이는 접근할 수 없다. 식별자의 이름의 일부를 제외하고 접근했으니 없는 속성에 접근한 것이다.
+
+이제 정상적으로 private 속성을 클래스에서 정의하고 사용해보자.
+
+```typescript
+class Human {
+  #age = 10;
+
+  getAge() {
+    return this.#age; 
+  }
+}
+
+const person = new Human();
+
+console.log(person.getAge()); // 10
+```
+
+외부에 `getAge()` 라는 게터(getter)를 노출해 `#age` 값에 접근할 수 있게 했다.
+
+당연한 거지만 private로 만든 속성은 해당 private 속성이 정의된 클래스를 제외하고는 어디에서도 접근이 불가능하다. 상속받은 클래스에서도 접근이 불가능하다. 자바스크립트가 이렇게 정상적일 리가 없어라면서 의심할 사람들을 위해 당연할지라도 언급해봤다.
+
+```typescript
+class Human {
+  #age = 10;
+
+  getAge() {
+    return this.#age; 
+  }
+}
+
+class Person extends Human {
+  getFakeAge() {
+    return this.#age - 3; // Property '#age' is not accessible outside class 'Human' because it has a private identifier.
+  }
+}
+```
+
+`Human` 을 상속받은 `Person` 에서는 `Human`의 private 속성 `#age`에 접근할 수 없다.
+
+하지만 약간 독특한 특징이 있다. private 속성의 독특함이 아니라 자바스크립트이기 때문에 유달리 독특해 보이는 특징이다. 그리고 이 특징은 상단에 정리한 특징 중 **"모든 Private 필드는 소속된 클래스에 고유한 스코프를 갖는다."** 라는 내용에 의해 발생한다.
+
+```typescript
+class Human {
+  age = 10;
+
+  getAge() {
+    return this.age; 
+  }
+}
+
+class Person extends Human {
+  age = 20;
+
+  getFakeAge() {
+    return this.age;
+  }
+}
+
+const p = new Person();
+console.log(p.getAge()); // 20
+console.log(p.getFakeAge());  // 20
+```
+
+위의 예제는 private 을 전혀 사용하지 않은 코드다. `Human`을 상속한 `Person`객체에서 `age`를 중복해서 선언하고 다른 이름의 게터 `getFakeAge()`를 정의했다. public 속성이라면 **this 컨텍스트에는 age 속성이 하나기 때문에 age의 값이 20이다.** 이는 `Human`의 `getAge()`를 실행하던 `Person`의 `getFakeAge()`를 실행하던 동일하게 20이다. 애초에 `this`가 가리키는 **인스턴스 컨텍스트에 `age`는 하나밖에 없기 때문이다.**
+
+자 이제 `age`를 private 속성 `#age`로 바꿔보자.
+
+```typescript
+class Human {
+  #age = 10;
+
+  getAge() {
+    return this.#age; 
+  }
+}
+
+class Person extends Human {
+  #age = 20;
+
+  getFakeAge() {
+    return this.#age;
+  }
+}
+
+const p = new Person();
+console.log(p.getAge()); // 10
+console.log(p.getFakeAge());  // 20
+```
+
+동일하게 `this.#age`에 접근하는 `getAge()`와 `getFakeAge()`의 결과가 다르다. 자바스크립트를 오래 개발해 왔던 사람이라면 충격과 공포 그리고 혼돈이 느껴질 것이다. 이게 뭐지?
+
+`#age` 즉 private 속성은 그동안 우리가 알고 있던 this 의 그 컨텍스트와는 다른 방식으로 저장된다. **기존처럼 인스턴스별로 독립적인 공간을 갖지만, 추가로 클래스 별로 독립적인 공간을 갖는 것이다.** 쉽게 말하면 `Human` 클래스 스코프의 `#age`와 `Person` 클래스 스코프의 `#age`는 다르다는 것이다. 그러므로 `Human` 클래스에 속한 `getAge()`가 실행될때는 `Human`의 `#age`에 접근하고 `Person`의 `getFakeAge()`가 실행될 때는 `Person`의 `#age`에 접근하는 것이다. 바로 그게 "모든 Private 필드는 소속된 클래스에 고유한 스코프를 갖는다."라는 문장의 의미이다.
+
+전반적으로 Private 필드 라는 개념에서 크게 벗어나지 않지만, **마지막에 다룬 내용은 제대로 이해하지 않고 사용하면 특정 상황에서 발견하기 힘든 오류를 만들 수 있을 것 같다. 조심하자.**
+
+
+## 끝으로
+
+처음 TC39에서 스펙을 발견하고도 한동안 1도 관심을 두지 않을 정도로 private이라는 개념에 대해서 무심했다. private 이랄것이 없는 객체를 다루는 환경에서 오랫동안 개발을 해서 그런지 모르겠지만 사실 큰 필요성을 느끼지 못하고 있었다. 그런 개념이 없었기에 오히려 좀 더 의미적으로 식별자를 분리해 조심히 다루고 클로저를 적절히 활용하는 게 몸에 뱄다. 그게 어찌 보면 더 (자바스크립트 적으로) 명확한 면도 있었다. 앞으로 자바스크립트 진영에 private이란 개념이 클래스나 어플리케이션 설계에 어떤 영향을 주게 될지 기대된다. 아마도 자바스크립트 개발자들은 private 속성을 이용해 또 다른 꼼수에 악용(?) 가능성이 크다. 꼼수에 새로운 가능성을 열어줬다고나 할까? **아무튼 난 이래서 자바스크립트가 좋다. 라고 마무리를 지으며 와인 한잔과 함께 외롭게 석양을 바라보며 씁쓸한 미소를 짓는다.**
