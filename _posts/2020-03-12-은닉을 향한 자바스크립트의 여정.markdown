@@ -34,7 +34,7 @@ function SomeConstructor() {
   const privateProp = 'dont touch this';
   this.publicProp = 'you can touch this';
 
-  this.doSomethingWithPravateProp = () => { ... }
+  this.doSomethingWithPrivateProp = () => { ... }
 }
 ```
 
