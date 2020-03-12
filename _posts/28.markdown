@@ -12,13 +12,13 @@ ECMAScript 클래스 필드(class field) 명세중에 `Private field` 즉 `Priva
 
 ## 프라이버시가 없는 설움
 
-객체의 private 한 속성을 만들 수 없었던 자바스크립트에서는 몇 가지 대안을 사용해왔다. 다른 클래스 기반의 언어처럼 근본적으로는 private 하게 만들 수 없었기 때문에 컨벤션으로 약속하거나 비슷한 효과를 주는 꼼수를 사용했었다.
+객체의 private 한 속성을 만들 수 없었던 자바스크립트에서는 몇 가지 대안을 사용해왔다. 다른 클래스 기반의 언어처럼 근본적으로는 private 하게 만들 수 없었기 때문에 컨벤션으로 약속하거나 비은닉을 향한 자바스크립트의 여정슷한 효과를 주는 꼼수를 사용했었다.
 
 컨벤션을 이용한 방법으로는 관용적으로 가장 많이 사용되는 것이 `_` 즉 언더스코어 프리픽스를 속성 명에 사용하는 것이다. 이런 방법은 파이썬에서도 사용된다.
 
 ```javascript
 function SomeConstructor() {
-  this._privateProp = 'don't touch this';
+  this._privateProp = 'dont touch this';
   this.publicProp = 'you can touch this';
 }
 ```
