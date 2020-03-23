@@ -2,7 +2,7 @@
 layout: post
 title:  "개발자와 명상"
 date:   2020-03-23 18:20:00
-categories: life, meditation
+categories: life, meditation, productivity
 ---
 
 # 개발자와 명상
