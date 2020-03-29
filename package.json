@@ -15,11 +15,29 @@
   },
   "dependencies": {
     "gatsby": "^2.19.45",
+    "gatsby-plugin-typescript": "^2.3.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
   "devDependencies": {
-    "prettier": "^1.19.1"
+    "@types/jest": "^25.1.4",
+    "@types/puppeteer": "^2.0.1",
+    "@types/react": "^16.9.27",
+    "@types/react-dom": "^16.9.5",
+    "@types/react-helmet": "^5.0.15",
+    "@types/webpack": "^4.41.8",
+    "@types/webpack-env": "^1.15.1",
+    "@typescript-eslint/eslint-plugin": "^2.25.0",
+    "@typescript-eslint/parser": "^2.25.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-config-tui": "^3.1.0",
+    "eslint-plugin-jest": "^23.8.2",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^3.0.0",
+    "prettier": "^1.19.1",
+    "typescript": "^3.8.3"
   },
   "repository": {
     "type": "git",

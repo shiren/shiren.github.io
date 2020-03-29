@@ -1,0 +1,55 @@
+{
+  "compilerOptions": {
+    "noEmit": true,
+    "target": "ES6",
+    "module": "ESNext",
+    "strict": true,
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "typeRoots": [
+      "./types",
+      "./node_modules/@types"
+    ],
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable"
+    ],
+    "types": [
+      "node",
+      "webpack",
+      "webpack-env",
+      "jest",
+      "puppeteer"
+    ],
+    "paths": {
+      "@src/*": [
+        "src/*"
+      ],
+      "@components/*": [
+        "src/components/*"
+      ]
+    },
+    "jsx": "react"
+  },
+  "exclude": [
+    "node_modules",
+    "public",
+    ".cache"
+  ],
+  "include": [
+    "*.js",
+    "types/**/*.ts",
+    "src/**/*.js",
+    "src/**/*.tsx",
+    "src/**/*.ts",
+    "stories/**/*.ts",
+    "stories/**/*.js",
+    "tests/**/*.ts"
+  ]
+}
