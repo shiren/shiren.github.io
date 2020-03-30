@@ -14,10 +14,15 @@
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
   "dependencies": {
-    "gatsby": "^2.19.45",
+    "@emotion/core": "^10.0.28",
+    "@emotion/styled": "^10.0.27",
+    "gatsby": "^2.20.8",
+    "gatsby-plugin-emotion": "^4.2.1",
     "gatsby-plugin-typescript": "^2.3.1",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "gatsby-source-filesystem": "^2.2.2",
+    "gatsby-transformer-remark": "^2.7.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   },
   "devDependencies": {
     "@types/jest": "^25.1.4",
@@ -25,7 +30,7 @@
     "@types/react": "^16.9.27",
     "@types/react-dom": "^16.9.5",
     "@types/react-helmet": "^5.0.15",
-    "@types/webpack": "^4.41.8",
+    "@types/webpack": "^4.41.9",
     "@types/webpack-env": "^1.15.1",
     "@typescript-eslint/eslint-plugin": "^2.25.0",
     "@typescript-eslint/parser": "^2.25.0",
@@ -36,7 +41,7 @@
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^3.0.0",
-    "prettier": "^1.19.1",
+    "prettier": "^2.0.2",
     "typescript": "^3.8.3"
   },
   "repository": {

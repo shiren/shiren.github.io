@@ -25,7 +25,9 @@
       "webpack",
       "webpack-env",
       "jest",
-      "puppeteer"
+      "puppeteer",
+      "react",
+      "react-dom"
     ],
     "paths": {
       "@src/*": [

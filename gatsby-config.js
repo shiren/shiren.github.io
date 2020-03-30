@@ -5,15 +5,33 @@
  */
 
 module.exports = {
+  siteMetadata: {
+    title: `MyTitle`,
+  },
   plugins: [
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `posts`,
+        path: `${__dirname}/posts/`,
+      },
+    },
+    `gatsby-transformer-remark`,
+    `gatsby-plugin-emotion`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `assets`,
+        path: `${__dirname}/assets/`,
+      },
+    },
     {
       resolve: `gatsby-plugin-typescript`,
       options: {
-        isTSX: true,
-        jsxPragma: `jsx`,
-        allExtensions: true,
+        // isTSX: true,
+        // jsxPragma: `jsx`,
+        // allExtensions: true,
       },
     },
   ],
-}
-
+};
