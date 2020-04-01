@@ -66,7 +66,7 @@ export const query = graphql`
         title
       }
     }
-    allMarkdownRemark {
+    allMarkdownRemark(sort: {fields: [frontmatter___date], order: DESC}) {
       totalCount
       edges {
         node {
@@ -78,7 +78,7 @@ export const query = graphql`
           fields {
             slug
           }
-          excerpt
+          excerpt(truncate: true, pruneLength: 200)
         }
       }
     }
