@@ -1,38 +1,36 @@
 import React from 'react';
 import {graphql} from 'gatsby';
 
+import PostList from '../components/postList';
+
 type Props = {
   data: {
     allMarkdownRemark: {
       edges: Array<{
         node: {
+          id: string;
+          frontmatter: {title: string; date: string};
           fields: {
             slug: string;
           };
-          frontmatter: {
-            title: string;
-          };
+          excerpt: string;
         };
       }>;
     };
   };
 };
 
-const PostList: React.FC<Props> = ({data}) => {
+const PostListPage: React.FC<Props> = ({data}) => {
   const posts = data.allMarkdownRemark.edges;
 
   return (
     <div>
-      {posts.map(({node}) => {
-        const title = node.frontmatter.title || node.fields.slug;
-
-        return <div key={node.fields.slug}>{title}</div>;
-      })}
+      <PostList posts={posts} />
     </div>
   );
 };
 
-export default PostList;
+export default PostListPage;
 
 export const postListQuery = graphql`
   query postListQuery($skip: Int!, $limit: Int!) {
@@ -43,12 +41,15 @@ export const postListQuery = graphql`
     ) {
       edges {
         node {
+          id
+          frontmatter {
+            title
+            date(formatString: "DD MMMM, YYYY")
+          }
           fields {
             slug
           }
-          frontmatter {
-            title
-          }
+          excerpt(truncate: true, pruneLength: 200)
         }
       }
     }

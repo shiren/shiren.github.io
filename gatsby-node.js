@@ -49,10 +49,7 @@ async function createPostListPage(graphql, actions) {
   const result = await graphql(
     `
       {
-        allMarkdownRemark(
-          sort: {fields: [frontmatter___date], order: DESC}
-          limit: 1000
-        ) {
+        allMarkdownRemark(sort: {fields: [frontmatter___date], order: DESC}) {
           edges {
             node {
               fields {
@@ -70,8 +67,8 @@ async function createPostListPage(graphql, actions) {
   const numPages = Math.ceil(posts.length / postsPerPage);
   Array.from({length: numPages}).forEach((_, i) => {
     createPage({
-      path: i === 0 ? `/post/` : `/post/${i + 1}`,
-      component: path.resolve('./src/templates/postList.tsx'),
+      path: i === 0 ? `/page/` : `/page${i + 1}`,
+      component: path.resolve('./src/templates/postListPage.tsx'),
       context: {
         limit: postsPerPage,
         skip: i * postsPerPage,

@@ -1,6 +1,7 @@
 import React from 'react';
-import {graphql, Link} from 'gatsby';
-import {css} from '@emotion/core';
+import {graphql} from 'gatsby';
+
+import PostList from '../components/postList';
 
 type Props = {
   data: {
@@ -24,40 +25,18 @@ type Props = {
   };
 };
 
-const Hello: React.FC<Props> = ({data}) => (
-  <div>
-    <h1>{data.site.siteMetadata.title}</h1>
-    {data.allMarkdownRemark.edges.map(({node}) => (
-      <div key={node.id}>
-        <Link
-          to={node.fields.slug}
-          css={css`
-            text-decoration: none;
-            color: inherit;
-          `}
-        >
-          <h3
-            css={css`
-              margin-bottom: 10;
-            `}
-          >
-            {node.frontmatter.title}{' '}
-            <span
-              css={css`
-                color: #bbb;
-              `}
-            >
-              — {node.frontmatter.date}
-            </span>
-          </h3>
-          <p>{node.excerpt}</p>
-        </Link>
-      </div>
-    ))}
-  </div>
-);
+const Main: React.FC<Props> = ({data}) => {
+  const posts = data.allMarkdownRemark.edges;
 
-export default Hello;
+  return (
+    <div>
+      <h1>{data.site.siteMetadata.title}</h1>
+      <PostList posts={posts} />
+    </div>
+  );
+};
+
+export default Main;
 
 export const query = graphql`
   query {
@@ -66,7 +45,11 @@ export const query = graphql`
         title
       }
     }
-    allMarkdownRemark(sort: {fields: [frontmatter___date], order: DESC}) {
+    allMarkdownRemark(
+      sort: {fields: [frontmatter___date], order: DESC}
+      limit: 6
+      skip: 0
+    ) {
       totalCount
       edges {
         node {
