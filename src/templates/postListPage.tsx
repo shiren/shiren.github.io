@@ -2,10 +2,12 @@ import React from 'react';
 import {graphql} from 'gatsby';
 
 import PostList from '../components/postList';
+import Pagination from '../components/pagination';
 
 type Props = {
   data: {
     allMarkdownRemark: {
+      totalCount: number;
       edges: Array<{
         node: {
           id: string;
@@ -18,14 +20,23 @@ type Props = {
       }>;
     };
   };
+  path: string;
 };
 
-const PostListPage: React.FC<Props> = ({data}) => {
-  const posts = data.allMarkdownRemark.edges;
+const PostListPage: React.FC<Props> = ({data, path}) => {
+  const {
+    allMarkdownRemark: {totalCount, edges: posts},
+  } = data;
+
+  console.log(path);
 
   return (
     <div>
       <PostList posts={posts} />
+      <Pagination
+        total={totalCount}
+        current={parseInt(path.replace('/page', ''), 10)}
+      />
     </div>
   );
 };
@@ -39,6 +50,7 @@ export const postListQuery = graphql`
       limit: $limit
       skip: $skip
     ) {
+      totalCount
       edges {
         node {
           id
