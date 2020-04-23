@@ -1,6 +1,7 @@
 import React from 'react';
-import {graphql, Link} from 'gatsby';
+import {graphql} from 'gatsby';
 
+import Layout from '../components/layout';
 import PostList from '../components/postList';
 import Pagination from '../components/pagination';
 
@@ -28,18 +29,15 @@ type Props = {
 };
 
 const Main: React.FC<Props> = ({data}) => {
-  // const posts = data.allMarkdownRemark.edges;
-
   const {
     allMarkdownRemark: {totalCount, edges: posts},
   } = data;
 
   return (
-    <div>
-      <h1>{data.site.siteMetadata.title}</h1>
+    <Layout>
       <PostList posts={posts} />
       <Pagination total={totalCount} current={1} />
-    </div>
+    </Layout>
   );
 };
 
