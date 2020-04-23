@@ -1,5 +1,9 @@
 import React from 'react';
+import {Helmet} from 'react-helmet';
+
 import {graphql} from 'gatsby';
+
+import Layout from '../components/layout';
 
 type Props = {
   data: {
@@ -21,10 +25,15 @@ const Post: React.FC<Props> = ({data}) => {
   const post = data.markdownRemark;
 
   return (
-    <div>
-      <h1>{post.frontmatter.title}</h1>
-      <div dangerouslySetInnerHTML={{__html: post.html}} />
-    </div>
+    <>
+      <Helmet>
+        <title>{post.frontmatter.title}</title>
+      </Helmet>
+      <Layout>
+        <h1>{post.frontmatter.title}</h1>
+        <div dangerouslySetInnerHTML={{__html: post.html}} />
+      </Layout>
+    </>
   );
 };
 
