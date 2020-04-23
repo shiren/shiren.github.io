@@ -7,11 +7,6 @@ import Pagination from '../components/pagination';
 
 type Props = {
   data: {
-    site: {
-      siteMetadata: {
-        title: string;
-      };
-    };
     allMarkdownRemark: {
       totalCount: number;
       edges: Array<{
@@ -45,11 +40,6 @@ export default Main;
 
 export const query = graphql`
   query {
-    site {
-      siteMetadata {
-        title
-      }
-    }
     allMarkdownRemark(
       sort: {fields: [frontmatter___date], order: DESC}
       limit: 6
