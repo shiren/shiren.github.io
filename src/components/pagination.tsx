@@ -6,11 +6,15 @@ type Props = {
   current: number;
 };
 
+const COUNT_PER_PAGE = 6;
+
 const Pagination: React.FC<Props> = ({total, current}) => {
   const getPrevUrl = () => (current === 2 ? `/` : `/page${current - 1}`);
   const getNextUrl = () => `/page${current + 1}`;
 
-  const hasNext = current < total;
+  console.log(total);
+
+  const hasNext = current < total / COUNT_PER_PAGE;
   const hasPrev = current > 1;
 
   return (

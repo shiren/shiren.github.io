@@ -50,5 +50,6 @@ module.exports = {
     ],
     '@typescript-eslint/no-non-null-assertion': 'off',
     'new-cap': ['error', {capIsNewExceptions: ['NumberFormat']}],
+    complexity: ['warn', 20],
   },
 };

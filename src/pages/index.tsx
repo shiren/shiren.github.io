@@ -1,6 +1,7 @@
 import React from 'react';
 import {graphql} from 'gatsby';
 
+import SEO from '../components/seo';
 import Layout from '../components/layout';
 import PostList from '../components/postList';
 import Pagination from '../components/pagination';
@@ -30,6 +31,7 @@ const Main: React.FC<Props> = ({data}) => {
 
   return (
     <Layout>
+      <SEO />
       <PostList posts={posts} />
       <Pagination total={totalCount} current={1} />
     </Layout>
@@ -56,7 +58,7 @@ export const query = graphql`
           fields {
             slug
           }
-          excerpt(truncate: true, pruneLength: 200)
+          excerpt(truncate: true, pruneLength: 300)
         }
       }
     }

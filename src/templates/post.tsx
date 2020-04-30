@@ -1,19 +1,15 @@
 import React from 'react';
-import {Helmet} from 'react-helmet';
 
 import {graphql} from 'gatsby';
 
 import Layout from '../components/layout';
+import SEO from '../components/seo';
 
 type Props = {
   data: {
-    site: {
-      siteMetadata: {
-        title: string;
-      };
-    };
     markdownRemark: {
       html: string;
+      excerpt: string;
       frontmatter: {
         title: string;
       };
@@ -26,12 +22,14 @@ const Post: React.FC<Props> = ({data}) => {
 
   return (
     <>
-      <Helmet>
-        <title>{post.frontmatter.title}</title>
-      </Helmet>
+      <SEO
+        title={post.frontmatter.title}
+        description={post.excerpt}
+        article={true}
+      />
       <Layout>
         <h1>{post.frontmatter.title}</h1>
-        <div dangerouslySetInnerHTML={{__html: post.html}} />
+        <article dangerouslySetInnerHTML={{__html: post.html}} />
       </Layout>
     </>
   );
@@ -43,6 +41,7 @@ export const query = graphql`
   query($slug: String!) {
     markdownRemark(fields: {slug: {eq: $slug}}) {
       html
+      excerpt(truncate: true, pruneLength: 300)
       frontmatter {
         title
       }

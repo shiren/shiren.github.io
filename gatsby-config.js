@@ -7,6 +7,11 @@
 module.exports = {
   siteMetadata: {
     title: `shiren the creator`,
+    titleTemplate: '%s · shiren the creator',
+    description: 'programmer & beatmaker',
+    url: 'https://blog.shiren.dev',
+    image: '/assets/image/profile.jpg',
+    twitterUsername: '@shirenbeat',
   },
   plugins: [
     {
