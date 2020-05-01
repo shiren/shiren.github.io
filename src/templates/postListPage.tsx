@@ -2,9 +2,10 @@ import React from 'react';
 import {graphql} from 'gatsby';
 
 import SEO from '../components/seo';
+import Layout from '../components/layout';
+import ListHeader from '../components/listHeader';
 import PostList from '../components/postList';
 import Pagination from '../components/pagination';
-import Layout from '../components/layout';
 
 type Props = {
   data: {
@@ -27,12 +28,13 @@ type Props = {
 
 const PostListPage: React.FC<Props> = ({data, path}) => {
   const {
-    allMarkdownRemark: {totalCount, edges: posts},
+    allMarkdownRemark: {totalCount, edges: posts}
   } = data;
 
   return (
     <Layout>
       <SEO />
+      <ListHeader />
       <PostList posts={posts} />
       <Pagination
         total={totalCount}

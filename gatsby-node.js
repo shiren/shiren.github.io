@@ -10,7 +10,7 @@ exports.onCreateNode = ({node, getNode, actions}) => {
     createNodeField({
       node,
       name: 'slug',
-      value: slug,
+      value: slug
     });
   }
 };
@@ -38,8 +38,8 @@ async function createPostPage(graphql, actions) {
       context: {
         // Data passed to context is available
         // in page queries as GraphQL variables.
-        slug: node.fields.slug,
-      },
+        slug: node.fields.slug
+      }
     });
   });
 }
@@ -65,6 +65,17 @@ async function createPostListPage(graphql, actions) {
   const posts = result.data.allMarkdownRemark.edges;
   const postsPerPage = 6;
   const numPages = Math.ceil(posts.length / postsPerPage);
+
+  createPage({
+    path: `/`,
+    component: path.resolve('./src/templates/postListPage.tsx'),
+    context: {
+      limit: postsPerPage,
+      skip: 0,
+      numPages,
+      currentPage: 1
+    }
+  });
   Array.from({length: numPages}).forEach((_, i) => {
     createPage({
       path: `/page${i + 1}`,
@@ -73,8 +84,8 @@ async function createPostListPage(graphql, actions) {
         limit: postsPerPage,
         skip: i * postsPerPage,
         numPages,
-        currentPage: i + 1,
-      },
+        currentPage: i + 1
+      }
     });
   });
 }
@@ -82,6 +93,6 @@ async function createPostListPage(graphql, actions) {
 exports.createPages = async ({graphql, actions}) => {
   await Promise.all([
     createPostPage(graphql, actions),
-    createPostListPage(graphql, actions),
+    createPostListPage(graphql, actions)
   ]);
 };
