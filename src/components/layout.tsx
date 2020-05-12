@@ -1,12 +1,16 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
+import '../../assets/style.css';
+
 import {graphql} from 'gatsby';
+
+import Top from './top';
 
 const Layout: React.FC = ({children}) => {
   return (
     <div>
-      <nav>메뉴</nav>
+      <Top />
       <Container>
         <div>{children}</div>
       </Container>

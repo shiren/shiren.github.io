@@ -28,18 +28,17 @@ type Props = {
 
 const PostListPage: React.FC<Props> = ({data, path}) => {
   const {
-    allMarkdownRemark: {totalCount, edges: posts}
+    allMarkdownRemark: {totalCount, edges: posts},
   } = data;
+
+  const currentPage = parseInt(path.replace('/page', ''), 10) || 0;
 
   return (
     <Layout>
       <SEO />
       <ListHeader />
       <PostList posts={posts} />
-      <Pagination
-        total={totalCount}
-        current={parseInt(path.replace('/page', ''), 10)}
-      />
+      <Pagination total={totalCount} current={currentPage} />
     </Layout>
   );
 };
