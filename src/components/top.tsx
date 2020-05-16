@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 
 import {useStaticQuery, graphql, navigate} from 'gatsby';
@@ -18,13 +18,13 @@ const goto = (url: string) => {
 };
 
 const renderMenuItems = (menus: Menu[]) => {
-  return menus.map((item, index) => {
+  return menus.map(({url, name}, index) => {
     return (
       <li key={index}>
-        {item.url ? (
-          <MenuButton onClick={() => goto(item.url!)}>{item.name}</MenuButton>
+        {url ? (
+          <MenuButton onClick={() => goto(url)}>{name}</MenuButton>
         ) : (
-          <MenuButton>{item.name}</MenuButton>
+          <MenuButton>{name}</MenuButton>
         )}
       </li>
     );
@@ -49,8 +49,26 @@ const Top: React.FC = () => {
     `
   );
 
+  const [shortTop, setShortTop] = useState(false);
+
+  useEffect(() => {
+    const handleScrollEvent = () => {
+      const scrollTop = document.documentElement.scrollTop;
+
+      if (scrollTop > 20) {
+        setShortTop(true);
+      } else {
+        setShortTop(false);
+      }
+    }
+
+    window.addEventListener('scroll', handleScrollEvent);
+
+    return () => window.removeEventListener('scroll', handleScrollEvent);
+  }, []);
+
   return (
-    <Wrapper>
+    <Wrapper shortTop={shortTop}>
       <LogoButton href={site.siteMetadata.url}>
         {site.siteMetadata.title}
       </LogoButton>
@@ -61,11 +79,22 @@ const Top: React.FC = () => {
 
 const MenuList = styled.ul`
   float: right;
+
+  & > li {
+  float: left;
+  list-style: none;
+  }
 `;
 
 const MenuButton = styled.button.attrs({type: 'button'})`
   background: none;
   border: none;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: #404040;
+  cursor: pointer;
 `;
 
 const LogoButton = styled.a`
@@ -78,16 +107,17 @@ const LogoButton = styled.a`
   text-decoration: none;
 `;
 
-const Wrapper = styled.nav`
+const Wrapper = styled.nav<{shortTop: boolean}>`
   position: fixed;
   right: 0;
   left: 0;
   top: 0;
   min-height: 50px;
-  padding: 20px 0;
+  padding: ${props => (props.shortTop ? '0' : '20px 0')};
   margin-bottom: 20px;
   border-bottom: 1px solid #eaeaea;
   background: #f5f6f6;
+  transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
 `;
 
 export default Top;
