@@ -12,6 +12,16 @@ module.exports = {
     url: 'https://blog.shiren.dev',
     image: '/assets/image/profile.jpg',
     twitterUsername: '@shirenbeat',
+    menus: [
+      {name: 'ABOUT ME', url: '/about'},
+      {name: 'SOUNDCLOUD', url: 'https://soundcloud.com/shiren'},
+      {
+        name: 'OPENSOURCES',
+        children: [
+          {name: 'TOAST UI Editor', url: 'https://github.com/nhn/tui.editor'},
+        ],
+      },
+    ],
   },
   plugins: [
     {
@@ -22,7 +32,7 @@ module.exports = {
       },
     },
     `gatsby-transformer-remark`,
-    `gatsby-plugin-emotion`,
+    `gatsby-plugin-styled-components`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {

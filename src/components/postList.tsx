@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'gatsby';
-import {css} from '@emotion/core';
+import styled from 'styled-components';
 
 type Props = {
   posts: Array<{
@@ -20,33 +20,21 @@ const PostList: React.FC<Props> = ({posts}) => {
     <div>
       {posts.map(({node}) => (
         <div key={node.id}>
-          <Link
-            to={node.fields.slug}
-            css={css`
-              text-decoration: none;
-              color: inherit;
-            `}
-          >
-            <h3
-              css={css`
-                margin-bottom: 10;
-              `}
-            >
-              {node.frontmatter.title}{' '}
-              <span
-                css={css`
-                  color: #bbb;
-                `}
-              >
-                — {node.frontmatter.date}
-              </span>
+          <ListItem to={node.fields.slug}>
+            <h3>
+              {node.frontmatter.title} <span>— {node.frontmatter.date}</span>
             </h3>
             <p>{node.excerpt}</p>
-          </Link>
+          </ListItem>
         </div>
       ))}
     </div>
   );
 };
+
+const ListItem = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+`;
 
 export default PostList;

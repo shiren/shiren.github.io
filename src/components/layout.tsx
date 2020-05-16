@@ -1,6 +1,7 @@
 import React from 'react';
-import styled from '@emotion/styled';
+import styled from 'styled-components';
 
+import 'normalize.css';
 import '../../assets/style.css';
 
 import {graphql} from 'gatsby';
