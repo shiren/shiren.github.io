@@ -1,7 +1,7 @@
-import React from 'react';
-import { Helmet } from 'react-helmet';
-import { useLocation } from '@reach/router';
-import { useStaticQuery, graphql } from 'gatsby';
+import React from "react"
+import { Helmet } from "react-helmet"
+import { useLocation } from "@reach/router"
+import { graphql, useStaticQuery } from "gatsby"
 
 type Props = {
   title?: string;
@@ -47,10 +47,6 @@ const SEO: React.FC<Props> = ({ title, description, image, article = false }) =>
 
   return (
     <Helmet title={seo.title} titleTemplate={titleTemplate}>
-      <link
-        rel="stylesheet"
-        href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
-      ></link>
       <meta name="description" content={seo.description} />
       <meta name="image" content={seo.image} />
 
@@ -64,15 +60,19 @@ const SEO: React.FC<Props> = ({ title, description, image, article = false }) =>
 
       {seo.image && <meta property="og:image" content={seo.image} />}
 
-      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:card" content="summary_large_image"/>
 
-      {twitterUsername && <meta name="twitter:creator" content={twitterUsername} />}
+      {twitterUsername && <meta name="twitter:creator" content={twitterUsername}/>}
 
-      {seo.title && <meta name="twitter:title" content={seo.title} />}
+      {seo.title && <meta name="twitter:title" content={seo.title}/>}
 
-      {seo.description && <meta name="twitter:description" content={seo.description} />}
+      {seo.description && <meta name="twitter:description" content={seo.description}/>}
 
-      {seo.image && <meta name="twitter:image" content={seo.image} />}
+      {seo.image && <meta name="twitter:image" content={seo.image}/>}
+      <link
+        rel="stylesheet"
+        href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
+      />
     </Helmet>
   );
 };
