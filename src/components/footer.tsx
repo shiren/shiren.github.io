@@ -22,8 +22,8 @@ const Footer: React.FC = () => {
           }
         }
       }
-    `,
-  )
+    `
+  );
 
   const { sns, email, url } = site.siteMetadata
 
@@ -63,8 +63,8 @@ const Footer: React.FC = () => {
         {site.siteMetadata.ownerName} • {new Date().getFullYear()}
       </p>
     </Wrapper>
-  )
-}
+  );
+};
 
 const Wrapper = styled.footer`
   margin-top: 50px;
@@ -79,7 +79,7 @@ const Wrapper = styled.footer`
     text-align: center;
     font-size: 14px;
   }
-`
+`;
 
 const FooterLinks = styled.ul`
   margin: 0;
@@ -98,6 +98,6 @@ const FooterLinks = styled.ul`
   & a {
     color: #404040;
   }
-`
+`;
 
 export default Footer

@@ -30,7 +30,7 @@ const Pagination: React.FC<Props> = ({ total, current }) => {
       )}
     </Wrapper>
   )
-}
+};
 
 const Wrapper = styled.div`
   &:after {
