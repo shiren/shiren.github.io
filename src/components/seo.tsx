@@ -62,15 +62,15 @@ const SEO: React.FC<Props> = ({ title, description, image, article = false }) =>
 
       {seo.image && <meta property="og:image" content={seo.image} />}
 
-      <meta name="twitter:card" content="summary_large_image"/>
+      <meta name="twitter:card" content="summary_large_image" />
 
-      {twitter && <meta name="twitter:creator" content={twitter}/>}
+      {twitter && <meta name="twitter:creator" content={twitter} />}
 
-      {seo.title && <meta name="twitter:title" content={seo.title}/>}
+      {seo.title && <meta name="twitter:title" content={seo.title} />}
 
-      {seo.description && <meta name="twitter:description" content={seo.description}/>}
+      {seo.description && <meta name="twitter:description" content={seo.description} />}
 
-      {seo.image && <meta name="twitter:image" content={seo.image}/>}
+      {seo.image && <meta name="twitter:image" content={seo.image} />}
       <link
         rel="stylesheet"
         href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"

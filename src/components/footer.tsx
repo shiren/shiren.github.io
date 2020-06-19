@@ -25,15 +25,15 @@ const Footer: React.FC = () => {
     `
   );
 
-  const { sns, email, url } = site.siteMetadata
+  const { sns, email, url } = site.siteMetadata;
 
   const footerIcons: Record<string, JSX.Element> = {
-    facebook: <Facebook/>,
-    instagram: <InstagramSquare/>,
-    twitter: <Twitter/>,
-    email: <At/>,
-    github: <Github/>,
-  }
+    facebook: <Facebook />,
+    instagram: <InstagramSquare />,
+    twitter: <Twitter />,
+    email: <At />,
+    github: <Github />,
+  };
 
   const urlMaker: Record<string, (id: string) => string> = {
     facebook: (id) => `//www.facebook.com/${id}`,
@@ -41,12 +41,12 @@ const Footer: React.FC = () => {
     github: (id) => `//www.github.com/${id}`,
     twitter: (id) => `//www.twitter.com/${id}`,
     email: (id) => `mailto:${id}`,
-  }
+  };
 
   return (
     <Wrapper>
       <FooterLinks>
-        {[["email", email], ...Object.entries(sns)].map(([type, value], index) => (
+        {[['email', email], ...Object.entries(sns)].map(([type, value], index) => (
           <li key={index}>
             <a href={urlMaker[type](value)} rel="noreferrer" target="_blank">
               {footerIcons[type]}
@@ -55,7 +55,7 @@ const Footer: React.FC = () => {
         ))}
         <li>
           <a href={`${url}/feed.xml`} rel="noreferrer" target="_blank">
-            <Rss/>
+            <Rss />
           </a>
         </li>
       </FooterLinks>
@@ -100,4 +100,4 @@ const FooterLinks = styled.ul`
   }
 `;
 
-export default Footer
+export default Footer;

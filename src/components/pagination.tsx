@@ -7,14 +7,14 @@ type Props = {
   current: number;
 };
 
-const COUNT_PER_PAGE = 6
+const COUNT_PER_PAGE = 6;
 
 const Pagination: React.FC<Props> = ({ total, current }) => {
-  const getPrevUrl = () => (current === 2 ? `/` : `/page${current - 1}`)
-  const getNextUrl = () => `/page${current === 0 ? 2 : current + 1}`
+  const getPrevUrl = () => (current === 2 ? `/` : `/page${current - 1}`);
+  const getNextUrl = () => `/page${current === 0 ? 2 : current + 1}`;
 
-  const hasNext = current < total / COUNT_PER_PAGE
-  const hasPrev = current > 1
+  const hasNext = current < total / COUNT_PER_PAGE;
+  const hasPrev = current > 1;
 
   return (
     <Wrapper>
@@ -29,7 +29,7 @@ const Pagination: React.FC<Props> = ({ total, current }) => {
         </PaginationLink>
       )}
     </Wrapper>
-  )
+  );
 };
 
 const Wrapper = styled.div`
@@ -38,7 +38,7 @@ const Wrapper = styled.div`
     display: table;
     clear: both;
   }
-`
+`;
 
 const PaginationLink = styled(Link)<{ align: string }>`
   float: ${({ align }) => align};
@@ -58,4 +58,4 @@ const PaginationLink = styled(Link)<{ align: string }>`
   }
 `;
 
-export default Pagination
+export default Pagination;

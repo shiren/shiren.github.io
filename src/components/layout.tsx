@@ -10,11 +10,11 @@ import Footer from "./footer"
 const Layout: React.FC = ({ children }) => {
   return (
     <div>
-      <Top/>
+      <Top />
       <Container>
         <div>{children}</div>
       </Container>
-      <Footer/>
+      <Footer />
     </div>
   );
 };
