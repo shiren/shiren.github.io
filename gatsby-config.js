@@ -6,20 +6,26 @@
 
 module.exports = {
   siteMetadata: {
+    ownerName: "Sungho Kim",
+    ownerNickname: "shiren",
     title: `shiren the creator`,
-    titleTemplate: '%s · shiren the creator',
-    description: 'programmer & beatmaker',
-    url: 'https://blog.shiren.dev',
-    image: '/assets/image/profile.jpg',
-    twitterUsername: '@shirenbeat',
+    titleTemplate: "%s · shiren the creator",
+    description: "programmer & beatmaker",
+    url: "https://blog.shiren.dev",
+    image: "/assets/image/profile.jpg",
+    email: "shirenbeat@gmail.com",
+    sns: {
+      github: "shiren",
+      instagram: "shiren",
+      facebook: "shirenbeat",
+      twitter: "@shirenbeat",
+    },
     menus: [
-      {name: 'ABOUT ME', url: '/about'},
-      {name: 'SOUNDCLOUD', url: 'https://soundcloud.com/shiren'},
+      { name: "ABOUT ME", url: "/about" },
+      { name: "SOUNDCLOUD", url: "https://soundcloud.com/shiren" },
       {
-        name: 'OPENSOURCES',
-        children: [
-          {name: 'TOAST UI Editor', url: 'https://github.com/nhn/tui.editor'},
-        ],
+        name: "OPENSOURCES",
+        children: [{ name: "TOAST UI Editor", url: "https://github.com/nhn/tui.editor" }],
       },
     ],
   },

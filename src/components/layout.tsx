@@ -1,21 +1,20 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react"
+import styled from "styled-components"
 
-import 'normalize.css';
-import '../../assets/style.css';
+import "normalize.css"
+import "../../assets/style.css"
 
-import {graphql} from 'gatsby';
+import Top from "./top"
+import Footer from "./footer"
 
-import Top from './top';
-
-const Layout: React.FC = ({children}) => {
+const Layout: React.FC = ({ children }) => {
   return (
     <div>
-      <Top />
+      <Top/>
       <Container>
         <div>{children}</div>
       </Container>
-      <footer>푸터</footer>
+      <Footer/>
     </div>
   );
 };

@@ -19,7 +19,9 @@ const query = graphql`
         defaultDescription: description
         siteUrl: url
         defaultImage: image
-        twitterUsername
+        sns {
+          twitter
+        }
       }
     }
   }
@@ -35,7 +37,7 @@ const SEO: React.FC<Props> = ({ title, description, image, article = false }) =>
     defaultDescription,
     siteUrl,
     defaultImage,
-    twitterUsername,
+    sns: { twitter },
   } = site.siteMetadata;
 
   const seo = {
@@ -62,7 +64,7 @@ const SEO: React.FC<Props> = ({ title, description, image, article = false }) =>
 
       <meta name="twitter:card" content="summary_large_image"/>
 
-      {twitterUsername && <meta name="twitter:creator" content={twitterUsername}/>}
+      {twitter && <meta name="twitter:creator" content={twitter}/>}
 
       {seo.title && <meta name="twitter:title" content={seo.title}/>}
 
