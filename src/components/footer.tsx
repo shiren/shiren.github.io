@@ -1,8 +1,8 @@
-import React from 'react'
-import styled from 'styled-components'
-import { Facebook, Github, InstagramSquare, Twitter } from '@styled-icons/fa-brands'
-import { At, Rss } from '@styled-icons/fa-solid'
-import { graphql, useStaticQuery } from 'gatsby'
+import React from 'react';
+import styled from 'styled-components';
+import { Facebook, Github, InstagramSquare, Twitter } from '@styled-icons/fa-brands';
+import { At, Rss } from '@styled-icons/fa-solid';
+import { graphql, useStaticQuery } from 'gatsby';
 
 const Footer: React.FC = () => {
   const { site } = useStaticQuery(
