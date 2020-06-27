@@ -36,6 +36,10 @@ const ListItem = styled(Link)`
   margin: 35px 0;
   text-decoration: none;
   color: #404040;
+
+  &:hover > h3 {
+    color: #0085a1;
+  }
 `;
 
 const PostHeader = styled.h3`

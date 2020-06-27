@@ -12,8 +12,38 @@ h3,
 h4,
 h5,
 h6 {
-  margin: 0 0 10px 0;
+  margin: 20px 0 10px 0;
   font-family: '나눔고딕', 'NanumGothic', 'NanumGothicWebFont', 'Malgun Gothic', '맑은 고딕',
-    'Dotum', '돋움', 'Helvetica', 'Apple SD Gothic Neo', 'sans-serif';
+  'Dotum', '돋움', 'Helvetica', 'Apple SD Gothic Neo', 'sans-serif';
   font-weight: 800;
+}
+
+article a {
+  text-decoration: none;
+  color: #008aff;
+}
+
+article a:hover {
+  text-decoration: underline;
+}
+
+p {
+  line-height: 1.5;
+  margin: 30px 0;
+}
+
+li > p {
+  margin: 0;
+}
+
+li {
+  padding: 3px;
+}
+
+code.language-text {
+  padding: 2px 4px;
+  font-size: 90%;
+  color: #c7254e;
+  background-color: #f9f2f4 !important;
+  border-radius: 4px;
 }
