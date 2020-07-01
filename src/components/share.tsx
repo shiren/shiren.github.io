@@ -1,7 +1,12 @@
 import React from 'react';
 import { FacebookF, LinkedinIn, RedditAlien, Twitter } from '@styled-icons/fa-brands';
 import { ShareAlt } from '@styled-icons/fa-solid';
-import { FacebookShareButton, LinkedinShareButton, RedditShareButton, TwitterShareButton } from 'react-share';
+import {
+  FacebookShareButton,
+  LinkedinShareButton,
+  RedditShareButton,
+  TwitterShareButton,
+} from 'react-share';
 
 import { graphql, useStaticQuery } from 'gatsby';
 import styled from 'styled-components';
