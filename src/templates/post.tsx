@@ -31,7 +31,7 @@ const Post: React.FC<Props> = ({ data }) => {
 
   return (
     <>
-      <SEO title={post.frontmatter.title} description={post.excerpt} article={true}/>
+      <SEO title={post.frontmatter.title} description={post.excerpt} article={true} />
       <Layout>
         <Headline>
           <h1>{post.frontmatter.title}</h1>
@@ -44,7 +44,7 @@ const Post: React.FC<Props> = ({ data }) => {
             />
           </p>
         </Headline>
-        <article dangerouslySetInnerHTML={{ __html: post.html }}/>
+        <article dangerouslySetInnerHTML={{ __html: post.html }} />
       </Layout>
     </>
   );

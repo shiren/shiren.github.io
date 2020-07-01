@@ -43,11 +43,11 @@ const Share: React.FC<Props> = ({ path, title, tags }) => {
   return (
     <Wrapper>
       <TitleIcon>
-        <ShareAlt/>
+        <ShareAlt />
       </TitleIcon>
       <FacebookShareButton url={fullUrl} className="button is-outlined is-rounded facebook">
         <Icon>
-          <FacebookF/>
+          <FacebookF />
         </Icon>
       </FacebookShareButton>
       <TwitterShareButton
@@ -58,7 +58,7 @@ const Share: React.FC<Props> = ({ path, title, tags }) => {
         hashtags={tags}
       >
         <Icon className="icon">
-          <Twitter/>
+          <Twitter />
         </Icon>
       </TwitterShareButton>
       <LinkedinShareButton
@@ -67,7 +67,7 @@ const Share: React.FC<Props> = ({ path, title, tags }) => {
         title={title}
       >
         <Icon className="icon">
-          <LinkedinIn/>
+          <LinkedinIn />
         </Icon>
       </LinkedinShareButton>
       <RedditShareButton
@@ -76,7 +76,7 @@ const Share: React.FC<Props> = ({ path, title, tags }) => {
         title={title}
       >
         <Icon className="icon">
-          <RedditAlien/>
+          <RedditAlien />
         </Icon>
       </RedditShareButton>
     </Wrapper>
