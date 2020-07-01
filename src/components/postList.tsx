@@ -19,7 +19,7 @@ const PostList: React.FC<Props> = ({ posts }) => {
   return (
     <div>
       {posts.map(({ node }) => (
-        <ListItem to={node.fields.slug} key={node.id}>
+        <ListItem to={node.fields.slug.replace(/\s/g, '-')} key={node.id}>
           <PostHeader>{node.frontmatter.title}</PostHeader>
           <PostDate>Posted on {node.frontmatter.date}</PostDate>
           <PostEntry>

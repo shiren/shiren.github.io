@@ -30,7 +30,7 @@ const Share: React.FC<Props> = ({ path, title, tags }) => {
           }
         }
       }
-    `,
+    `
   );
 
   const fullUrl = `${url}${path}`;

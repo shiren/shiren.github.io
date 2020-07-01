@@ -1,22 +1,22 @@
 const path = require(`path`);
-const {createFilePath} = require(`gatsby-source-filesystem`);
+const { createFilePath } = require(`gatsby-source-filesystem`);
 
-exports.onCreateNode = ({node, getNode, actions}) => {
-  const {createNodeField} = actions;
-
+exports.onCreateNode = ({ node, getNode, actions }) => {
+  const { createNodeField } = actions;
+  
   if (node.internal.type === 'MarkdownRemark') {
-    const slug = createFilePath({node, getNode, basePath: 'pages'});
-
+    const slug = createFilePath({ node, getNode, basePath: 'pages' });
+    
     createNodeField({
       node,
       name: 'slug',
-      value: slug
+      value: slug,
     });
   }
 };
 
 async function createPostPage(graphql, actions) {
-  const {createPage} = actions;
+  const { createPage } = actions;
   const result = await graphql(`
     query {
       allMarkdownRemark {
@@ -30,26 +30,28 @@ async function createPostPage(graphql, actions) {
       }
     }
   `);
-
-  result.data.allMarkdownRemark.edges.forEach(({node}) => {
+  
+  result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+    const slug = node.fields.slug.replace(/\s/g, '-');
+    
     createPage({
-      path: node.fields.slug,
+      path: slug,
       component: path.resolve(`./src/templates/post.tsx`),
       context: {
         // Data passed to context is available
         // in page queries as GraphQL variables.
-        slug: node.fields.slug
-      }
+        slug: node.fields.slug,
+      },
     });
   });
 }
 
 async function createPostListPage(graphql, actions) {
-  const {createPage} = actions;
+  const { createPage } = actions;
   const result = await graphql(
     `
       {
-        allMarkdownRemark(sort: {fields: [frontmatter___date], order: DESC}) {
+        allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
           edges {
             node {
               fields {
@@ -59,7 +61,7 @@ async function createPostListPage(graphql, actions) {
           }
         }
       }
-    `
+    `,
   );
 
   const posts = result.data.allMarkdownRemark.edges;
@@ -73,10 +75,10 @@ async function createPostListPage(graphql, actions) {
       limit: postsPerPage,
       skip: 0,
       numPages,
-      currentPage: 1
-    }
+      currentPage: 1,
+    },
   });
-  Array.from({length: numPages}).forEach((_, i) => {
+  Array.from({ length: numPages }).forEach((_, i) => {
     createPage({
       path: `/page${i + 1}`,
       component: path.resolve('./src/templates/postListPage.tsx'),
@@ -84,15 +86,12 @@ async function createPostListPage(graphql, actions) {
         limit: postsPerPage,
         skip: i * postsPerPage,
         numPages,
-        currentPage: i + 1
-      }
+        currentPage: i + 1,
+      },
     });
   });
 }
 
-exports.createPages = async ({graphql, actions}) => {
-  await Promise.all([
-    createPostPage(graphql, actions),
-    createPostListPage(graphql, actions)
-  ]);
+exports.createPages = async ({ graphql, actions }) => {
+  await Promise.all([createPostPage(graphql, actions), createPostListPage(graphql, actions)]);
 };
