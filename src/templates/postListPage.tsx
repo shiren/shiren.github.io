@@ -37,8 +37,8 @@ const PostListPage: React.FC<Props> = ({ data, path }) => {
     <Layout>
       <SEO/>
       <ListHeader/>
-      <PostList posts={posts} />
-      <Pagination total={totalCount} current={currentPage} />
+      <PostList posts={posts}/>
+      <Pagination total={totalCount} current={currentPage}/>
     </Layout>
   );
 };
