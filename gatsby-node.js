@@ -6,7 +6,7 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
 
   if (node.internal.type === 'MarkdownRemark') {
     const slug = createFilePath({ node, getNode, basePath: 'pages' });
-  
+
     createNodeField({
       node,
       name: 'slug',
@@ -25,15 +25,19 @@ async function createPostPage(graphql, actions) {
             fields {
               slug
             }
+            frontmatter {
+              categories
+            }
           }
         }
       }
     }
   `);
-  
+
   result.data.allMarkdownRemark.edges.forEach(({ node }) => {
     const slug = node.fields.slug.replace(/\s/g, '-');
-    
+    const categories = node.frontmatter.categories;
+
     createPage({
       path: slug,
       component: path.resolve(`./src/templates/post.tsx`),
@@ -41,6 +45,7 @@ async function createPostPage(graphql, actions) {
         // Data passed to context is available
         // in page queries as GraphQL variables.
         slug: node.fields.slug,
+        categoriesRegex: `/${categories.split(', ').join('|')}/g`,
       },
     });
   });

@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import Share from '../components/share';
+import RecomendPost from '../components/recomendPost';
 
 type Props = {
   data: {
@@ -14,12 +15,38 @@ type Props = {
       excerpt: string;
       frontmatter: {
         title: string;
-        date: Date;
+        date: string;
         categories: Array<string>;
       };
       fields: {
         slug: string;
       };
+    };
+    recomendPost: {
+      nodes: Array<{
+        fields: {
+          slug: string;
+        };
+        frontmatter: {
+          title: string;
+          categories: string;
+          date: string;
+        };
+        excerpt: string;
+      }>;
+    };
+    recentPost: {
+      nodes: Array<{
+        fields: {
+          slug: string;
+        };
+        frontmatter: {
+          title: string;
+          categories: string;
+          date: string;
+        };
+        excerpt: string;
+      }>;
     };
   };
 };
@@ -27,7 +54,18 @@ type Props = {
 const Post: React.FC<Props> = ({ data }) => {
   const post = data.markdownRemark;
 
-  console.log(data);
+  const recomendPost = [...data.recomendPost.nodes, ...data.recentPost.nodes]
+    .map((node) => ({
+      title: node.frontmatter.title,
+      slug: node.fields.slug,
+      excerpt: node.excerpt,
+      date: node.frontmatter.date,
+      categories: node.frontmatter.categories.split(', '),
+    }))
+    .filter((node) => node.slug !== post.fields.slug)
+    .sort(() => Math.random() * 2 - 1);
+
+  recomendPost.splice(4, 4);
 
   return (
     <>
@@ -45,13 +83,14 @@ const Post: React.FC<Props> = ({ data }) => {
           </p>
         </Headline>
         <article dangerouslySetInnerHTML={{ __html: post.html }} />
+        {recomendPost.length ? <RecomendPost posts={recomendPost} /> : null}
       </Layout>
     </>
   );
 };
 
 const Headline = styled.header`
-  margin: 130px 0 20px;
+  margin: 130px 0 40px;
 
   & > h1 {
     font-size: 50px;
@@ -68,7 +107,7 @@ const Headline = styled.header`
 export default Post;
 
 export const query = graphql`
-  query($slug: String!) {
+  query($slug: String!, $categoriesRegex: String!) {
     markdownRemark(fields: { slug: { eq: $slug } }) {
       html
       fields {
@@ -79,6 +118,39 @@ export const query = graphql`
         title
         date(formatString: "DD MMMM, YYYY")
         categories
+      }
+    }
+    recomendPost: allMarkdownRemark(
+      filter: {
+        frontmatter: { categories: { regex: $categoriesRegex } }
+        fields: { slug: { ne: $slug } }
+      }
+      sort: { fields: frontmatter___date, order: DESC }
+      limit: 4
+    ) {
+      nodes {
+        fields {
+          slug
+        }
+        frontmatter {
+          title
+          categories
+          date(formatString: "DD MMMM, YYYY")
+        }
+        excerpt(truncate: true, pruneLength: 300)
+      }
+    }
+    recentPost: allMarkdownRemark(sort: { fields: frontmatter___date, order: DESC }, limit: 4) {
+      nodes {
+        fields {
+          slug
+        }
+        frontmatter {
+          title
+          categories
+          date(formatString: "DD MMMM, YYYY")
+        }
+        excerpt(truncate: true, pruneLength: 300)
       }
     }
   }
