@@ -60,5 +60,56 @@ module.exports = {
         // allExtensions: true,
       },
     },
+    {
+      resolve: `gatsby-plugin-feed`,
+      options: {
+        query: `
+          {
+            site {
+              siteMetadata {
+                title
+                description
+                url
+              }
+            }
+          }
+        `,
+        feeds: [
+          {
+            serialize: ({ query: { site, allMarkdownRemark } }) => {
+              return allMarkdownRemark.edges.map((edge) => {
+                return Object.assign({}, edge.node.frontmatter, {
+                  description: edge.node.excerpt,
+                  date: edge.node.frontmatter.date,
+                  url: site.siteMetadata.url + encodeURI(edge.node.fields.slug.replace(/\s/g, '-')),
+                  guid:
+                    site.siteMetadata.url + encodeURI(edge.node.fields.slug.replace(/\s/g, '-')),
+                });
+              });
+            },
+            query: `
+              {
+                allMarkdownRemark(
+                  sort: { order: DESC, fields: [frontmatter___date] },
+                ) {
+                  edges {
+                    node {
+                      excerpt(truncate: true, pruneLength: 300)
+                      fields { slug }
+                      frontmatter {
+                        title
+                        date
+                      }
+                    }
+                  }
+                }
+              }
+            `,
+            output: '/feed.xml',
+            title: 'shiren.dev RSS Feed',
+          },
+        ],
+      },
+    },
   ],
 };

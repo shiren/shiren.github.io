@@ -7,7 +7,6 @@ categories: javascript, ecmascript, private
 
 ECMAScript 클래스 필드(class field) 명세중에 `Private field` 즉 `Private Property` (이하 Private 속성) 가 있다. 클래스 필드 스펙은 Stage 3(Candidate)까지 올랐으니 아마 곧 Stage 4(Finished)를 거쳐 표준 스펙이 될 것이다. 사실 초기에 명세 문서를 봤을 때는 "드디어 private이 생기는건가?"하는 기대감과 "문법이 좀 별론데"라는 실망감이 있었을 뿐 뭔가 현실감은 없었다. 그렇게 시간이 흘러 기억 속에서 잊힌 채로 지내다가 얼마전에 타입스크립트 3.8에서 정식으로 지원한다는 소식을 들었고 이를 계기로 Private 속성 에 대해 제대로 알아보기로 했다. 물론 이제 프로젝트에서도 적극적으로 사용할 생각이다. public 한 클래스 필드는 바벨 플러그인 [babel-plugin-proposal-class-properties](https://babeljs.io/docs/en/babel-plugin-proposal-class-properties)을 통해 이미 예전부터 아주 유용하게 사용하고 있었다.
 
-
 ## 프라이버시가 없는 설움
 
 객체의 private 한 속성을 만들 수 없었던 자바스크립트에서는 몇 가지 대안을 사용해왔다. 다른 클래스 기반의 언어처럼 근본적으로는 private 하게 만들 수 없었기 때문에 컨벤션으로 약속하거나 비슷한 효과를 주는 꼼수를 사용했었다.
@@ -53,7 +52,7 @@ function SomeModule() {
   return {
     publicProp,
     publicMethod
-  }   
+  }
 }
 ```
 
@@ -81,17 +80,17 @@ class SomeClass {
 
 모듈 스코프 안에서는 symbol을 사용할 수 있어 해당 필드나 메서드에 접근할 수 있지만, symbol을 export 하지 않는 한 외부에서는 접근할 방법이 없다. 접근할 필드의 이름이 무엇인지 모르니까 말이다. 이 방법은 속성의 이름을 다른 차원으로 격리한 케이스다.
 
-
 ## 나이스 샵(#)
 
 아무튼, 드디어 자바스크립트에서도 진정한 의미의, 꼼수가 아닌 언어가 제공하는 정상적인 방법으로 클래스에 private 속성을 만들 수 있게 되었다. [TC39의 스펙문서](https://github.com/tc39/proposal-class-fields/)를 토대로 간단하게 특징을 요약하면 아래와 같다.
 
--   Stage-3 단계에 있는 스펙으로 특별한 결격 사유가 없는 한 표준 스펙이 될 것이다. 물론 변경되거나 개선될 여지는 있다.
--   `private`과 같은 키워드를 사용하지 않는다. 대신 `#` 즉 샵 프리픽스를 사용한다. **키워드가 아니라 프리픽스다.** 속성 명 앞에 `#`이 붙으면 Private 필드로 동작한다. - Class Field Decalarations 스펙의 일부다. public과 다른 점은 클래스의 필드 선언을 통해서만 만들 수 있다. 즉 동적으로 객체에 private 필드를 추가할 수 없다.
--   메서드에는 제한적이다. **메서드 선언으로 사용할 수 없다.** private 메서드를 만들려면 함수 표현식으로 정의해야 한다.
-    -   어디까지나 현재로서는 그렇다는 말이다. 스펙이 업데이트될 수도 있다. ([Class fields and private methods: Stage 3 update](https://docs.google.com/presentation/d/1Q9upYkWnPjJaVc8k9q3U6NekDch8tsz7CgV-Xm55-5Y/edit#slide=id.p))
--   **Computed Property Name을 사용할 수 없다.** `#foo` 자체만 식별자로 허용되고 `#[fooName]` 이건 문법 오류다.
--   **모든 Private 필드는 소속된 클래스에 고유한 스코프를 갖는다.** 그렇기 때문에 독특한 특징이 있다.(그 특징은 뒷부분에서 다룬다)
+- Stage-3 단계에 있는 스펙으로 특별한 결격 사유가 없는 한 표준 스펙이 될 것이다. 물론 변경되거나 개선될 여지는 있다.
+- `private`과 같은 키워드를 사용하지 않는다. 대신 `#` 즉 샵 프리픽스를 사용한다. **키워드가 아니라 프리픽스다.** 속성 명 앞에 `#`이 붙으면 Private 필드로 동작한다.
+- Class Field Decalarations 스펙의 일부다. public과 다른 점은 클래스의 필드 선언을 통해서만 만들 수 있다. 즉 동적으로 객체에 private 필드를 추가할 수 없다.
+- 메서드에는 제한적이다. **메서드 선언으로 사용할 수 없다.** private 메서드를 만들려면 함수 표현식으로 정의해야 한다.
+  - 어디까지나 현재로서는 그렇다는 말이다. 스펙이 업데이트될 수도 있다. ([Class fields and private methods: Stage 3 update](https://docs.google.com/presentation/d/1Q9upYkWnPjJaVc8k9q3U6NekDch8tsz7CgV-Xm55-5Y/edit#slide=id.p))
+- **Computed Property Name을 사용할 수 없다.** `#foo` 자체만 식별자로 허용되고 `#[fooName]` 이건 문법 오류다.
+- **모든 Private 필드는 소속된 클래스에 고유한 스코프를 갖는다.** 그렇기 때문에 독특한 특징이 있다.(그 특징은 뒷부분에서 다룬다)
 
 아직은 보통의 클래스 기반 언어만큼의 지원은 아니다. 약간의 제약은 있지만, 아직 stage-3이고 언제든 업데이트되거나 개선될 여지가 있다. 왜 private method가 초반에 같이 논의되지 않았는지는 궁금하다.
 
@@ -124,7 +123,7 @@ class Human {
   getAge() {
     return this.age; // Error TS2551: Property 'age' does not exist on type 'Human'. Did you mean '#age'?
   }
-}      
+}
 ```
 
 `#` 없이는 접근할 수 없다. 식별자의 이름의 일부를 제외하고 접근했으니 없는 속성에 접근한 것이다.
@@ -136,7 +135,7 @@ class Human {
   #age = 10;
 
   getAge() {
-    return this.#age; 
+    return this.#age;
   }
 }
 
@@ -154,7 +153,7 @@ class Human {
   #age = 10;
 
   getAge() {
-    return this.#age; 
+    return this.#age;
   }
 }
 
@@ -174,7 +173,7 @@ class Human {
   age = 10;
 
   getAge() {
-    return this.age; 
+    return this.age;
   }
 }
 
@@ -200,7 +199,7 @@ class Human {
   #age = 10;
 
   getAge() {
-    return this.#age; 
+    return this.#age;
   }
 }
 
@@ -222,7 +221,6 @@ console.log(p.getFakeAge());  // 20
 `#age` 즉 private 속성은 그동안 우리가 알고 있던 this 의 그 컨텍스트와는 다른 방식으로 저장된다. **기존처럼 인스턴스별로 독립적인 공간을 갖지만, 추가로 클래스 별로 독립적인 공간을 갖는 것이다.** 쉽게 말하면 `Human` 클래스 스코프의 `#age`와 `Person` 클래스 스코프의 `#age`는 다르다는 것이다. 그러므로 `Human` 클래스에 속한 `getAge()`가 실행될때는 `Human`의 `#age`에 접근하고 `Person`의 `getFakeAge()`가 실행될 때는 `Person`의 `#age`에 접근하는 것이다. 바로 그게 "모든 Private 필드는 소속된 클래스에 고유한 스코프를 갖는다."라는 문장의 의미이다.
 
 전반적으로 Private 필드 라는 개념에서 크게 벗어나지 않지만, **마지막에 다룬 내용은 제대로 이해하지 않고 사용하면 특정 상황에서 발견하기 힘든 오류를 만들 수 있을 것 같다. 조심하자.**
-
 
 ## 끝으로
 

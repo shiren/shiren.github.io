@@ -19,10 +19,6 @@ https://medium.com/javascript-scene/common-misconceptions-about-inheritance-in-j
 
 #### "프로토타입을 이해하지 못했다면 당신은 자바스크립트를 이해하지 못하는것이다."
 
-faewfewafewf
-
-
-
 ### Q. 클래스 방식의 상속과 프로토타입의 상속은 사실상 같은 것이고, 단지 스타일적인 취향이다?
 
 > ### "아니다"
