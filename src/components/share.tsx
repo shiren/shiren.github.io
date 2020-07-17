@@ -47,20 +47,14 @@ const Share: React.FC<Props> = ({ path, title, tags }) => {
     const scrollTopWithNumberWhatIDontKnow = document.documentElement.scrollTop + 70;
 
     if (scrollTopWithNumberWhatIDontKnow >= shareTop.current!) {
-      console.log('1');
       setHeadlineVisible(false);
     } else {
-      console.log('2');
       setHeadlineVisible(true);
     }
   };
 
   useLayoutEffect(() => {
-    console.log('layoutEffect', wrapperRef.current.getBoundingClientRect());
-
     shareTop.current = wrapperRef.current.getBoundingClientRect().y;
-
-    console.log(shareTop.current);
 
     window.addEventListener('scroll', positionShare);
 
