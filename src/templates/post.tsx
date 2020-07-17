@@ -16,7 +16,7 @@ type Props = {
       frontmatter: {
         title: string;
         date: string;
-        categories: Array<string>;
+        categories: string;
       };
       fields: {
         slug: string;
@@ -77,7 +77,7 @@ const Post: React.FC<Props> = ({ data }) => {
           <Share
             title={post.frontmatter.title}
             path={post.fields.slug}
-            tags={post.frontmatter.categories}
+            tags={post.frontmatter.categories.split(', ')}
           />
         </Headline>
         <article dangerouslySetInnerHTML={{ __html: post.html }} />

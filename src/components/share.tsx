@@ -73,7 +73,7 @@ const Share: React.FC<Props> = ({ path, title, tags }) => {
         url={fullUrl}
         className="button is-outlined is-rounded twitter"
         title={title}
-        via={sns.twitter.split('@').join('')}
+        via={sns.twitter.replace('@', '')}
         hashtags={tags}
       >
         <Icon className="icon">
