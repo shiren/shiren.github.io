@@ -12,7 +12,7 @@ module.exports = {
     titleTemplate: '%s · shiren the creator',
     description: 'programmer & beatmaker',
     url: 'https://blog.shiren.dev',
-    image: '/assets/image/profile.jpg',
+    image: '/image/profile.jpg',
     email: 'shirenbeat@gmail.com',
     sns: {
       github: 'shiren',

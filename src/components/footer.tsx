@@ -60,7 +60,7 @@ const Footer: React.FC = () => {
         </li>
       </FooterLinks>
       <p>
-        {site.siteMetadata.ownerName} • {new Date().getFullYear()}
+        © {site.siteMetadata.ownerName} • {new Date().getFullYear()}
       </p>
     </Wrapper>
   );
@@ -69,9 +69,10 @@ const Footer: React.FC = () => {
 const Wrapper = styled.footer`
   margin-top: 50px;
   padding: 50px 0;
-  background: #f5f5f5;
   border-top: 1px #eaeaea solid;
   text-align: center;
+  color: #fff;
+  background: #000;
 
   & > div {
     margin: 0 auto;
@@ -96,7 +97,7 @@ const FooterLinks = styled.ul`
   }
 
   & a {
-    color: #404040;
+    color: #fff;
   }
 `;
 

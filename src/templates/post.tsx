@@ -73,14 +73,12 @@ const Post: React.FC<Props> = ({ data }) => {
       <Layout>
         <Headline>
           <h1>{post.frontmatter.title}</h1>
-          <p>
-            Posted on {post.frontmatter.date}{' '}
-            <Share
-              title={post.frontmatter.title}
-              path={post.fields.slug}
-              tags={post.frontmatter.categories}
-            />
-          </p>
+          <p>Posted on {post.frontmatter.date} </p>
+          <Share
+            title={post.frontmatter.title}
+            path={post.fields.slug}
+            tags={post.frontmatter.categories}
+          />
         </Headline>
         <article dangerouslySetInnerHTML={{ __html: post.html }} />
         {recomendPost.length ? <RecomendPost posts={recomendPost} /> : null}
@@ -90,6 +88,7 @@ const Post: React.FC<Props> = ({ data }) => {
 };
 
 const Headline = styled.header`
+  position: relative;
   margin: 130px 0 40px;
 
   & > h1 {

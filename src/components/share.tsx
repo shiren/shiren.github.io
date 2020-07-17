@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import { FacebookF, LinkedinIn, RedditAlien, Twitter } from '@styled-icons/fa-brands';
-import { ShareAlt } from '@styled-icons/fa-solid';
 import {
   FacebookShareButton,
   LinkedinShareButton,
@@ -38,13 +37,39 @@ const Share: React.FC<Props> = ({ path, title, tags }) => {
     `
   );
 
+  const [headlineVisible, setHeadlineVisible] = useState(true);
+  const wrapperRef = React.useRef() as React.MutableRefObject<HTMLDivElement>;
+  const shareTop = React.useRef<number>();
+
   const fullUrl = `${url}${path}`;
 
+  const positionShare = () => {
+    const scrollTopWithNumberWhatIDontKnow = document.documentElement.scrollTop + 70;
+
+    if (scrollTopWithNumberWhatIDontKnow >= shareTop.current!) {
+      console.log('1');
+      setHeadlineVisible(false);
+    } else {
+      console.log('2');
+      setHeadlineVisible(true);
+    }
+  };
+
+  useLayoutEffect(() => {
+    console.log('layoutEffect', wrapperRef.current.getBoundingClientRect());
+
+    shareTop.current = wrapperRef.current.getBoundingClientRect().y;
+
+    console.log(shareTop.current);
+
+    window.addEventListener('scroll', positionShare);
+
+    return () => window.removeEventListener('scroll', positionShare);
+  }, []);
+
   return (
-    <Wrapper>
-      <TitleIcon>
-        <ShareAlt />
-      </TitleIcon>
+    <Wrapper headlineVisible={headlineVisible} ref={wrapperRef}>
+      <Title>Share</Title>
       <FacebookShareButton url={fullUrl} className="button is-outlined is-rounded facebook">
         <Icon>
           <FacebookF />
@@ -83,11 +108,20 @@ const Share: React.FC<Props> = ({ path, title, tags }) => {
   );
 };
 
-const Wrapper = styled.span`
-  float: right;
+const Wrapper = styled.div<{ headlineVisible: boolean }>`
+  height: 1px;
+  width: 150px;
+  position: ${({ headlineVisible }) => (headlineVisible ? 'relative' : 'fixed')};
+  top: ${({ headlineVisible }) => (headlineVisible ? '40px' : '42px')};
+  left: ${({ headlineVisible }) => (headlineVisible ? '-180px' : '51px')};
   vertical-align: middle;
+
   & > button {
     margin: 0 0.25rem;
+  }
+
+  & > button:first-child {
+    margin: 0 0.25rem 0 0 !important;
   }
 `;
 
@@ -99,8 +133,12 @@ const Icon = styled.span`
   }
 `;
 
-const TitleIcon = styled(Icon)`
-  color: #81a1c1;
+const Title = styled.h3`
+  border-bottom: 1px solid #000;
+  color: #000;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: 800;
 `;
 
 export default styled(Share)``;

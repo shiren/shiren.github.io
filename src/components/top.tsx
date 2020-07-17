@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { useStaticQuery, graphql, Link } from 'gatsby';
+import { graphql, Link, useStaticQuery } from 'gatsby';
 
 type Menu = {
   name: string;
@@ -43,6 +43,7 @@ const Top: React.FC = () => {
           siteMetadata {
             title
             url
+            image
             menus {
               name
               url
@@ -77,7 +78,10 @@ const Top: React.FC = () => {
 
   return (
     <Wrapper shortTop={shortTop}>
-      <LogoButton href={site.siteMetadata.url}>{site.siteMetadata.title}</LogoButton>
+      <LogoButton href={site.siteMetadata.url}>
+        <img src={site.siteMetadata.image} />
+        {site.siteMetadata.title}
+      </LogoButton>
       <MenuList>{renderMenuItems(site.siteMetadata.menus)}</MenuList>
     </Wrapper>
   );
@@ -119,7 +123,7 @@ const MenuList = styled.ul`
     text-transform: uppercase;
     font-size: 12px;
     letter-spacing: 1px;
-    color: #404040;
+    color: #000;
     text-decoration: none;
     font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     cursor: pointer;
@@ -127,7 +131,12 @@ const MenuList = styled.ul`
 
   & > li > a,
   & > li > button {
-    font-weight: 800;
+    font-weight: 500;
+  }
+
+  & > li > a:hover,
+  & > li > button:hover {
+    text-decoration: underline;
   }
 `;
 
@@ -166,9 +175,16 @@ const LogoButton = styled.a`
   font-size: 18px;
   line-height: 20px;
   font-weight: 800;
-  color: #404040;
+  color: #000;
   text-decoration: none;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+  & > img {
+    width: 30px;
+    vertical-align: middle;
+    border-radius: 50%;
+    margin: 0 10px;
+  }
 `;
 
 const Wrapper = styled.nav<{ shortTop: boolean }>`
@@ -179,9 +195,10 @@ const Wrapper = styled.nav<{ shortTop: boolean }>`
   min-height: 50px;
   padding: ${(props) => (props.shortTop ? '0' : '20px 0')};
   margin-bottom: 20px;
-  border-bottom: 1px solid #eaeaea;
-  background: #f5f6f6;
+  border-bottom: 1px solid #000;
+  background: #fff;
   transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
+  z-index: 1000;
 `;
 
 export default Top;
