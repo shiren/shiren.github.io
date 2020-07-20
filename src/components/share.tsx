@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React from 'react';
 import { FacebookF, LinkedinIn, RedditAlien, Twitter } from '@styled-icons/fa-brands';
 import {
   FacebookShareButton,
@@ -37,32 +37,12 @@ const Share: React.FC<Props> = ({ path, title, tags }) => {
     `
   );
 
-  const [headlineVisible, setHeadlineVisible] = useState(true);
   const wrapperRef = React.useRef() as React.MutableRefObject<HTMLDivElement>;
-  const shareTop = React.useRef<number>();
 
   const fullUrl = `${url}${path}`;
 
-  const positionShare = () => {
-    const scrollTopWithNumberWhatIDontKnow = document.documentElement.scrollTop + 70;
-
-    if (scrollTopWithNumberWhatIDontKnow >= shareTop.current!) {
-      setHeadlineVisible(false);
-    } else {
-      setHeadlineVisible(true);
-    }
-  };
-
-  useLayoutEffect(() => {
-    shareTop.current = wrapperRef.current.getBoundingClientRect().y;
-
-    window.addEventListener('scroll', positionShare);
-
-    return () => window.removeEventListener('scroll', positionShare);
-  }, []);
-
   return (
-    <Wrapper headlineVisible={headlineVisible} ref={wrapperRef}>
+    <Wrapper ref={wrapperRef}>
       <Title>Share</Title>
       <FacebookShareButton url={fullUrl} className="button is-outlined is-rounded facebook">
         <Icon>
@@ -102,12 +82,11 @@ const Share: React.FC<Props> = ({ path, title, tags }) => {
   );
 };
 
-const Wrapper = styled.div<{ headlineVisible: boolean }>`
-  height: 1px;
+const Wrapper = styled.div`
   width: 150px;
-  position: ${({ headlineVisible }) => (headlineVisible ? 'relative' : 'fixed')};
-  top: ${({ headlineVisible }) => (headlineVisible ? '40px' : '42px')};
-  left: ${({ headlineVisible }) => (headlineVisible ? '-180px' : '51px')};
+  position: sticky;
+  top: 100px;
+  margin-left: -180px;
   vertical-align: middle;
 
   & > button {
