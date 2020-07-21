@@ -96,6 +96,14 @@ const Wrapper = styled.div`
   & > button:first-child {
     margin: 0 0.25rem 0 0 !important;
   }
+
+  @media only screen and (max-width: 1080px) {
+    position: relative;
+    float: right;
+    width: 200px;
+    top: initial;
+    margin-top: -100px;
+  }
 `;
 
 const Icon = styled.span`
@@ -112,6 +120,11 @@ const Title = styled.h3`
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-style: normal;
   font-weight: 800;
+
+  @media only screen and (max-width: 1080px) {
+    display: inline-block;
+    border-bottom: none;
+  }
 `;
 
 export default styled(Share)``;

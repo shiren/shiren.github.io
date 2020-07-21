@@ -105,6 +105,10 @@ const Headline = styled.header`
 
 const Article = styled.article`
   margin-top: -86px;
+
+  @media only screen and (max-width: 1080px) {
+    margin-top: 0;
+  }
 `;
 
 export default Post;
