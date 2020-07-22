@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
+import { AlignJustify } from '@styled-icons/fa-solid';
+
 import { graphql, Link, useStaticQuery } from 'gatsby';
 
 type Menu = {
@@ -59,6 +61,7 @@ const Top: React.FC = () => {
   );
 
   const [shortTop, setShortTop] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false);
 
   useEffect(() => {
     const handleScrollEvent = () => {
@@ -77,11 +80,14 @@ const Top: React.FC = () => {
   }, []);
 
   return (
-    <Wrapper shortTop={shortTop}>
+    <Wrapper shortTop={shortTop} showMenu={openMenu}>
       <LogoButton href={site.siteMetadata.url}>
         <img src={site.siteMetadata.image} />
         {site.siteMetadata.title}
       </LogoButton>
+      <MenuButton onClick={() => setOpenMenu(!openMenu)}>
+        <AlignJustify />
+      </MenuButton>
       <MenuList>{renderMenuItems(site.siteMetadata.menus)}</MenuList>
     </Wrapper>
   );
@@ -96,6 +102,16 @@ const SubMenu = styled.li`
   &:hover {
     background: #eee;
   }
+`;
+
+const MenuButton = styled.button`
+  float: right;
+  width: 25px;
+  padding: 0;
+  margin-top: 15px;
+  margin-right: 20px;
+  background: none;
+  border: none;
 `;
 
 const MenuList = styled.ul`
@@ -187,18 +203,85 @@ const LogoButton = styled.a`
   }
 `;
 
-const Wrapper = styled.nav<{ shortTop: boolean }>`
+const Wrapper = styled.nav<{ shortTop: boolean; showMenu: boolean }>`
   position: fixed;
   right: 0;
   left: 0;
   top: 0;
   min-height: 50px;
-  padding: ${(props) => (props.shortTop ? '0' : '20px 0')};
+  padding: ${({ shortTop }) => (shortTop ? '0' : '20px 0')};
   margin-bottom: 20px;
   border-bottom: 1px solid #000;
   background: #fff;
   transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
   z-index: 1000;
+
+  & > ${MenuButton} {
+    display: none;
+  }
+
+  @media only screen and (max-width: 768px) {
+    & > ${MenuButton} {
+      display: inline-block;
+    }
+
+    & > ${MenuList} {
+      display: ${({ showMenu }) => (showMenu ? 'block' : 'none')};
+      float: none;
+      margin-top: 60px;
+    }
+
+    & > ${MenuList} > li {
+      float: none;
+
+      & > a,
+      & > button {
+        text-decoration: none;
+      }
+    }
+
+    & ${SubMenus} {
+      display: block;
+      position: relative;
+      background: none;
+    }
+
+    & ${DropButton} {
+      &:hover {
+        background: none;
+        text-decoration: none;
+      }
+
+      outline: 0;
+      cursor: default;
+    }
+
+    & ${DropMenu} {
+      background: none;
+      &:hover ${DropButton} {
+        background: none;
+      }
+    }
+
+    & ${SubMenu} {
+      &:before {
+        content: '-';
+        vertical-align: middle;
+      }
+
+      & a,
+      & button {
+        display: inline-block;
+        vertical-align: middle;
+        text-decoration: none;
+      }
+      box-sizing: border-box;
+      padding-left: 30px;
+      text-align: left;
+      background: none;
+      border: none;
+    }
+  }
 `;
 
 export default Top;
