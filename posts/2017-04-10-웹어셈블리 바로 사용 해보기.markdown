@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "(번역)웹어셈블리 바로 사용 해보기"
+title:  "웹어셈블리 바로 사용 해보기"
 date:   2017-04-10 13:58:08
-categories: webassembly
+categories: webassembly, translation
 ---
 
 > 원글: <https://tutorials.technology/tutorials/11-webassembly-initial-steps-tutorial.html>

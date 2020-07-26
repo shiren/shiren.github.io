@@ -2,7 +2,7 @@
 layout: post
 title:  "(번역)Reactive MVC 그리고 Virtual DOM"
 date:   2015-06-01 11:50:00
-categories: javascript
+categories: javascript, translation
 ---
 
 ### "Reactive MVC 그리고 Virtual DOM"

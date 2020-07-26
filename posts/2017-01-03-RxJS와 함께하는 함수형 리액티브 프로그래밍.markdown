@@ -2,7 +2,7 @@
 layout: post
 title:  "(번역)RxJS와 함께하는 함수형 리액티브 프로그래밍"
 date:   2017-01-03 10:07:08
-categories: javascript, reative, rxjs
+categories: javascript, reative, rxjs, translation
 ---
 
 > 원글: <https://www.sitepoint.com/functional-reactive-programming-rxjs/>
