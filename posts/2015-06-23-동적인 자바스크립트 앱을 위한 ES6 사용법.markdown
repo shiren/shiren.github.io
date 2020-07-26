@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "(번역)동적인 자바스크립트 앱을 위한 ES6 사용법"
+title:  "동적인 자바스크립트 앱을 위한 ES6 사용법"
 date:   2015-06-23 14:50:00
 categories: javascript, translation
 ---

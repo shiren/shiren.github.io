@@ -35,10 +35,10 @@ const PostListPage: React.FC<Props> = ({ data, path }) => {
 
   return (
     <Layout>
-      <SEO/>
-      <ListHeader/>
-      <PostList posts={posts}/>
-      <Pagination total={totalCount} current={currentPage}/>
+      <SEO />
+      <ListHeader />
+      <PostList posts={posts} />
+      <Pagination total={totalCount} current={currentPage} />
     </Layout>
   );
 };
@@ -59,6 +59,7 @@ export const postListQuery = graphql`
           frontmatter {
             title
             date(formatString: "DD MMMM, YYYY")
+            categories
           }
           fields {
             slug

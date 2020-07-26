@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "(번역)Flux 카툰 가이드"
+title:  "Flux 카툰 가이드"
 date:   2015-10-19 10:07:08
 categories: javascript, react, flux, translation
 ---

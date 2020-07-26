@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'gatsby';
+import { GlobeAsia } from '@styled-icons/fa-solid';
 import styled from 'styled-components';
 
 type Props = {
   posts: Array<{
     node: {
       id: string;
-      frontmatter: { title: string; date: string };
+      frontmatter: { title: string; date: string; categories: string[] };
       fields: {
         slug: string;
       };
@@ -20,7 +21,15 @@ const PostList: React.FC<Props> = ({ posts }) => {
     <div>
       {posts.map(({ node }) => (
         <ListItem to={node.fields.slug.replace(/\s/g, '-')} key={node.id}>
-          <PostHeader>{node.frontmatter.title}</PostHeader>
+          <PostHeader>
+            {node.frontmatter.categories.includes('translation') ? (
+              <Icon>
+                <GlobeAsia />
+                번역
+              </Icon>
+            ) : null}
+            {node.frontmatter.title}
+          </PostHeader>
           <PostDate>Posted on {node.frontmatter.date}</PostDate>
           <PostEntry>
             {node.excerpt} <ReadMore>[Read More]</ReadMore>
@@ -60,6 +69,19 @@ const PostEntry = styled.p`
 
 const ReadMore = styled.span`
   font-weight: 800;
+`;
+
+const Icon = styled.span`
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  padding: 3px;
+  vertical-align: top;
+  font-size: 10px;
+
+  & svg {
+    vertical-align: top;
+  }
 `;
 
 export default PostList;

@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "(번역)자바스크립트 상속에 관한 일반적인 오해들"
+title:  "자바스크립트 상속에 관한 일반적인 오해들"
 date:   2015-05-06 12:31:08
 categories: javascript, translation
 ---
