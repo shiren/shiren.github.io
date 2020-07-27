@@ -18,7 +18,7 @@ categories: frontend, refactoring
 
 `on이벤트` 작명법은 그냥 부르기 쉽게 이름을 지어봤다. 네이밍을 네이밍했다. (…) 무슨 말인지 경험많은 개발자라면 바로 눈치챌 수 있을 것이다. 예제 코드를 통해 살펴보자. 예제 코드는 리액트를 사용했지만, 뷰나 앵귤러 혹은 DOM API를 직접 사용한 경우에도 동일하게 해당된다.
 
-```javascript
+```jsx
 function MyFancyButton() {
   const onClick = () => { … }
 
@@ -30,7 +30,7 @@ function MyFancyButton() {
 필요한 이벤트가 클릭 이벤트이기 때문에 클릭 이벤트에 바인드 될 이벤트 핸들러 함수의 이름을 onClick 으로 네이밍한것이다 `on이벤트` 작명법은 이런것을 말한다.
 이런 네이밍의 문제는 이벤트 핸들러 함수를 인라인 무명함수로 작성했을때도 나타난다.
 
-```javascript
+```jsx
 function MyFancyButton() {
   return <button onClick={() => …} />
 }
@@ -48,7 +48,7 @@ click 이벤트 -> onClick 함수 실행 or 무명 함수 실행
 
 프레임웍에 따라 다를 수 있겠지만 보통 이벤트 핸들러를 바인드 하는 코드와 이벤트 핸들러 정의하는 코드는 물리적인 거리가 있기 마련이다.
 
-```javascript
+```jsx
 // …
 return <button onClick={onClick} />
 ```
@@ -67,7 +67,7 @@ return <button onClick={onClick} />
 JSX 혹은 Vue나 Angular의 HTML 확장 문법에서 인라인 이벤트 핸들러를 바인드할 수 있기 때문에 이동 거리는 줄일 수 있겠지만 이는 코드의 복잡도를 매우 높일 수 있기 때문에 의식적으로 함수를 미리 정의하고 HTML을 만드는 코드에서는 해당 함수를 바인드하는 정도로만 사용하는 것이 좋다.
 이 문제를 해결하는 방법 간단하다. 이벤트 핸들러 함수에게 함수가 하는 일을 충분히 설명하는 제대로된 이름을 지어주는 것이다. onClick으로 네이밍했었던 함수가 하는 일이 서브 메뉴를 여는 것이라고 가정해보자 이 함수의 이름은 `openSubMenu` 정도면 충분할 것 같다.
 
-```javascript
+```jsx
 function MyFancyButton() {
   const openSubMenu = () => {…}
   return <button onClick={openSubMenu} />
