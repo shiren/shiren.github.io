@@ -14,7 +14,7 @@ type Props = {
       edges: Array<{
         node: {
           id: string;
-          frontmatter: { title: string; date: string };
+          frontmatter: { title: string; date: string; categories: string[] };
           fields: {
             slug: string;
           };
@@ -48,6 +48,7 @@ export default PostListPage;
 export const postListQuery = graphql`
   query postListQuery($skip: Int!, $limit: Int!) {
     allMarkdownRemark(
+      filter: { frontmatter: { layout: { eq: "post" } } }
       sort: { fields: [frontmatter___date], order: DESC }
       limit: $limit
       skip: $skip

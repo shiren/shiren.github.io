@@ -5,7 +5,7 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions;
 
   if (node.internal.type === 'MarkdownRemark') {
-    const slug = createFilePath({ node, getNode, basePath: 'pages' });
+    const slug = createFilePath({ node, getNode });
 
     createNodeField({
       node,
@@ -15,11 +15,40 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
   }
 };
 
+async function createSubPage(graphql, actions) {
+  const { createPage } = actions;
+  const result = await graphql(`
+    query {
+      allMarkdownRemark(filter: { frontmatter: { layout: { eq: "page" } } }) {
+        edges {
+          node {
+            fields {
+              slug
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+    const slug = node.fields.slug.replace(/\s/g, '-');
+
+    createPage({
+      path: slug,
+      component: path.resolve(`./src/templates/page.tsx`),
+      context: {
+        slug: node.fields.slug,
+      },
+    });
+  });
+}
+
 async function createPostPage(graphql, actions) {
   const { createPage } = actions;
   const result = await graphql(`
     query {
-      allMarkdownRemark {
+      allMarkdownRemark(filter: { frontmatter: { layout: { eq: "post" } } }) {
         edges {
           node {
             fields {
@@ -56,11 +85,17 @@ async function createPostListPage(graphql, actions) {
   const result = await graphql(
     `
       {
-        allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+        allMarkdownRemark(
+          filter: { frontmatter: { layout: { eq: "post" } } }
+          sort: { fields: [frontmatter___date], order: DESC }
+        ) {
           edges {
             node {
               fields {
                 slug
+              }
+              frontmatter {
+                categories
               }
             }
           }
@@ -83,6 +118,7 @@ async function createPostListPage(graphql, actions) {
       currentPage: 1,
     },
   });
+
   Array.from({ length: numPages }).forEach((_, i) => {
     createPage({
       path: `/page${i + 1}`,
@@ -98,5 +134,9 @@ async function createPostListPage(graphql, actions) {
 }
 
 exports.createPages = async ({ graphql, actions }) => {
-  await Promise.all([createPostPage(graphql, actions), createPostListPage(graphql, actions)]);
+  await Promise.all([
+    createPostPage(graphql, actions),
+    createPostListPage(graphql, actions),
+    createSubPage(graphql, actions),
+  ]);
 };

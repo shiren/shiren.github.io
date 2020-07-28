@@ -21,7 +21,7 @@ module.exports = {
       twitter: '@shirenbeat',
     },
     menus: [
-      { name: 'ABOUT ME', url: '/about' },
+      { name: 'ABOUT ME', url: '/aboutme' },
       { name: 'SOUNDCLOUD', url: 'https://soundcloud.com/shiren' },
       {
         name: 'OPENSOURCES',
@@ -35,6 +35,13 @@ module.exports = {
       options: {
         name: `posts`,
         path: `${__dirname}/posts/`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `pages`,
+        path: `${__dirname}/pages/`,
       },
     },
     {
