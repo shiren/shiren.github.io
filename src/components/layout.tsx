@@ -1,9 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import 'normalize.css';
-import '../../assets/style.css';
-
 import Top from './top';
 import Footer from './footer';
 

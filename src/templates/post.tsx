@@ -129,7 +129,7 @@ export const query = graphql`
     }
     recomendPost: allMarkdownRemark(
       filter: {
-        frontmatter: { categories: { regex: $categoriesRegex } }
+        frontmatter: { categories: { regex: $categoriesRegex }, layout: { eq: "post" } }
         fields: { slug: { ne: $slug } }
       }
       sort: { fields: frontmatter___date, order: DESC }
@@ -147,7 +147,11 @@ export const query = graphql`
         excerpt(truncate: true, pruneLength: 300)
       }
     }
-    recentPost: allMarkdownRemark(sort: { fields: frontmatter___date, order: DESC }, limit: 4) {
+    recentPost: allMarkdownRemark(
+      filter: { frontmatter: { layout: { eq: "post" } } }
+      sort: { fields: frontmatter___date, order: DESC }
+      limit: 4
+    ) {
       nodes {
         fields {
           slug

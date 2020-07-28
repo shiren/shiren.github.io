@@ -53,3 +53,9 @@ article em {
   text-decoration: underline;
   text-underline-position: under;
 }
+
+article img {
+  display: block;
+  width: 90%;
+  margin: 0 auto;
+}
