@@ -34,12 +34,15 @@ const PostListPage: React.FC<Props> = ({ data, path }) => {
   const currentPage = parseInt(path.replace('/page', ''), 10) || 0;
 
   return (
-    <Layout>
-      <SEO />
-      <ListHeader />
-      <PostList posts={posts} />
-      <Pagination total={totalCount} current={currentPage} />
-    </Layout>
+    <>
+      <SEO article={false} />
+      <Layout>
+        <SEO />
+        <ListHeader />
+        <PostList posts={posts} />
+        <Pagination total={totalCount} current={currentPage} />
+      </Layout>
+    </>
   );
 };
 
@@ -65,7 +68,7 @@ export const postListQuery = graphql`
           fields {
             slug
           }
-          excerpt(truncate: true, pruneLength: 300)
+          excerpt(truncate: true, pruneLength: 200)
         }
       }
     }
