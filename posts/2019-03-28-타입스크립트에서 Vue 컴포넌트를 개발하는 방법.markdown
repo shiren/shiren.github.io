@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "타입스크립트에서 Vue 컴포넌트를 개발하는 방법"
-date:   2019-03-27 17:53:00
+date:   2019-03-28 17:53:00
 categories: vue, typescript
 ---
 

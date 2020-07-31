@@ -22,6 +22,8 @@ const query = graphql`
         sns {
           twitter
         }
+        ownerName
+        ownerNickname
       }
     }
   }
@@ -37,6 +39,7 @@ const SEO: React.FC<Props> = ({ title, description, image, article = false }) =>
     defaultDescription,
     siteUrl,
     defaultImage,
+    ownerName,
     sns: { twitter },
   } = site.siteMetadata;
 
@@ -51,7 +54,8 @@ const SEO: React.FC<Props> = ({ title, description, image, article = false }) =>
     <Helmet title={seo.title} titleTemplate={titleTemplate}>
       <meta name="description" content={seo.description} />
       <meta name="image" content={seo.image} />
-
+      <meta name="author" content={`${ownerName}`} />
+      <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
       {seo.url && <meta property="og:url" content={seo.url} />}
 
       {(article ? true : null) && <meta property="og:type" content="article" />}

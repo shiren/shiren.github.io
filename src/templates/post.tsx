@@ -81,11 +81,25 @@ const Post: React.FC<Props> = ({ data }) => {
           tags={post.frontmatter.categories.split(', ')}
         />
         <Article dangerouslySetInnerHTML={{ __html: post.html }} />
+        <BuyMeACoffee href="https://www.buymeacoffee.com/shiren" target="_blank">
+          <img src="https://cdn.buymeacoffee.com/buttons/lato-orange.png" alt="Buy Me A Coffee" />
+        </BuyMeACoffee>
         {recomendPost.length ? <RecomendPost posts={recomendPost} /> : null}
       </Layout>
     </>
   );
 };
+
+const BuyMeACoffee = styled.a`
+  display: block;
+  margin-top: 40px;
+  text-align: center;
+
+  & img {
+    height: 51px;
+    width: 217px;
+  }
+`;
 
 const Headline = styled.header`
   position: relative;
