@@ -1,11 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Helmet} from 'react-helmet';
 
-import {useStaticQuery, graphql} from 'gatsby';
+import {graphql, useStaticQuery} from 'gatsby';
 
-const ListHeader: React.FC = ({children}) => {
-  const {site} = useStaticQuery(
+const ListHeader: React.FC = ({ children }) => {
+  const { site } = useStaticQuery(
     graphql`
       query {
         site {
@@ -19,7 +18,7 @@ const ListHeader: React.FC = ({children}) => {
 
   return (
     <header>
-      <h1>{site.siteMetadata.title}</h1>
+      <h1>Hello</h1>
     </header>
   );
 };

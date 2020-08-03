@@ -17,7 +17,7 @@ const Layout: React.FC = ({ children }) => {
 };
 
 const Container = styled.div`
-  margin: 0 auto;
+  margin: 120px auto 0;
   width: 750px;
   padding: 0 15px;
   box-sizing: border-box;
