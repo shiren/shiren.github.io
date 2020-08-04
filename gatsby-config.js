@@ -10,7 +10,7 @@ module.exports = {
     ownerNickname: 'shiren',
     title: `shiren the creator`,
     titleTemplate: '%s · shiren the creator',
-    description: 'coding + beatmaking + writing',
+    description: 'code for life, life for music',
     url: 'https://blog.shiren.dev',
     image: '/image/profile.jpg',
     email: 'shirenbeat@gmail.com',
