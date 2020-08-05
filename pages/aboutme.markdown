@@ -4,7 +4,7 @@ title: About me
 subtitle: let the games begin.
 ---
 
-![shiren](/image/aboutme.png)
+<img src="/image/aboutme.png" alt="Sungho Kim" style="width:200px;"/>
 
 ## 개발자
 
@@ -34,4 +34,4 @@ subtitle: let the games begin.
 
 ## 키워드
 
-> `#개발` `#음악` `#글쓰기` `#웨이트트레이닝` `#게임` `#명상` `#커피` `#와인` `#호러` `#스릴러` `#잠비` `#힙합` `#퓨처베이스` `#트랩` `#책`
+> `#개발` `#음악` `#글쓰기` `#웨이트트레이닝` `#게임` `#명상` `#커피` `#와인` `#호러` `#스릴러` `#좀비` `#책` `#힙합` `#퓨처베이스` `#트랩` 
