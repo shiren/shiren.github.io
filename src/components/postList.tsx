@@ -1,13 +1,13 @@
 import React from 'react';
-import { Link } from 'gatsby';
-import { GlobeAsia } from '@styled-icons/fa-solid';
+import {Link} from 'gatsby';
+import {GlobeAsia} from '@styled-icons/fa-solid';
 import styled from 'styled-components';
 
 type Props = {
   posts: Array<{
     node: {
       id: string;
-      frontmatter: { title: string; date: string; categories: string[] };
+      frontmatter: { title: string; date: string; categories: string };
       fields: {
         slug: string;
       };
@@ -17,6 +17,8 @@ type Props = {
 };
 
 const PostList: React.FC<Props> = ({ posts }) => {
+  console.log(posts);
+
   return (
     <div>
       {posts.map(({ node }) => (
@@ -30,21 +32,52 @@ const PostList: React.FC<Props> = ({ posts }) => {
             ) : null}
             {node.frontmatter.title}
           </PostHeader>
-          <PostDate>Posted on {node.frontmatter.date}</PostDate>
-          <PostEntry>
-            {node.excerpt} <ReadMore>[Read More]</ReadMore>
-          </PostEntry>
+          <PostEntry>{node.excerpt}</PostEntry>
+          <Date>{node.frontmatter.date}</Date>
+          <Categories>
+            {node.frontmatter.categories.split(', ').map((category) => (
+              <Category key={category}>{category}</Category>
+            ))}
+          </Categories>
         </ListItem>
       ))}
     </div>
   );
 };
 
+const Date = styled.p`
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #b1b1b1;
+`;
+
+const Category = styled.span`
+  display: inline-block;
+  margin-right: 10px;
+  border-bottom: 1px solid #777;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #777;
+`;
+
+const Categories = styled.div`
+  display: inline-block;
+  margin-left: 10px;
+`;
+
 const ListItem = styled(Link)`
   display: block;
-  margin: 35px 0;
+  margin: 35px 0 35px;
   text-decoration: none;
   color: #404040;
+  clear: both;
 
   &:hover > h3 {
     color: #0085a1;
@@ -56,19 +89,9 @@ const PostHeader = styled.h3`
   font-size: 36px;
 `;
 
-const PostDate = styled.p`
-  margin: 0 0 10px 0;
-  color: #808080;
-  font-size: 18px;
-  font-style: italic;
-`;
-
 const PostEntry = styled.p`
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-`;
-
-const ReadMore = styled.span`
-  font-weight: 800;
+  margin-bottom: 5px;
 `;
 
 const Icon = styled.span`
