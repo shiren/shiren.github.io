@@ -90,8 +90,8 @@ const PostHeader = styled.h3`
 `;
 
 const PostEntry = styled.p`
+  margin: 10px 0 5px;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  margin-bottom: 5px;
 `;
 
 const Icon = styled.span`
