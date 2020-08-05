@@ -1,6 +1,6 @@
 import React from 'react';
-import {Link} from 'gatsby';
-import {GlobeAsia} from '@styled-icons/fa-solid';
+import { Link } from 'gatsby';
+import { GlobeAsia } from '@styled-icons/fa-solid';
 import styled from 'styled-components';
 
 type Props = {
