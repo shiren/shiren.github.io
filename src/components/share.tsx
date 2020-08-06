@@ -102,7 +102,7 @@ const Wrapper = styled.div`
     float: right;
     width: 200px;
     top: initial;
-    margin-top: -100px;
+    margin-top: -69px;
   }
 `;
 
@@ -124,6 +124,8 @@ const Title = styled.h3`
   @media only screen and (max-width: 1080px) {
     display: inline-block;
     border-bottom: none;
+    vertical-align: middle;
+    margin: 0;
   }
 `;
 

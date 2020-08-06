@@ -17,8 +17,6 @@ type Props = {
 };
 
 const PostList: React.FC<Props> = ({ posts }) => {
-  console.log(posts);
-
   return (
     <div>
       {posts.map(({ node }) => (
