@@ -1,7 +1,7 @@
 body {
   font-family: '나눔고딕', 'NanumGothic', 'NanumGothicWebFont', 'Malgun Gothic', '맑은 고딕',
     'Dotum', '돋움', 'Helvetica', 'Apple SD Gothic Neo', 'sans-serif';
-  font-size: 18px;
+  font-size: 1.2em;
   line-height: 1.42857143;
   color: #404040;
 }
@@ -42,10 +42,13 @@ li {
 
 code.language-text {
   padding: 2px 4px;
-  font-size: 90%;
   color: #c7254e;
   background-color: #f9f2f4 !important;
   border-radius: 4px;
+}
+
+div.gatsby-highlight {
+  font-size: 0.9em;
 }
 
 article em {

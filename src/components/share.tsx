@@ -104,6 +104,12 @@ const Wrapper = styled.div`
     top: initial;
     margin-top: -69px;
   }
+
+  @media only screen and (max-width: 440px) {
+    position: relative;
+    float: none;
+    margin: -40px 0 0 0;
+  }
 `;
 
 const Icon = styled.span`

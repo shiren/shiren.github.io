@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "noEmit": true,
-    "target": "ES6",
+    "target": "es5",
     "module": "ESNext",
     "strict": true,
     "importHelpers": true,
