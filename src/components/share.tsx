@@ -101,11 +101,11 @@ const Wrapper = styled.div`
     position: relative;
     float: right;
     width: 200px;
-    top: initial;
-    margin-top: -69px;
+    top: 0;
+    margin: -69px 0 0 0;
   }
 
-  @media only screen and (max-width: 440px) {
+  @media only screen and (max-width: 460px) {
     position: relative;
     float: none;
     margin: -40px 0 0 0;
