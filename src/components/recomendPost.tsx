@@ -46,7 +46,8 @@ const Wrapper = styled.div`
 const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
-  padding-top: 20px;
+  padding: 20px 10px 0;
+  justify-content: space-between;
 `;
 
 const Title = styled.h4`
@@ -58,9 +59,9 @@ const Title = styled.h4`
 `;
 
 const Item = styled.div`
-  margin-bottom: 30px;
-  padding: 0 15px;
-  flex: 0 0 50%;
+  flex: 0 0 49%;
+  margin: 0 0 25px;
+  flex-direction: column;
   box-sizing: border-box;
 
   & > div {

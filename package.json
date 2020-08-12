@@ -15,7 +15,7 @@
   },
   "browserslist_": [
     "last 2 version",
-    "not ie <= 9"
+    "not ie <= 10"
   ],
   "dependencies": {
     "babel-plugin-styled-components": "^1.11.1",
