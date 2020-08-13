@@ -10,6 +10,8 @@ import {
 import { graphql, useStaticQuery } from 'gatsby';
 import styled from 'styled-components';
 
+import { trackCustomEvent } from 'gatsby-plugin-google-analytics';
+
 type Props = {
   title: string;
   path: string;
@@ -37,6 +39,12 @@ const Share: React.FC<Props> = ({ path, title, tags }) => {
     `
   );
 
+  const sendShareGa = (type: string) =>
+    trackCustomEvent({
+      category: 'Share',
+      action: type,
+    });
+
   const wrapperRef = React.useRef() as React.MutableRefObject<HTMLDivElement>;
 
   const fullUrl = `${url}${path}`;
@@ -44,12 +52,17 @@ const Share: React.FC<Props> = ({ path, title, tags }) => {
   return (
     <Wrapper ref={wrapperRef}>
       <Title>Share</Title>
-      <FacebookShareButton url={fullUrl} className="button is-outlined is-rounded facebook">
+      <FacebookShareButton
+        onClick={() => sendShareGa('facebook')}
+        url={fullUrl}
+        className="button is-outlined is-rounded facebook"
+      >
         <Icon>
           <FacebookF />
         </Icon>
       </FacebookShareButton>
       <TwitterShareButton
+        onClick={() => sendShareGa('twitter')}
         url={fullUrl}
         className="button is-outlined is-rounded twitter"
         title={title}
@@ -61,6 +74,7 @@ const Share: React.FC<Props> = ({ path, title, tags }) => {
         </Icon>
       </TwitterShareButton>
       <LinkedinShareButton
+        onClick={() => sendShareGa('linkedin')}
         url={fullUrl}
         className="button is-outlined is-rounded linkedin"
         title={title}
@@ -70,6 +84,7 @@ const Share: React.FC<Props> = ({ path, title, tags }) => {
         </Icon>
       </LinkedinShareButton>
       <RedditShareButton
+        onClick={() => sendShareGa('reddit')}
         url={fullUrl}
         className="button is-outlined is-rounded reddit"
         title={title}
