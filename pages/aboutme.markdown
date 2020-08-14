@@ -8,8 +8,10 @@ subtitle: let the games begin.
 
 ## 개발자
 
+- 김성호
+- 닉네임인 shiren은 시렌이라고 읽는다.
 - 1X년차 개발자
-- Web Front End를 주로 개발
+- Web Front End]를 주로 개발
 - Emacs Lisp, iOS 쬐금, Unity 쬐금, 요즘은 오디오 프로그래밍을 틈틈히 공부중
 - 언젠가는 웹 기반 DAW(Digital audio workstation) 개발하겠다는 야망으로 이 바닥에 뛰어들었지만, 전혀 상관없는 것들만 개발 중(슬슬 때가 오고 있다)
 

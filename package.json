@@ -16,7 +16,7 @@
     "start": "npm run develop",
     "serve": "gatsby serve -H 0.0.0.0",
     "clean": "gatsby clean",
-    "deploy": "gatsby clean && gatsby build && git checkout gh-pages && rm -rf ./docs && mv ./public ./docs",
+    "deploy": "gatsby clean && gatsby build && git checkout gh-pages && rm -rf ./docs && mv ./public ./docs && git add . && git commit -m \"Updated: `date +'%Y-%m-%d %H:%M:%S'`\" && git push && git checkout v2",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
   "browserslist_": [
