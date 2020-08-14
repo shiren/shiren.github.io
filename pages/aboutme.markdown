@@ -6,10 +6,10 @@ subtitle: let the games begin.
 
 <img src="/image/aboutme.png" alt="Sungho Kim" style="width:200px;"/>
 
-## 개발자
-
 - 김성호
-- 닉네임인 shiren은 시렌이라고 읽는다.
+- 20년 넘게 사용하고 있는 중2병 같은 닉네임 shiren, 시렌이라고 읽는다.
+
+## 개발자
 - 1X년차 개발자
 - Web Front End]를 주로 개발
 - Emacs Lisp, iOS 쬐금, Unity 쬐금, 요즘은 오디오 프로그래밍을 틈틈히 공부중
