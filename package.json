@@ -11,6 +11,7 @@
     "start": "npm run develop",
     "serve": "gatsby serve -H 0.0.0.0",
     "clean": "gatsby clean",
+    "deploy": "gatsby clean && gatsby build && git checkout gh-pages && rm -rf ./docs && mv ./public ./docs",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
   "browserslist_": [
