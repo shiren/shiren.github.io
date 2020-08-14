@@ -10,7 +10,7 @@ subtitle: let the games begin.
 
 - 1X년차 개발자
 - Web Front End를 주로 개발
-- Node.js, Emacs Lisp, iOS 쬐금, Unity 쬐금, 오디오 프로그래밍을 조금씩 공부중
+- Emacs Lisp, iOS 쬐금, Unity 쬐금, 요즘은 오디오 프로그래밍을 틈틈히 공부중
 - 언젠가는 웹 기반 DAW(Digital audio workstation) 개발하겠다는 야망으로 이 바닥에 뛰어들었지만, 전혀 상관없는 것들만 개발 중(슬슬 때가 오고 있다)
 
 ## 비트 메이커, 작곡가
