@@ -25,7 +25,11 @@ module.exports = {
       { name: 'SOUNDCLOUD', url: 'https://soundcloud.com/shiren' },
       {
         name: 'OPENSOURCES',
-        children: [{ name: 'TOAST UI Editor', url: 'https://github.com/nhn/tui.editor' }],
+        children: [
+          { name: 'TOAST UI', url: 'https://ui.toast.com' },
+          { name: 'UPBO Emacs + Karma integration', url: 'https://github.com/shiren/upbo' },
+          { name: 'Karma narrow reporter', url: 'https://github.com/shiren/karma-narrow-reporter' },
+        ],
       },
     ],
   },
