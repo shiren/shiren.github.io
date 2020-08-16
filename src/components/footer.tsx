@@ -67,7 +67,7 @@ const Footer: React.FC = () => {
 };
 
 const Wrapper = styled.footer`
-  margin-top: 50px;
+  margin-top: 100px;
   padding: 50px 0;
   border-top: 1px #eaeaea solid;
   text-align: center;
