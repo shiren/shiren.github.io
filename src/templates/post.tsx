@@ -8,6 +8,8 @@ import SEO from '../components/seo';
 import Share from '../components/share';
 import RecomendPost from '../components/recomendPost';
 
+import { trackCustomEvent } from 'gatsby-plugin-google-analytics';
+
 type Props = {
   data: {
     markdownRemark: {
@@ -67,6 +69,12 @@ const Post: React.FC<Props> = ({ data }) => {
 
   recomendPost.splice(4, 4);
 
+  const sendShareGa = () =>
+    trackCustomEvent({
+      category: 'BuyMeACoffee',
+      action: 'click',
+    });
+
   return (
     <>
       <SEO title={post.frontmatter.title} description={post.excerpt} article={true} />
@@ -81,7 +89,11 @@ const Post: React.FC<Props> = ({ data }) => {
           tags={post.frontmatter.categories.split(', ')}
         />
         <Article dangerouslySetInnerHTML={{ __html: post.html }} />
-        <BuyMeACoffee href="https://www.buymeacoffee.com/shiren" target="_blank">
+        <BuyMeACoffee
+          onClick={sendShareGa}
+          href="https://www.buymeacoffee.com/shiren"
+          target="_blank"
+        >
           <img src="https://cdn.buymeacoffee.com/buttons/lato-orange.png" alt="Buy Me A Coffee" />
         </BuyMeACoffee>
         {recomendPost.length ? <RecomendPost posts={recomendPost} /> : null}
