@@ -8,6 +8,11 @@ subtitle: let the games begin.
 
 - 김성호
 - 20년 넘게 사용하고 있는 중2병 같은 닉네임 shiren, 시렌이라고 읽는다.
+- Github: [shiren](https://github.com/shiren)
+- Instagram: [shiren](https://www.instagram.com/shiren/)
+- Facebook: [shirenbeat](https://www.facebook.com/shirenbeat)
+- Twitter: [shirenbeat](https://twitter.com/shirenbeat)
+- E-Mail: [shirenbeat@gmail.com](mailto:shirenbeat@gmail.com)
 
 ## 개발자
 - 1X년차 개발자
