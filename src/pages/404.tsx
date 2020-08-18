@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { navigate } from 'gatsby';
 
 import styled from 'styled-components';
@@ -8,6 +8,8 @@ import Layout from '../components/layout';
 import { trackCustomEvent } from 'gatsby-plugin-google-analytics';
 
 const Page404: React.FC = () => {
+  const [redirectURL, setRedirectURL] = useState<null | string>(null);
+
   const goBack = () => {
     if (window.history.length > 1) {
       window.history.back();
@@ -17,19 +19,22 @@ const Page404: React.FC = () => {
   };
 
   const renderRedirectIfNeed = () => {
-    const decodedURL = decodeURIComponent(location.href);
-    const isTranslatedURL = decodedURL.includes('(번역)');
-
-    return isTranslatedURL ? (
+    return redirectURL ? (
       <p>
         번역 포스트는 주소가 변경되었습니다.
         <br />
-        <a href={decodedURL.replace('(번역)', '')}>{decodedURL.replace('(번역)', '')}</a>
+        <a href={redirectURL}>{redirectURL}</a>
       </p>
     ) : null;
   };
 
   useEffect(() => {
+    const decodedURL = decodeURIComponent(location.href);
+
+    if (decodedURL.includes('(번역)')) {
+      setRedirectURL(decodedURL.replace('(번역)', ''));
+    }
+
     trackCustomEvent({
       category: 'Error',
       action: '404',
