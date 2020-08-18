@@ -16,7 +16,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm install
-      - run: npm run clean
       - run: npm run build --if-present
       - run: rm -rf ./docs
       - run: mv ./public ./docs
@@ -30,8 +29,11 @@ jobs:
         uses: EndBug/add-and-commit@v4.4.0
         with:
           add: 'docs'
+          message: "Updated: `date +'%Y-%m-%d %H:%M:%S'`"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: git log
+      - run: ls -al
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
