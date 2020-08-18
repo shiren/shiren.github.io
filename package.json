@@ -2,9 +2,9 @@
   "name": "shiren-gatsby-blog",
   "private": true,
   "author": {
-    "name" : "Sungho Kim",
-    "email" : "shirenbeat@gmail.com",
-    "url" : "https://shiren.dev"
+    "name": "Sungho Kim",
+    "email": "shirenbeat@gmail.com",
+    "url": "https://shiren.dev"
   },
   "description": "Gatsby Blog of Sungho Kim(shiren)",
   "version": "0.1.0",
