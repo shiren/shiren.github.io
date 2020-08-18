@@ -34,6 +34,7 @@ jobs:
         uses: EndBug/add-and-commit@v4.4.0
         with:
           add: 'docs'
+          ref: "action_test"
           message: "Updated:`date +'%Y-%m-%d %H:%M:%S'`"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
