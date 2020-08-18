@@ -22,7 +22,7 @@ jobs:
       - name: Checkout gh-pages branch
         uses: actions/checkout@v2.3.2
         with:
-          ref: "action_test"
+          ref: "gh-pages"
           clean: false
       - name: Change Directories
         run: |
@@ -32,12 +32,12 @@ jobs:
         uses: EndBug/add-and-commit@v4.4.0
         with:
           add: 'docs'
-          ref: "action_test"
+          ref: "gh-pages"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: "action_test"
+          branch: "gh-pages"
           force: true
