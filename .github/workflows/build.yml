@@ -9,9 +9,17 @@ jobs:
         node-version: [14.x]
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2.3.2
+        with:
+          repository: "v2"
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
       - run: npm install
       - run: npm run clean
-      - run: npm run build
+      - run: npm run build --if-present
       - run: rm -rf ./docs
       - run: mv ./public ./docs
       - name: Checkout
