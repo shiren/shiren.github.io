@@ -1,11 +1,11 @@
-import React, {useEffect} from 'react';
-import {navigate} from 'gatsby';
+import React, { useEffect } from 'react';
+import { navigate } from 'gatsby';
 
 import styled from 'styled-components';
 
 import Layout from '../components/layout';
 
-import {trackCustomEvent} from 'gatsby-plugin-google-analytics';
+import { trackCustomEvent } from 'gatsby-plugin-google-analytics';
 
 const Page404: React.FC = () => {
   const goBack = () => {
