@@ -9,7 +9,6 @@ jobs:
         node-version: [14.x]
 
     steps:
-      - run: npm run clean
       - run: npm run build
       - run: rm -rf ./docs
       - run: mv ./public ./docs
