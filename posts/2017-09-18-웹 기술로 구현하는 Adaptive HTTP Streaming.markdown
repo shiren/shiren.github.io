@@ -13,13 +13,13 @@ categories: frontend, javascript
 
 Adaptive HTTP Streaming은 말 그대로 적응형 스트리밍이다. 사용자의 네트워크 상태에 적응(반응)해서 스트리밍을 하는 것이 이 기술의 주목표다. 비슷한 기술로는 RTSP/RTMP Streaming이 있지만, HTTP를 이용한 기술이 아니기 때문에 서비스를 유지하려면 추가적인 비용과 작업이 필요했다. 일반적으로 우리가 사용했던 스트리밍은 Progressive download(이하 PD)로 동영상 소스가 한번 선택되면 해당 콘텐츠를 끝까지 다운로드하면서 플레이를 해나가는 방식이다. HTML5 비디오에서도 기본적으로 PD의 형태로 사용할 수 있다.
 
-![Progressive Download workflow](https://1n469r2k28cd3i0ovv1yqnaz-wpengine.netdna-ssl.com/wp-content/uploads/drupal/progressive_download.png)
+![Progressive Download workflow](https://user-images.githubusercontent.com/389021/90834512-69003c00-e385-11ea-8fc1-057fff4b1f52.jpeg)
 
 이미지 출처: https://www.jwplayer.com/blog/what-is-video-streaming/
 
 PD의 단점은 한가지 해상도의 동영상 소스가 선택되어 다운로드해나가는 방식이다 보니 네트워크 상황에 따라서 사용자는 버퍼링을 만날 수 있게 되고 이후 네트워크 상황이 좋아지지 않는다면 지속해서 버퍼링을 만나게 될 수밖에 없는 것이다. Adaptive Streaming은 바로 이 문제를 해결하기 위해 만들어졌다. 아이디어는 이렇다. 동영상 콘텐츠를 다양한 해상도로 인코딩해 저장해두고 데이터 단위도 동영상 콘텐츠 하나로 저장하는 게 아니라 잘게 쪼개 저장해둔다. 그리고 사용자가 동영상을 플레이할 때 네트워크 상황에 따라서 적절한 전략으로 콘텐츠의 소스를 선택해 최적의 스트리밍 서비스를 제공하는 것이다. 다양한 소스로 인코딩이 되어있으니 상황에 따라 선택할 수 있고 큰 파일 하나가 아닌 잘게 쪼개진 데이터들을 하나씩 다운로드하는 방식이라 다음 데이터를 다른 퀄리티로 쉽게 교체할 수 있게 된다. 예를 들면 현재 사용자의 네트워크 사정이 좋지 않다면 동영상의 480P 소스를 한 조각씩 스트리밍해주고 상황이 나아지면 다음 조각으로 그 이상의 해상도를 갖는 소스를 선택해 스트리밍하는 것이다.
 
-![Adaptive Streaming](https://1n469r2k28cd3i0ovv1yqnaz-wpengine.netdna-ssl.com/wp-content/uploads/drupal/rtmp-rtsp-streaming.png)
+![Adaptive Streaming](https://user-images.githubusercontent.com/389021/90834518-6b629600-e385-11ea-9212-f1212efc3508.jpeg)
 
 이미지 출처: https://www.jwplayer.com/blog/what-is-video-streaming/
 
