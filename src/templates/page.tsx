@@ -24,9 +24,16 @@ type Props = {
 const Page: React.FC<Props> = ({ data }) => {
   const post = data.markdownRemark;
 
+  const foundedImageFromContentsOrNot = (post.html.match(/<img.*?src="(.*?)"/) || [])[1];
+
   return (
     <>
-      <SEO title={post.frontmatter.title} description={post.excerpt} article={false} />
+      <SEO
+        title={post.frontmatter.title}
+        description={post.excerpt}
+        article={false}
+        image={foundedImageFromContentsOrNot}
+      />
       <Layout>
         <Headline>
           <h1>{post.frontmatter.title}</h1>

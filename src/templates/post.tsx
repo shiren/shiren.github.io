@@ -69,6 +69,8 @@ const Post: React.FC<Props> = ({ data }) => {
 
   recomendPost.splice(4, 4);
 
+  const foundedImageFromContentsOrNot = (post.html.match(/<img.*?src="(.*?)"/) || [])[1];
+
   const sendShareGa = () =>
     trackCustomEvent({
       category: 'BuyMeACoffee',
@@ -77,7 +79,12 @@ const Post: React.FC<Props> = ({ data }) => {
 
   return (
     <>
-      <SEO title={post.frontmatter.title} description={post.excerpt} article={true} />
+      <SEO
+        title={post.frontmatter.title}
+        description={post.excerpt}
+        article={true}
+        image={foundedImageFromContentsOrNot}
+      />
       <Layout>
         <Headline>
           <h1>{post.frontmatter.title}</h1>

@@ -46,7 +46,7 @@ const SEO: React.FC<Props> = ({ title, description, image, article = false }) =>
   const seo = {
     title: title || defaultTitle,
     description: description || defaultDescription,
-    image: `${siteUrl}${image || defaultImage}`,
+    image: `${image?.includes('http') ? '' : siteUrl}${image ?? defaultImage}`,
     url: `${siteUrl}${pathname}`,
   };
 
