@@ -53,11 +53,19 @@ type Props = {
   };
 };
 
+type RecomendPostData = {
+  title: string;
+  slug: string;
+  excerpt: string;
+  date: string;
+  categories: string[];
+};
+
 const Post: React.FC<Props> = ({ data }) => {
   const post = data.markdownRemark;
 
   const recomendPost = [...data.recomendPost.nodes, ...data.recentPost.nodes]
-    .map((node) => ({
+    .map<RecomendPostData>((node) => ({
       title: node.frontmatter.title,
       slug: node.fields.slug,
       excerpt: node.excerpt,
@@ -65,6 +73,11 @@ const Post: React.FC<Props> = ({ data }) => {
       categories: node.frontmatter.categories.split(', '),
     }))
     .filter((node) => node.slug !== post.fields.slug)
+    .reduce<RecomendPostData[]>(
+      (unique, node) =>
+        unique.find((unode) => unode.slug === node.slug) ? unique : [...unique, node],
+      []
+    )
     .sort(() => Math.random() * 2 - 1);
 
   recomendPost.splice(4, 4);
