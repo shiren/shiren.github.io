@@ -39,11 +39,13 @@ const Share: React.FC<Props> = ({ path, title, tags }) => {
     `
   );
 
-  const sendShareGa = (type: string) =>
+  const sendShareGa = (type: string) => {
     trackCustomEvent({
       category: 'Share',
       action: type,
+      label: decodeURIComponent(location.href),
     });
+  };
 
   const wrapperRef = React.useRef() as React.MutableRefObject<HTMLDivElement>;
 

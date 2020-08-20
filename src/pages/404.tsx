@@ -38,6 +38,7 @@ const Page404: React.FC = () => {
     trackCustomEvent({
       category: 'Error',
       action: '404',
+      label: decodedURL,
     });
   }, []);
 
