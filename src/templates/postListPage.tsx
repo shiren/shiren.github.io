@@ -14,7 +14,7 @@ type Props = {
       edges: Array<{
         node: {
           id: string;
-          frontmatter: { title: string; date: string; categories: string[] };
+          frontmatter: { title: string; date: string; categories: string };
           fields: {
             slug: string;
           };
@@ -23,15 +23,15 @@ type Props = {
       }>;
     };
   };
-  path: string;
+  pageContext: {
+    currentPage: number;
+  };
 };
 
-const PostListPage: React.FC<Props> = ({ data, path }) => {
+const PostListPage: React.FC<Props> = ({ data, pageContext }) => {
   const {
     allMarkdownRemark: { totalCount, edges: posts },
   } = data;
-
-  const currentPage = parseInt(path.replace('/page', ''), 10) || 0;
 
   return (
     <>
@@ -40,7 +40,7 @@ const PostListPage: React.FC<Props> = ({ data, path }) => {
         <SEO />
         <ListHeader />
         <PostList posts={posts} />
-        <Pagination total={totalCount} current={currentPage} />
+        <Pagination total={totalCount} current={pageContext.currentPage} />
       </Layout>
     </>
   );
