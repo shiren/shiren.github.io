@@ -2,7 +2,7 @@
 layout: post
 title:  "Webpack으로 자바스크립트 모듈관리 하기"
 date:   2016-02-15 10:07:08
-categories: javascript, webpack
+categories: frontend, javascript, webpack
 ---
 
 ### 디펜던시 모듈 관리

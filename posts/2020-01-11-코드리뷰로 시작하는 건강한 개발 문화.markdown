@@ -2,7 +2,7 @@
 layout: post
 title:  "코드리뷰로 시작하는 건강한 개발 문화"
 date:   2020-01-11 16:00:00
-categories: codereview, development
+categories: devculture
 ---
 
 2019년 11월에 개최한 회사 컨퍼런스 [NHN FORWARD](https://forward.nhn.com)에서 프런트엔드에 대한 고민이나 궁금증을 해결할 수 있는 **프런트엔드 상담소** 를 운영했었다. 다양한 고민이 있었지만, 연차나 직책별로 궁금증과 고민거리들이 비슷하다는 것을 알 수 있었다. 명확하게 묘수를 알려줄 수 있는 트러블 슈팅부터 프런트 엔드 개발자가 가야할 방향까지 다양한 고민이 있었다.

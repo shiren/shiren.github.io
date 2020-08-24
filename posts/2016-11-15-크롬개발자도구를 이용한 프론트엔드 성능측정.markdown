@@ -2,7 +2,7 @@
 layout: post
 title:  "크롬 개발자 도구를 이용한 프론트엔드 성능 측정"
 date:   2016-11-15 13:44:08
-categories: frontend
+categories: frontend, tool
 ---
 
 ## 크롬 개발자 도구를 이용한 프론트엔드 성능 측정

@@ -2,7 +2,7 @@
 layout: post
 title:  "요즘 잘나가는 프론트엔드 개발환경 만들기(2018): ES6"
 date:   2018-07-10 13:58:08
-categories: javascript, frontend
+categories: frontend, javascript
 ---
 
 ![요즘 잘나가는 프론트엔드 개발환경 만들기(2018): ES6](https://user-images.githubusercontent.com/389021/42009614-1bb58092-7ac6-11e8-8964-ba880911caac.png)

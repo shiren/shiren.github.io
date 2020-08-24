@@ -2,7 +2,7 @@
 layout: post
 title:  "요즘 잘나가는 프론트엔드 개발 환경 만들기(2018): Webpack 4"
 date:   2018-04-16 13:58:08
-categories: javascript, frontend
+categories: frontend, javascript
 ---
 
 ![요즘 잘나가는 프론트엔드 개발 환경 만들기(2018): Webpack 4](https://user-images.githubusercontent.com/389021/39568622-c4f1a4be-4efd-11e8-9ddd-b987e493e99b.png)

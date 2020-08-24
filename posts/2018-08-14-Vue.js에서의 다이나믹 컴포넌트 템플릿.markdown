@@ -2,7 +2,7 @@
 layout: post
 title:  "Vue.js에서의 다이나믹 컴포넌트 템플릿"
 date:   2018-08-14 13:58:08
-categories: vue, translation
+categories: framework, translation
 ---
 
 > 원글: [https://medium.com/scrumpy/dynamic-component-templates-with-vue-js-d9236ab183bb](https://medium.com/scrumpy/dynamic-component-templates-with-vue-js-d9236ab183bb)

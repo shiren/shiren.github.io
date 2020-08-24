@@ -2,7 +2,7 @@
 layout: post
 title:  "크롬 네이티브 레이지 로딩"
 date:   2019-05-22 09:39:00
-categories: chrome, frontend
+categories: frontend, tool
 ---
 
 ## 레이지 로딩이란?

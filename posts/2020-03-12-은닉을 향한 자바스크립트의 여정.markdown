@@ -2,7 +2,7 @@
 layout: post
 title:  "은닉을 향한 자바스크립트의 여정"
 date:   2020-03-12 11:35:00
-categories: javascript, ecmascript, private
+categories: javascript
 ---
 
 ECMAScript 클래스 필드(class field) 명세중에 `Private field` 즉 `Private Property` (이하 Private 속성) 가 있다. 클래스 필드 스펙은 Stage 3(Candidate)까지 올랐으니 아마 곧 Stage 4(Finished)를 거쳐 표준 스펙이 될 것이다. 사실 초기에 명세 문서를 봤을 때는 "드디어 private이 생기는건가?"하는 기대감과 "문법이 좀 별론데"라는 실망감이 있었을 뿐 뭔가 현실감은 없었다. 그렇게 시간이 흘러 기억 속에서 잊힌 채로 지내다가 얼마전에 타입스크립트 3.8에서 정식으로 지원한다는 소식을 들었고 이를 계기로 Private 속성 에 대해 제대로 알아보기로 했다. 물론 이제 프로젝트에서도 적극적으로 사용할 생각이다. public 한 클래스 필드는 바벨 플러그인 [babel-plugin-proposal-class-properties](https://babeljs.io/docs/en/babel-plugin-proposal-class-properties)을 통해 이미 예전부터 아주 유용하게 사용하고 있었다.
