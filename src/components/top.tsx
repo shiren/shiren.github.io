@@ -37,7 +37,7 @@ const renderMenuItems = (menus: Menu[]) => {
   );
 };
 
-const Top: React.FC = () => {
+const Top: React.FC<{ useIndicator: boolean }> = ({ useIndicator }) => {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -62,6 +62,7 @@ const Top: React.FC = () => {
 
   const [shortTop, setShortTop] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     const handleScrollEvent = () => {
@@ -72,23 +73,33 @@ const Top: React.FC = () => {
       } else {
         setShortTop(false);
       }
+
+      const progress = Math.min(
+        (scrollTop /
+          (document.documentElement.scrollHeight - document.documentElement.clientHeight)) *
+          100,
+        100
+      );
+
+      useIndicator && setProgress(progress);
     };
 
     window.addEventListener('scroll', handleScrollEvent);
 
     return () => window.removeEventListener('scroll', handleScrollEvent);
-  }, []);
+  }, [useIndicator]);
 
   return (
     <Wrapper shortTop={shortTop} showMenu={openMenu}>
       <LogoButton href={site.siteMetadata.url}>
-        <img src={site.siteMetadata.image} />
+        <img alt="logo" src={site.siteMetadata.image} />
         {site.siteMetadata.title}
       </LogoButton>
       <MenuButton onClick={() => setOpenMenu(!openMenu)}>
         <AlignJustify />
       </MenuButton>
       <MenuList>{renderMenuItems(site.siteMetadata.menus)}</MenuList>
+      {useIndicator && <Indicator progress={progress} />}
     </Wrapper>
   );
 };
@@ -201,6 +212,16 @@ const LogoButton = styled.a`
     border-radius: 50%;
     margin: 0 10px;
   }
+`;
+
+const Indicator = styled.span.attrs<{ progress: number }>(({ progress }) => ({
+  style: { width: `${progress}%` },
+}))<{ progress: number }>`
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 5px;
+  background: #88c0d0;
 `;
 
 const Wrapper = styled.nav<{ shortTop: boolean; showMenu: boolean }>`

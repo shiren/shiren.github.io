@@ -98,7 +98,7 @@ const Post: React.FC<Props> = ({ data }) => {
         article={true}
         image={foundedImageFromContentsOrNot}
       />
-      <Layout>
+      <Layout indicator={true}>
         <Headline>
           <h1>{post.frontmatter.title}</h1>
           <p>Posted on {post.frontmatter.date} </p>

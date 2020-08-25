@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Top from './top';
 import Footer from './footer';
 
-const Layout: React.FC = ({ children }) => {
+const Layout: React.FC<{ indicator: boolean }> = ({ indicator, children }) => {
   const [notSupported, setNotSupported] = useState(false);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const Layout: React.FC = ({ children }) => {
 
   return (
     <div>
-      <Top />
+      <Top useIndicator={indicator} />
       <Container>
         {notSupported ? (
           <h1>
