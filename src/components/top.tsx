@@ -217,11 +217,12 @@ const LogoButton = styled.a`
 const Indicator = styled.span.attrs<{ progress: number }>(({ progress }) => ({
   style: { width: `${progress}%` },
 }))<{ progress: number }>`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   height: 5px;
-  background: #88c0d0;
+  background: #00bcbb;
+  opacity: 0.6;
 `;
 
 const Wrapper = styled.nav<{ shortTop: boolean; showMenu: boolean }>`
@@ -302,6 +303,10 @@ const Wrapper = styled.nav<{ shortTop: boolean; showMenu: boolean }>`
       background: none;
       border: none;
     }
+  }
+
+  @media only screen and (max-width: 460px) {
+    position: relative;
   }
 `;
 
