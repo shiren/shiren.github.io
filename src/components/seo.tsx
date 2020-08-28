@@ -79,6 +79,11 @@ const SEO: React.FC<Props> = ({ title, description, image, article = false }) =>
         rel="stylesheet"
         href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
       />
+      <script
+        data-ad-client="ca-pub-4811193197471582"
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+      />
     </Helmet>
   );
 };
