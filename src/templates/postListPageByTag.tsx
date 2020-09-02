@@ -1,5 +1,5 @@
 import React from 'react';
-import { graphql, Link } from 'gatsby';
+import { graphql } from 'gatsby';
 import styled from 'styled-components';
 
 import SEO from '../components/seo';
@@ -7,6 +7,8 @@ import Layout from '../components/layout';
 import ListHeader from '../components/listHeader';
 import PostList from '../components/postList';
 import Pagination from '../components/pagination';
+
+import { Category } from '../bases/category';
 
 type Props = {
   data: {
@@ -59,17 +61,10 @@ const TagTitle = styled.h3`
   padding-bottom: 10px;
   border-bottom: 1px solid #ccc;
   font-size: 40px;
-`;
 
-const Category = styled(Link)`
-  display: inline-block;
-  margin-right: 10px;
-  border-bottom: 1px solid #777;
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: 400;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: #777;
+  & ${Category} {
+    font-size: inherit;
+  }
 `;
 
 export default PostListPageByTag;

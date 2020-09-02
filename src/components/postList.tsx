@@ -3,6 +3,8 @@ import { Link } from 'gatsby';
 import { GlobeAsia } from '@styled-icons/fa-solid';
 import styled from 'styled-components';
 
+import { Categories, Category } from '../bases/category';
+
 type Props = {
   posts: Array<{
     node: {
@@ -56,23 +58,6 @@ const Date = styled.p`
   font-size: 14px;
   line-height: 1.5;
   color: #b1b1b1;
-`;
-
-const Category = styled(Link)`
-  display: inline-block;
-  margin-right: 10px;
-  border-bottom: 1px solid #777;
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 12px;
-  font-weight: 400;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: #777;
-`;
-
-const Categories = styled.div`
-  display: inline-block;
-  margin-left: 10px;
 `;
 
 const Linkable = styled(Link)`
