@@ -1,5 +1,6 @@
 import React from 'react';
-import { graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
+import styled from 'styled-components';
 
 import SEO from '../components/seo';
 import Layout from '../components/layout';
@@ -25,10 +26,11 @@ type Props = {
   };
   pageContext: {
     currentPage: number;
+    category: string;
   };
 };
 
-const PostListPage: React.FC<Props> = ({ data, pageContext }) => {
+const PostListPageByTag: React.FC<Props> = ({ data, pageContext }) => {
   const {
     allMarkdownRemark: { totalCount, edges: posts },
   } = data;
@@ -39,19 +41,43 @@ const PostListPage: React.FC<Props> = ({ data, pageContext }) => {
       <Layout indicator={false}>
         <SEO />
         <ListHeader />
+        <TagTitle>
+          Tag: <Category to={`/${pageContext.category}/1`}>#{pageContext.category}</Category>
+        </TagTitle>
         <PostList posts={posts} />
-        <Pagination total={totalCount} current={pageContext.currentPage} path={'/page'} />
+        <Pagination
+          total={totalCount}
+          current={pageContext.currentPage}
+          path={`/${pageContext.category}/`}
+        />
       </Layout>
     </>
   );
 };
 
-export default PostListPage;
+const TagTitle = styled.h3`
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+  font-size: 40px;
+`;
 
-export const postListQuery = graphql`
-  query postListQuery($skip: Int!, $limit: Int!) {
+const Category = styled(Link)`
+  display: inline-block;
+  margin-right: 10px;
+  border-bottom: 1px solid #777;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #777;
+`;
+
+export default PostListPageByTag;
+
+export const postListByTagQuery = graphql`
+  query postListByTagQuery($skip: Int!, $limit: Int!, $categoryRegex: String!) {
     allMarkdownRemark(
-      filter: { frontmatter: { layout: { eq: "post" } } }
+      filter: { frontmatter: { categories: { regex: $categoryRegex }, layout: { eq: "post" } } }
       sort: { fields: [frontmatter___date], order: DESC }
       limit: $limit
       skip: $skip

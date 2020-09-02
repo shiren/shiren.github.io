@@ -1,17 +1,18 @@
-import React from "react"
-import { Link } from "gatsby"
-import styled from "styled-components"
+import React from 'react';
+import { Link } from 'gatsby';
+import styled from 'styled-components';
 
 type Props = {
   total: number;
   current: number;
+  path: string;
 };
 
 const COUNT_PER_PAGE = 6;
 
-const Pagination: React.FC<Props> = ({ total, current }) => {
-  const getPrevUrl = () => (current === 2 ? `/` : `/page${current - 1}`);
-  const getNextUrl = () => `/page${current === 0 ? 2 : current + 1}`;
+const Pagination: React.FC<Props> = ({ total, current, path }) => {
+  const getPrevUrl = () => `${path}${current - 1}`;
+  const getNextUrl = () => `${path}${current === 0 ? 2 : current + 1}`;
 
   const hasNext = current < total / COUNT_PER_PAGE;
   const hasPrev = current > 1;

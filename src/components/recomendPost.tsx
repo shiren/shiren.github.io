@@ -23,7 +23,9 @@ const RecomendPost: React.FC<Props> = ({ posts }) => {
               <div>
                 <RecomendLink to={slug.replace(/\s/g, '-')}>
                   {categories.map((category) => (
-                    <Category key={category}>{category}</Category>
+                    <Category to={`/${category}/1`} key={category}>
+                      {category}
+                    </Category>
                   ))}
                   <Title>{title}</Title>
                   <Date>{date}</Date>
@@ -89,7 +91,7 @@ const Date = styled.p`
   color: #b1b1b1;
 `;
 
-const Category = styled.span`
+const Category = styled(Link)`
   display: inline-block;
   margin-right: 10px;
   border-bottom: 1px solid #777;
@@ -97,6 +99,7 @@ const Category = styled.span`
   font-size: 12px;
   font-weight: 400;
   text-transform: uppercase;
+  text-decoration: none;
   color: #777;
 `;
 

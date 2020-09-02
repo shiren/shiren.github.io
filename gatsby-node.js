@@ -1,6 +1,8 @@
 const path = require(`path`);
 const { createFilePath } = require(`gatsby-source-filesystem`);
 
+const POST_PER_PAGE = 6;
+
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions;
 
@@ -105,14 +107,13 @@ async function createPostListPage(graphql, actions) {
   );
 
   const posts = result.data.allMarkdownRemark.edges;
-  const postsPerPage = 6;
-  const numPages = Math.ceil(posts.length / postsPerPage);
+  const numPages = Math.ceil(posts.length / POST_PER_PAGE);
 
   createPage({
     path: `/`,
     component: path.resolve('./src/templates/postListPage.tsx'),
     context: {
-      limit: postsPerPage,
+      limit: POST_PER_PAGE,
       skip: 0,
       numPages,
       currentPage: 1,
@@ -124,11 +125,67 @@ async function createPostListPage(graphql, actions) {
       path: `/page${i + 1}`,
       component: path.resolve('./src/templates/postListPage.tsx'),
       context: {
-        limit: postsPerPage,
-        skip: i * postsPerPage,
+        limit: POST_PER_PAGE,
+        skip: i * POST_PER_PAGE,
         numPages,
         currentPage: i + 1,
       },
+    });
+  });
+}
+
+async function createPostListByTag(graphql, actions) {
+  const { createPage } = actions;
+  const result = await graphql(
+    `
+      {
+        allMarkdownRemark(
+          filter: { frontmatter: { layout: { eq: "post" } } }
+          sort: { fields: [frontmatter___date], order: DESC }
+        ) {
+          edges {
+            node {
+              fields {
+                slug
+              }
+              frontmatter {
+                categories
+              }
+            }
+          }
+        }
+      }
+    `
+  );
+
+  const posts = result.data.allMarkdownRemark.edges;
+
+  const categoriesCount = posts.reduce((res, post) => {
+    post.node.frontmatter.categories.split(', ').forEach((category) => {
+      res[category] = res[category] ? res[category] + 1 : 1;
+    });
+
+    return res;
+  }, {});
+
+  Object.keys(categoriesCount).forEach((category) => {
+    const numPages = Math.ceil(categoriesCount[category] / POST_PER_PAGE);
+
+    Array.from({ length: numPages }).forEach((_, i) => {
+      const currentPage = i + 1;
+
+      createPage({
+        path: `/${category}/${currentPage}`,
+        component: path.resolve('./src/templates/postListPageByTag.tsx'),
+        context: {
+          category,
+          categoryRegex: `/${category}/`,
+          limit: POST_PER_PAGE,
+          skip: i * POST_PER_PAGE,
+          numPages,
+          currentPage,
+        },
+      });
     });
   });
 }
@@ -138,5 +195,6 @@ exports.createPages = async ({ graphql, actions }) => {
     createPostPage(graphql, actions),
     createPostListPage(graphql, actions),
     createSubPage(graphql, actions),
+    createPostListByTag(graphql, actions),
   ]);
 };

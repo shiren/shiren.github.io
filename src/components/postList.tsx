@@ -20,21 +20,25 @@ const PostList: React.FC<Props> = ({ posts }) => {
   return (
     <div>
       {posts.map(({ node }) => (
-        <ListItem to={node.fields.slug.replace(/\s/g, '-')} key={node.id}>
-          <PostHeader>
-            {node.frontmatter.categories.includes('translation') ? (
-              <Icon>
-                <GlobeAsia />
-                번역
-              </Icon>
-            ) : null}
-            {node.frontmatter.title}
-          </PostHeader>
-          <PostEntry>{node.excerpt}</PostEntry>
+        <ListItem key={node.id}>
+          <Linkable to={node.fields.slug.replace(/\s/g, '-')}>
+            <PostHeader>
+              {node.frontmatter.categories.includes('translation') ? (
+                <Icon>
+                  <GlobeAsia />
+                  번역
+                </Icon>
+              ) : null}
+              {node.frontmatter.title}
+            </PostHeader>
+            <PostEntry>{node.excerpt}</PostEntry>
+          </Linkable>
           <Date>{node.frontmatter.date}</Date>
           <Categories>
             {node.frontmatter.categories.split(', ').map((category) => (
-              <Category key={category}>{category}</Category>
+              <Category to={`/${category}/1`} key={category}>
+                {category}
+              </Category>
             ))}
           </Categories>
         </ListItem>
@@ -54,7 +58,7 @@ const Date = styled.p`
   color: #b1b1b1;
 `;
 
-const Category = styled.span`
+const Category = styled(Link)`
   display: inline-block;
   margin-right: 10px;
   border-bottom: 1px solid #777;
@@ -62,6 +66,7 @@ const Category = styled.span`
   font-size: 12px;
   font-weight: 400;
   text-transform: uppercase;
+  text-decoration: none;
   color: #777;
 `;
 
@@ -70,16 +75,21 @@ const Categories = styled.div`
   margin-left: 10px;
 `;
 
-const ListItem = styled(Link)`
+const Linkable = styled(Link)`
+  text-decoration: none;
+  color: #404040;
+
+  &:hover > h3 {
+    color: #00bcbb;
+  }
+`;
+
+const ListItem = styled.div`
   display: block;
   margin: 35px 0 35px;
   text-decoration: none;
   color: #404040;
   clear: both;
-
-  &:hover > h3 {
-    color: #0085a1;
-  }
 `;
 
 const PostHeader = styled.h3`
