@@ -62,3 +62,13 @@ article img {
   width: 90%;
   margin: 0 auto;
 }
+
+blockquote {
+  padding: 5px;
+  color: #888;
+  font-weight: 500;
+}
+
+blockquote p {
+  line-height: 1.6;
+}
