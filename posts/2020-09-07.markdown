@@ -2,7 +2,7 @@
 layout: post
 title: "하루 25분 실행하기: 하루를 대하는 14년차 개발자의 자세"
 date: 2020-09-07 09:00:00
-categories: life, motivation
+categories: productivity, motivation, life
 ---
 
 하루 24시간은 모두에게 공평하지만 그 24시간을 모두가 공평하게 사용하진 않는다. 하루의 여가시간을 어떻게 하면 더 효율적으로 사용할 수 있을까는 나의 오랜 고민거리였다.
