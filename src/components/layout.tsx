@@ -49,7 +49,7 @@ const Layout: React.FC<{ indicator: boolean }> = ({ indicator, children }) => {
 
 const Container = styled.div`
   margin: 120px auto 0;
-  width: 750px;
+  max-width: 680px;
   padding: 0 15px;
   box-sizing: border-box;
 
