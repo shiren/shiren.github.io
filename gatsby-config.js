@@ -71,6 +71,7 @@ module.exports = {
         // allExtensions: true,
       },
     },
+    `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-plugin-feed`,
       options: {

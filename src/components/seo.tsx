@@ -65,6 +65,7 @@ const SEO: React.FC<Props> = ({ title, description, image, article = false }) =>
       {seo.description && <meta property="og:description" content={seo.description} />}
 
       {seo.image && <meta property="og:image" content={seo.image} />}
+      {seo.image && <meta property="image" content={seo.image} />}
 
       <meta name="twitter:card" content="summary_large_image" />
 
@@ -75,7 +76,6 @@ const SEO: React.FC<Props> = ({ title, description, image, article = false }) =>
       {seo.description && <meta name="twitter:description" content={seo.description} />}
 
       {seo.image && <meta name="twitter:image" content={seo.image} />}
-      {seo.image && <meta name="twitter:image:src" content={seo.image} />}
       <link
         rel="stylesheet"
         href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
