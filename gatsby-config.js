@@ -132,5 +132,27 @@ module.exports = {
         head: false,
       },
     },
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        output: `/sitemap.xml`,
+        query: `
+        {
+          site {
+            siteMetadata {
+              url
+            }
+          }
+          allSitePage {
+            nodes {
+              path
+            }
+          }
+        }`,
+        resolveSiteUrl: ({ site }) => {
+          return site.siteMetadata.url;
+        },
+      },
+    },
   ],
 };
