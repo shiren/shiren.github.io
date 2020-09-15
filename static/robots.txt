@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: http://blog.shiren.dev/sitemap.xml
+Sitemap: https://blog.shiren.dev/sitemap.xml
