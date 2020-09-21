@@ -23,12 +23,12 @@ const RecomendPost: React.FC<Props> = ({ posts }) => {
           return (
             <Item key={slug}>
               <div>
+                {categories.map((category) => (
+                  <Category to={`/${category}/1`} key={category}>
+                    {category}
+                  </Category>
+                ))}
                 <RecomendLink to={slug.replace(/\s/g, '-')}>
-                  {categories.map((category) => (
-                    <Category to={`/${category}/1`} key={category}>
-                      {category}
-                    </Category>
-                  ))}
                   <Title>{title}</Title>
                   <Date>{date}</Date>
                 </RecomendLink>

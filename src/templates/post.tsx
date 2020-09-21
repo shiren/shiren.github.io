@@ -10,6 +10,8 @@ import RecomendPost from '../components/recomendPost';
 
 import { trackCustomEvent } from 'gatsby-plugin-google-analytics';
 
+import { DiscussionEmbed } from 'disqus-react';
+
 type Props = {
   data: {
     markdownRemark: {
@@ -117,6 +119,10 @@ const Post: React.FC<Props> = ({ data }) => {
           <img src="https://cdn.buymeacoffee.com/buttons/lato-orange.png" alt="Buy Me A Coffee" />
         </BuyMeACoffee>
         {recomendPost.length ? <RecomendPost posts={recomendPost} /> : null}
+        <DiscussionEmbed
+          shortname={process.env.GATSBY_DISQUS_NAME!}
+          config={{ identifier: post.fields.slug, title: post.frontmatter.title }}
+        />
       </Layout>
     </>
   );

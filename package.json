@@ -25,6 +25,7 @@
   ],
   "dependencies": {
     "babel-plugin-styled-components": "^1.11.1",
+    "disqus-react": "^1.0.10",
     "gatsby": "^2.24.32",
     "gatsby-plugin-feed": "^2.5.11",
     "gatsby-plugin-google-analytics": "^2.3.13",
