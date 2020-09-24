@@ -72,14 +72,16 @@ const SEO: React.FC<Props> = ({ title, description, image, date = '', article = 
       {article && (
         <script type="application/ld+json">
           {`
-          "@context": "https://schema.org",
-          "@type": "BlogPosting",
-          "headline": "${seo.title}",
-          "image": [
-            "${seo.image}" 
-          ],
-          "datePublished": "${new Date(Date.parse(date)).toISOString()}"
-        `}
+            {
+              "@context": "https://schema.org",
+              "@type": "BlogPosting",
+              "headline": "${seo.title}",
+              "image": [
+                "${seo.image}" 
+              ],
+              "datePublished": "${new Date(Date.parse(date)).toISOString()}"
+            }
+          `}
         </script>
       )}
       <link
