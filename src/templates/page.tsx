@@ -34,7 +34,7 @@ const Page: React.FC<Props> = ({ data }) => {
         article={false}
         image={foundedImageFromContentsOrNot}
       />
-      <Layout>
+      <Layout indicator={false}>
         <Headline>
           <h1>{post.frontmatter.title}</h1>
         </Headline>
