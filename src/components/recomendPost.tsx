@@ -1,8 +1,8 @@
-import React from 'react';
-import { Link } from 'gatsby';
-import styled from 'styled-components';
+import React from "react";
+import { Link } from "gatsby";
+import styled from "styled-components";
 
-import { Category } from '../bases/category';
+import { Category } from "../bases/category";
 
 type Props = {
   posts: Array<{
@@ -23,11 +23,13 @@ const RecomendPost: React.FC<Props> = ({ posts }) => {
           return (
             <Item key={slug}>
               <div>
-                {categories.map((category) => (
-                  <Category to={`/${category}/1`} key={category}>
-                    {category}
-                  </Category>
-                ))}
+                <div>
+                  {categories.map((category) => (
+                    <Category to={`/${category}/1`} key={category}>
+                      {category}
+                    </Category>
+                  ))}
+                </div>
                 <RecomendLink to={slug.replace(/\s/g, '-')}>
                   <Title>{title}</Title>
                   <Date>{date}</Date>
