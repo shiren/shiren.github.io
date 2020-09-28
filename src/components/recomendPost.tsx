@@ -1,8 +1,8 @@
-import React from "react";
-import { Link } from "gatsby";
-import styled from "styled-components";
+import React from 'react';
+import { Link } from 'gatsby';
+import styled from 'styled-components';
 
-import { Category } from "../bases/category";
+import { Category } from '../bases/category';
 
 type Props = {
   posts: Array<{
