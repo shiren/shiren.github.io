@@ -97,6 +97,7 @@ const Post: React.FC<Props> = ({ data }) => {
         description={post.excerpt}
         article={true}
         image={foundedImageFromContentsOrNot}
+        date={post.frontmatter.date}
       />
       <Layout indicator={true}>
         <Headline>
