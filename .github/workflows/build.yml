@@ -20,28 +20,28 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: npm cache
         uses: actions/cache@v2
+        id: npm-cache
         with:
           path: ~/.npm
-          id: npm-cache
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
       - name: Gatsby Cache Folder
-          uses: actions/cache@v2
-          id: gatsby-cache-folder
-          with:
-            path: .cache
-            key: ${{ runner.os }}-cache-gatsby
-            restore-keys: |
-              ${{ runner.os }}-cache-gatsby
+        uses: actions/cache@v2
+        id: gatsby-cache-folder
+        with:
+          path: .cache
+          key: ${{ runner.os }}-cache-gatsby
+          restore-keys: |
+            ${{ runner.os }}-cache-gatsby
       - name: Gatsby Public Folder
-          uses: actions/cache@v2
-          id: gatsby-public-folder
-          with:
-            path: public/
-            key: ${{ runner.os }}-public-gatsby
-            restore-keys: |
-              ${{ runner.os }}-public-gatsby
+        uses: actions/cache@v2
+        id: gatsby-public-folder
+        with:
+          path: public/
+          key: ${{ runner.os }}-public-gatsby
+          restore-keys: |
+            ${{ runner.os }}-public-gatsby
       - name: Install dependencies
         run: npm install
       - name: Build
