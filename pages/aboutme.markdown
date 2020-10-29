@@ -24,7 +24,7 @@ subtitle: let the games begin.
 ## 비트 메이커, 작곡가
 
 - 개발로 돈을 벌어 음악에 다 탕진한다.
-- code for life, life for music.
+- "code for life, life for music"
 - 보유 장비
   - Ableton Live + Push2
   - RME Fireface UC
@@ -34,7 +34,7 @@ subtitle: let the games begin.
   - Reason
   - Serum
   - Soundtoys effects
-  - 그밖의 다수 플러그인 보유
+  - 그밖의 다수 플러그인 보유중
 
 ## 글도 쓴다
 
