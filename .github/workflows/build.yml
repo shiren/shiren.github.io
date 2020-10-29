@@ -9,7 +9,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [ 14.x ]
 
     steps:
       - name: Checkout v2 branch
@@ -18,19 +18,45 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Install & Build
-        run: |
-          npm install
-          npm run build --if-present
+      - name: npm cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          id: npm-cache
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Gatsby Cache Folder
+          uses: actions/cache@v2
+          id: gatsby-cache-folder
+          with:
+            path: .cache
+            key: ${{ runner.os }}-cache-gatsby
+            restore-keys: |
+              ${{ runner.os }}-cache-gatsby
+      - name: Gatsby Public Folder
+          uses: actions/cache@v2
+          id: gatsby-public-folder
+          with:
+            path: public/
+            key: ${{ runner.os }}-public-gatsby
+            restore-keys: |
+              ${{ runner.os }}-public-gatsby
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        run: npm run build --if-present
+        env:
+          GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES: true
+          NODE_ENV: production
       - name: Checkout gh-pages branch
         uses: actions/checkout@v2.3.2
         with:
           ref: "gh-pages"
           clean: false
-      - name: Change Directories
+      - name: Copy Directories
         run: |
-          rm -rf ./docs
-          mv ./public ./docs
+          cp -R ./public ./docs
       - name: Add & Commit
         uses: EndBug/add-and-commit@v4.4.0
         with:

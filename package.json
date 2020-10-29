@@ -10,13 +10,13 @@
   "version": "0.1.0",
   "license": "MIT",
   "scripts": {
-    "build": "gatsby build",
+    "build": "GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true && gatsby build",
     "develop": "gatsby clean && gatsby develop -H 0.0.0.0",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve -H 0.0.0.0",
     "clean": "gatsby clean",
-    "deploy": "gatsby clean && gatsby build && git checkout gh-pages && rm -rf ./docs && mv ./public ./docs && git add . && git commit -m \"Updated: `date +'%Y-%m-%d %H:%M:%S'`\" && git push && git checkout v2",
+    "deploy": "gatsby clean && gatsby build && git checkout gh-pages && cp -R ./public ./docs && git add . && git commit -m \"Updated: `date +'%Y-%m-%d %H:%M:%S'`\" && git push && git checkout v2 && rm -rf ./docs",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
   "browserslist_": [

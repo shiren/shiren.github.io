@@ -32,7 +32,9 @@ subtitle: let the games begin.
   - Nord stage 3 88
   - KOMPLETE ULTIMATE + M32 Keyboard
   - Reason
-  - 그밖에 다수의 VST 보유
+  - Serum
+  - Soundtoys effects
+  - 그밖의 다수 플러그인 보유
 
 ## 글도 쓴다
 
