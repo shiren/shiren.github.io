@@ -45,7 +45,7 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Build
-        run: gatsby build
+        run: npx gatsby build
         env:
           GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES: false
           NODE_ENV: production
