@@ -79,7 +79,8 @@ const SEO: React.FC<Props> = ({ title, description, image, date = '', article = 
               "image": [
                 "${seo.image}" 
               ],
-              "datePublished": "${new Date(Date.parse(date)).toISOString()}"
+              "datePublished": "${new Date(Date.parse(date)).toISOString()}",
+              "test": 1
             }
           `}
         </script>
