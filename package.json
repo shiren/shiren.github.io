@@ -24,6 +24,7 @@
     "not ie <= 10"
   ],
   "dependencies": {
+    "@isamrish/gatsby-plugin-google-adsense": "^1.2.0",
     "babel-plugin-styled-components": "^1.11.1",
     "gatsby": "^2.24.32",
     "gatsby-plugin-feed": "^2.5.11",

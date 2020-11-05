@@ -154,5 +154,12 @@ module.exports = {
         },
       },
     },
+    {
+      resolve: `@isamrish/gatsby-plugin-google-adsense`,
+      options: {
+        googleAdClientId: 'ca-pub-4811193197471582',
+        head: true,
+      },
+    },
   ],
 };
