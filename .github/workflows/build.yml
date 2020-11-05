@@ -44,12 +44,12 @@ jobs:
             ${{ runner.os }}-public-gatsby
       - name: Install dependencies
         run: npm install
-      - name: clean
-        run: npm run clean
+#      - name: clean
+#        run: npm run clean
       - name: Build
         run: npm run build --if-present
         env:
-#          GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES: true
+          GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES: true
           NODE_ENV: production
       - name: Checkout gh-pages branch
         uses: actions/checkout@v2.3.2
