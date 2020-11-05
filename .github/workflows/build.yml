@@ -47,7 +47,7 @@ jobs:
       - name: Build
         run: npx gatsby build
         env:
-          GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES: false
+          GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES: true
           NODE_ENV: production
       - name: Checkout gh-pages branch
         uses: actions/checkout@v2.3.2
