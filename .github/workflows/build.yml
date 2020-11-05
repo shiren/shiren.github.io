@@ -56,6 +56,8 @@ jobs:
           clean: false
       - name: Copy Directories
         run: |
+          ls -al
+          rm -rf ./docs
           cp -R ./public ./docs
       - name: Add & Commit
         uses: EndBug/add-and-commit@v4.4.0
