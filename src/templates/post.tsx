@@ -120,7 +120,7 @@ const Post: React.FC<Props> = ({ data }) => {
     (window as any).adsbygoogle = (window as any).adsbygoogle || [];
     (window as any).adsbygoogle.push({});
     (window as any).adsbygoogle.push({});
-  }, []);
+  });
 
   return (
     <>
