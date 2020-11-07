@@ -90,11 +90,6 @@ const Post: React.FC<Props> = ({ data }) => {
       action: 'click',
     });
 
-  useEffect(() => {
-    (window as any).adsbygoogle = (window as any).adsbygoogle || [];
-    (window as any).adsbygoogle.push({});
-  }, []);
-
   let pCount = 0;
   let h2Count = 0;
 
@@ -120,6 +115,12 @@ const Post: React.FC<Props> = ({ data }) => {
 
     return item;
   });
+
+  useEffect(() => {
+    (window as any).adsbygoogle = (window as any).adsbygoogle || [];
+    (window as any).adsbygoogle.push({});
+    (window as any).adsbygoogle.push({});
+  }, []);
 
   return (
     <>
