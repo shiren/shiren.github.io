@@ -91,7 +91,6 @@ const Post: React.FC<Props> = ({ data }) => {
     });
 
   let pCount = 0;
-  let h2Count = 0;
 
   let splited = post.html.split('\n');
 
@@ -101,11 +100,9 @@ const Post: React.FC<Props> = ({ data }) => {
   splited = splited.map((item) => {
     if (/^<p>/g.test(item)) {
       pCount += 1;
-    } else if (/^<h2>/g.test(item)) {
-      h2Count += 1;
     }
 
-    if (pCount === 3 && h2Count === 0) {
+    if (pCount === 3) {
       return `${item}${adHTML}`;
     }
 
