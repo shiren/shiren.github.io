@@ -206,7 +206,7 @@ const Article = styled.article`
 const AD = styled.a`
   display: block;
   width: 200px;
-  margin: 10px auto 0;
+  margin: 10px auto 10px;
   color: #404040;
   text-decoration: none;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;

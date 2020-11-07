@@ -44,7 +44,7 @@ const RecomendPost: React.FC<Props> = ({ posts }) => {
 };
 
 const Wrapper = styled.div`
-  margin-top: 60px;
+  margin-top: 40px;
   padding-top: 10px;
   border-top: 1px solid #000;
 `;
