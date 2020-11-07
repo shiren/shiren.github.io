@@ -118,7 +118,6 @@ const Post: React.FC<Props> = ({ data }) => {
           data-ad-client="ca-pub-4811193197471582"
           data-ad-slot="7153541064"
         />
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         <BuyMeACoffee
           onClick={sendShareGa}
           href="https://www.buymeacoffee.com/shiren"
