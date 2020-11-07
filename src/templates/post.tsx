@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { graphql } from 'gatsby';
 
 import styled from 'styled-components';
@@ -89,6 +89,11 @@ const Post: React.FC<Props> = ({ data }) => {
       category: 'BuyMeACoffee',
       action: 'click',
     });
+
+  useEffect(() => {
+    (window as any).adsbygoogle = (window as any).adsbygoogle || [];
+    (window as any).adsbygoogle.push({});
+  }, []);
 
   return (
     <>
