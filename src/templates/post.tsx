@@ -95,6 +95,32 @@ const Post: React.FC<Props> = ({ data }) => {
     (window as any).adsbygoogle.push({});
   }, []);
 
+  let pCount = 0;
+  let h2Count = 0;
+
+  let splited = post.html.split('\n');
+
+  const adHTML =
+    '<ins class="adsbygoogle" style="display: block;text-align: center" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-4811193197471582" data-ad-slot="7153541064"></ins>';
+
+  splited = splited.map((item) => {
+    if (/^<p>/g.test(item)) {
+      pCount += 1;
+    } else if (/^<h2>/g.test(item)) {
+      h2Count += 1;
+    }
+
+    if (pCount >= 3 && h2Count === 0) {
+      return `${item}${adHTML}`;
+    }
+
+    if (pCount < 3 && h2Count === 1) {
+      return `${adHTML}${item}`;
+    }
+
+    return item;
+  });
+
   return (
     <>
       <SEO
@@ -114,15 +140,7 @@ const Post: React.FC<Props> = ({ data }) => {
           path={post.fields.slug}
           tags={post.frontmatter.categories.split(', ')}
         />
-        <Article dangerouslySetInnerHTML={{ __html: post.html }} />
-        <ins
-          className="adsbygoogle"
-          style={{ display: 'block', textAlign: 'center' }}
-          data-ad-layout="in-article"
-          data-ad-format="fluid"
-          data-ad-client="ca-pub-4811193197471582"
-          data-ad-slot="7153541064"
-        />
+        <Article dangerouslySetInnerHTML={{ __html: splited.join('') }} />
         <BuyMeACoffee
           onClick={sendShareGa}
           href="https://www.buymeacoffee.com/shiren"
@@ -135,6 +153,14 @@ const Post: React.FC<Props> = ({ data }) => {
           <br />
           <img src="/image/toastui.png" alt="TOAST UI" />
         </AD>
+        <ins
+          className="adsbygoogle"
+          style={{ display: 'block', textAlign: 'center' }}
+          data-ad-layout="in-article"
+          data-ad-format="fluid"
+          data-ad-client="ca-pub-4811193197471582"
+          data-ad-slot="7153541064"
+        />
         {recomendPost.length ? <RecomendPost posts={recomendPost} /> : null}
       </Layout>
     </>
