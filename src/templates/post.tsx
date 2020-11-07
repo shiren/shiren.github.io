@@ -109,10 +109,6 @@ const Post: React.FC<Props> = ({ data }) => {
       return `${item}${adHTML}`;
     }
 
-    if (pCount < 3 && h2Count === 1) {
-      return `${adHTML}${item}`;
-    }
-
     return item;
   });
 
