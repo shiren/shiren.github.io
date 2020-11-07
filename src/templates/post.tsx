@@ -91,6 +91,7 @@ const Post: React.FC<Props> = ({ data }) => {
     });
 
   let pCount = 0;
+  let adCount = 0;
 
   let splited = post.html.split('\n');
 
@@ -102,7 +103,9 @@ const Post: React.FC<Props> = ({ data }) => {
       pCount += 1;
     }
 
-    if (pCount === 3) {
+    if (pCount === 3 && adCount < 1) {
+      adCount += 1;
+
       return `${item}${adHTML}`;
     }
 
