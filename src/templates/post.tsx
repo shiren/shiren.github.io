@@ -110,6 +110,15 @@ const Post: React.FC<Props> = ({ data }) => {
           tags={post.frontmatter.categories.split(', ')}
         />
         <Article dangerouslySetInnerHTML={{ __html: post.html }} />
+        <ins
+          className="adsbygoogle"
+          style={{ display: 'block', textAlign: 'center' }}
+          data-ad-layout="in-article"
+          data-ad-format="fluid"
+          data-ad-client="ca-pub-4811193197471582"
+          data-ad-slot="7153541064"
+        />
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         <BuyMeACoffee
           onClick={sendShareGa}
           href="https://www.buymeacoffee.com/shiren"
