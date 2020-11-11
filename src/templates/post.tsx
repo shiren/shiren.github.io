@@ -61,6 +61,31 @@ type RecomendPostData = {
   categories: string[];
 };
 
+const addAdsenseToHtml = (html: string): string => {
+  let pCount = 0;
+  let adCount = 0;
+
+  const adHTML =
+    '<ins class="adsbygoogle" style="display: block;text-align: center" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-4811193197471582" data-ad-slot="7153541064"></ins>';
+
+  return html
+    .split('\n')
+    .map((item) => {
+      if (/^<p>/g.test(item)) {
+        pCount += 1;
+      }
+
+      if (pCount === 3 && adCount < 1) {
+        adCount += 1;
+
+        return `${item}${adHTML}`;
+      }
+
+      return item;
+    })
+    .join('\n');
+};
+
 const Post: React.FC<Props> = ({ data }) => {
   const post = data.markdownRemark;
 
@@ -82,6 +107,8 @@ const Post: React.FC<Props> = ({ data }) => {
 
   recomendPost.splice(4, 4);
 
+  const translationPost = post.frontmatter.categories.includes('translation');
+
   const foundedImageFromContentsOrNot = (post.html.match(/<img.*?src="(.*?)"/) || [])[1];
 
   const sendShareGa = () =>
@@ -90,32 +117,14 @@ const Post: React.FC<Props> = ({ data }) => {
       action: 'click',
     });
 
-  let pCount = 0;
-  let adCount = 0;
-
-  let splited = post.html.split('\n');
-
-  const adHTML =
-    '<ins class="adsbygoogle" style="display: block;text-align: center" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-4811193197471582" data-ad-slot="7153541064"></ins>';
-
-  splited = splited.map((item) => {
-    if (/^<p>/g.test(item)) {
-      pCount += 1;
-    }
-
-    if (pCount === 3 && adCount < 1) {
-      adCount += 1;
-
-      return `${item}${adHTML}`;
-    }
-
-    return item;
-  });
+  const html = translationPost ? post.html : addAdsenseToHtml(post.html);
 
   useEffect(() => {
-    (window as any).adsbygoogle = (window as any).adsbygoogle || [];
-    (window as any).adsbygoogle.push({});
-    (window as any).adsbygoogle.push({});
+    if (!translationPost) {
+      (window as any).adsbygoogle = (window as any).adsbygoogle || [];
+      (window as any).adsbygoogle.push({});
+      (window as any).adsbygoogle.push({});
+    }
   });
 
   return (
@@ -137,7 +146,7 @@ const Post: React.FC<Props> = ({ data }) => {
           path={post.fields.slug}
           tags={post.frontmatter.categories.split(', ')}
         />
-        <Article dangerouslySetInnerHTML={{ __html: splited.join('') }} />
+        <Article dangerouslySetInnerHTML={{ __html: html }} />
         <BuyMeACoffee
           onClick={sendShareGa}
           href="https://www.buymeacoffee.com/shiren"
