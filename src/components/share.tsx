@@ -45,6 +45,12 @@ const Share: React.FC<Props> = ({ path, title, tags }) => {
       action: type,
       label: decodeURIComponent(location.href),
     });
+
+    typeof window !== 'undefined' &&
+      window.gtag('event', 'click', {
+        event_category: 'Share',
+        event_label: decodeURIComponent(location.href),
+      });
   };
 
   const wrapperRef = React.useRef() as React.MutableRefObject<HTMLDivElement>;

@@ -109,11 +109,17 @@ const Post: React.FC<Props> = ({ data }) => {
 
   const foundedImageFromContentsOrNot = (post.html.match(/<img.*?src="(.*?)"/) || [])[1];
 
-  const sendShareGa = () =>
+  const sendShareGa = () => {
     trackCustomEvent({
       category: 'BuyMeACoffee',
       action: 'click',
     });
+
+    typeof window !== 'undefined' &&
+      window.gtag('event', 'click', {
+        event_category: 'BuyMeACoffee',
+      });
+  };
 
   const translated = post.frontmatter.categories.includes('translation');
 

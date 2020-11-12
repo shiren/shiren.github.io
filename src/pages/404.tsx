@@ -40,6 +40,12 @@ const Page404: React.FC = () => {
       action: '404',
       label: decodedURL,
     });
+
+    typeof window !== 'undefined' &&
+      window.gtag('event', 'Error', {
+        event_category: '404',
+        event_label: decodedURL,
+      });
   }, []);
 
   return (
