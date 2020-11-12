@@ -107,8 +107,6 @@ const Post: React.FC<Props> = ({ data }) => {
 
   recomendPost.splice(4, 4);
 
-  const translationPost = post.frontmatter.categories.includes('translation');
-
   const foundedImageFromContentsOrNot = (post.html.match(/<img.*?src="(.*?)"/) || [])[1];
 
   const sendShareGa = () =>
@@ -117,10 +115,12 @@ const Post: React.FC<Props> = ({ data }) => {
       action: 'click',
     });
 
-  const html = translationPost ? post.html : addAdsenseToHtml(post.html);
+  const translated = post.frontmatter.categories.includes('translation');
+
+  const html = translated ? post.html : addAdsenseToHtml(post.html);
 
   useEffect(() => {
-    if (!translationPost) {
+    if (!translated) {
       (window as any).adsbygoogle = (window as any).adsbygoogle || [];
       (window as any).adsbygoogle.push({});
       (window as any).adsbygoogle.push({});

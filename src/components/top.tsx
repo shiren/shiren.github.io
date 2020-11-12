@@ -74,14 +74,14 @@ const Top: React.FC<{ useIndicator: boolean }> = ({ useIndicator }) => {
         setShortTop(false);
       }
 
-      const progress = Math.min(
+      const currentProgress = Math.min(
         (scrollTop /
           (document.documentElement.scrollHeight - document.documentElement.clientHeight)) *
           100,
         100
       );
 
-      useIndicator && setProgress(progress);
+      useIndicator && setProgress(currentProgress);
     };
 
     window.addEventListener('scroll', handleScrollEvent);

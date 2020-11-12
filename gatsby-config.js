@@ -125,11 +125,13 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-google-analytics`,
+      resolve: `gatsby-plugin-google-gtag`,
       options: {
-        trackingId: 'UA-59192630-1',
-        pageTransitionDelay: 0,
-        head: false,
+        // You can add multiple tracking ids and a pageview event will be fired for all of them.
+        trackingIds: [
+          'G-9LD1FTDX8D', // Google Analytics / GA
+          'ca-pub-4811193197471582', // Google Ads / Adwords / AW
+        ],
       },
     },
     {
