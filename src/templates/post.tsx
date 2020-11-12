@@ -117,7 +117,7 @@ const Post: React.FC<Props> = ({ data }) => {
 
     typeof window !== 'undefined' &&
       window.gtag('event', 'click', {
-        event_category: 'BuyMeACoffee',
+        event_category: 'BuyMeACoffee', // eslint-disable-line camelcase
       });
   };
 

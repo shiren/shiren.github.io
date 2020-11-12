@@ -48,8 +48,8 @@ const Share: React.FC<Props> = ({ path, title, tags }) => {
 
     typeof window !== 'undefined' &&
       window.gtag('event', 'click', {
-        event_category: 'Share',
-        event_label: decodeURIComponent(location.href),
+        event_category: 'Share', // eslint-disable-line camelcase
+        event_label: decodeURIComponent(location.href), // eslint-disable-line camelcase
       });
   };
 

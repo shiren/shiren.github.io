@@ -43,8 +43,8 @@ const Page404: React.FC = () => {
 
     typeof window !== 'undefined' &&
       window.gtag('event', 'Error', {
-        event_category: '404',
-        event_label: decodedURL,
+        event_category: '404', // eslint-disable-line camelcase
+        event_label: decodedURL, // eslint-disable-line camelcase
       });
   }, []);
 
