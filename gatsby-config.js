@@ -82,6 +82,7 @@ module.exports = {
                 title
                 description
                 url
+                site_url: url # 파일안에 link를 제대로 만들려면 필요하다.
               }
             }
           }
@@ -120,6 +121,7 @@ module.exports = {
             `,
             output: '/feed.xml',
             title: 'shiren.dev RSS Feed',
+            link: 'https://blog.shiren.dev',
           },
         ],
       },
