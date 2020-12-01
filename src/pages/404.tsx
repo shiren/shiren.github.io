@@ -42,7 +42,7 @@ const Page404: React.FC = () => {
     });
 
     typeof window !== 'undefined' &&
-      window.gtag('event', 'Error', {
+      (window as any).gtag('event', 'Error', {
         event_category: '404', // eslint-disable-line camelcase
         event_label: decodedURL, // eslint-disable-line camelcase
       });
@@ -50,7 +50,7 @@ const Page404: React.FC = () => {
 
   return (
     <>
-      <Layout>
+      <Layout indicator={false}>
         <Wrapper>
           <h1>Page not found</h1>
           <p>두둠칫🎶 두둠칫🎶 두둠두둠둠🎶 두둠칫칫🎶</p>

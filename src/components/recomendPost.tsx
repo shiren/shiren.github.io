@@ -30,7 +30,7 @@ const RecomendPost: React.FC<Props> = ({ posts }) => {
                     </Category>
                   ))}
                 </div>
-                <RecomendLink to={slug.replace(/\s/g, '-')}>
+                <RecomendLink to={slug.replace(/\s/g, '-')} key={slug}>
                   <Title>{title}</Title>
                   <Date>{date}</Date>
                 </RecomendLink>

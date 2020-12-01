@@ -103,7 +103,7 @@ const Post: React.FC<Props> = ({ data }) => {
         unique.find((unode) => unode.slug === node.slug) ? unique : [...unique, node],
       []
     )
-    .sort(() => Math.random() * 2 - 1);
+    .sort((node) => (node.categories.includes('translation') ? 1 : -1));
 
   recomendPost.splice(4, 4);
 
@@ -116,20 +116,21 @@ const Post: React.FC<Props> = ({ data }) => {
     });
 
     typeof window !== 'undefined' &&
-      window.gtag('event', 'click', {
+      (window as any).gtag('event', 'click', {
         event_category: 'BuyMeACoffee', // eslint-disable-line camelcase
       });
   };
 
-  const translated = post.frontmatter.categories.includes('translation');
-
-  const html = translated ? post.html : addAdsenseToHtml(post.html);
+  const html = addAdsenseToHtml(post.html);
 
   useEffect(() => {
-    if (!translated) {
-      (window as any).adsbygoogle = (window as any).adsbygoogle || [];
+    (window as any).adsbygoogle = (window as any).adsbygoogle || [];
+
+    let adLength = document.querySelectorAll('.adsbygoogle[data-ad-slot]').length;
+
+    while (adLength > 0) {
       (window as any).adsbygoogle.push({});
-      (window as any).adsbygoogle.push({});
+      adLength -= 1;
     }
   });
 
