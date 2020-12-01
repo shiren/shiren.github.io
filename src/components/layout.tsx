@@ -23,11 +23,6 @@ const Layout: React.FC<{ indicator: boolean }> = ({ indicator, children }) => {
       version = parseInt(UA.substring(rv + 3, UA.indexOf('.', rv)), 10);
     }
 
-    const edge = UA.indexOf('Edge/');
-    if (edge > 0) {
-      version = parseInt(UA.substring(edge + 5, UA.indexOf('.', edge)), 10);
-    }
-
     setNotSupported(!!version && version < 11);
   }, []);
 
