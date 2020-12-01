@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { graphql } from 'gatsby';
 
 import styled from 'styled-components';
@@ -87,25 +87,9 @@ const addAdsenseToHtml = (html: string): string => {
 };
 
 const Post: React.FC<Props> = ({ data }) => {
+  const [recomendPost, setRecomendPost] = useState<RecomendPostData[]>([]);
+
   const post = data.markdownRemark;
-
-  const recomendPost = [...data.recomendPost.nodes, ...data.recentPost.nodes]
-    .map<RecomendPostData>((node) => ({
-      title: node.frontmatter.title,
-      slug: node.fields.slug,
-      excerpt: node.excerpt,
-      date: node.frontmatter.date,
-      categories: node.frontmatter.categories.split(', '),
-    }))
-    .filter((node) => node.slug !== post.fields.slug)
-    .reduce<RecomendPostData[]>(
-      (unique, node) =>
-        unique.find((unode) => unode.slug === node.slug) ? unique : [...unique, node],
-      []
-    )
-    .sort((node) => (node.categories.includes('translation') ? 1 : -1));
-
-  recomendPost.splice(4, 4);
 
   const foundedImageFromContentsOrNot = (post.html.match(/<img.*?src="(.*?)"/) || [])[1];
 
@@ -132,7 +116,27 @@ const Post: React.FC<Props> = ({ data }) => {
       (window as any).adsbygoogle.push({});
       adLength -= 1;
     }
-  });
+
+    const recomendPostCandidates = [...data.recomendPost.nodes, ...data.recentPost.nodes]
+      .map<RecomendPostData>((node) => ({
+        title: node.frontmatter.title,
+        slug: node.fields.slug,
+        excerpt: node.excerpt,
+        date: node.frontmatter.date,
+        categories: node.frontmatter.categories.split(', '),
+      }))
+      .filter((node) => node.slug !== post.fields.slug)
+      .reduce<RecomendPostData[]>(
+        (unique, node) =>
+          unique.find((unode) => unode.slug === node.slug) ? unique : [...unique, node],
+        []
+      )
+      .sort((node) => (node.categories.includes('translation') ? 1 : Math.random() * 2 - 1));
+
+    recomendPostCandidates.splice(4, recomendPostCandidates.length - 4);
+
+    setRecomendPost(recomendPostCandidates);
+  }, [data, post, setRecomendPost]);
 
   return (
     <>
@@ -263,7 +267,7 @@ export const query = graphql`
     recentPost: allMarkdownRemark(
       filter: { frontmatter: { layout: { eq: "post" } } }
       sort: { fields: frontmatter___date, order: DESC }
-      limit: 4
+      limit: 6
     ) {
       nodes {
         fields {
