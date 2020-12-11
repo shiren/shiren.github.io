@@ -165,11 +165,6 @@ const Post: React.FC<Props> = ({ data }) => {
         >
           <img src="https://cdn.buymeacoffee.com/buttons/lato-orange.png" alt="Buy Me A Coffee" />
         </BuyMeACoffee>
-        <AD href="https://ui.toast.com" target="_blank">
-          Why not?
-          <br />
-          <img src="/image/toastui.png" alt="TOAST UI" />
-        </AD>
         <ins
           className="adsbygoogle"
           style={{ display: 'block', textAlign: 'center' }}
@@ -231,15 +226,6 @@ const Article = styled.article`
   @media only screen and (max-width: 1080px) {
     margin-top: 0;
   }
-`;
-
-const AD = styled.a`
-  display: block;
-  width: 200px;
-  margin: 10px auto 10px;
-  color: #404040;
-  text-decoration: none;
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 `;
 
 const CC = styled.p`
