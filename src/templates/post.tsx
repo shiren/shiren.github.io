@@ -167,7 +167,13 @@ const Post: React.FC<Props> = ({ data }) => {
         </BuyMeACoffee>
         <ins
           className="adsbygoogle"
-          style={{ display: 'block', textAlign: 'center' }}
+          style={{
+            display: 'block',
+            textAlign: 'center',
+            // width: 650,
+            // height: 163,
+            // border: '1px solid red',
+          }}
           data-ad-layout="in-article"
           data-ad-format="fluid"
           data-ad-client="ca-pub-4811193197471582"
@@ -195,7 +201,7 @@ const Post: React.FC<Props> = ({ data }) => {
 
 const BuyMeACoffee = styled.a`
   display: block;
-  margin-top: 40px;
+  margin: 40px 0 20px;
   text-align: center;
 
   & img {
