@@ -178,6 +178,20 @@ const Post: React.FC<Props> = ({ data }) => {
           data-ad-client="ca-pub-4811193197471582"
           data-ad-slot="7153541064"
         />
+        <CC>
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">
+            <img
+              alt="크리에이티브 커먼즈 라이선스"
+              style={{ borderWidth: 0 }}
+              src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png"
+            />
+          </a>
+          이 저작물은{' '}
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">
+            크리에이티브 커먼즈 저작자표시-비영리-변경금지 4.0 국제 라이선스
+          </a>
+          에 따라 이용할 수 있습니다.
+        </CC>
         {recomendPost.length ? <RecomendPost posts={recomendPost} /> : null}
       </Layout>
     </>
@@ -226,6 +240,17 @@ const AD = styled.a`
   color: #404040;
   text-decoration: none;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+`;
+
+const CC = styled.p`
+  font-size: 13px;
+  line-height: 1;
+
+  & > a:first-child {
+    float: left;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
 `;
 
 export default Post;
