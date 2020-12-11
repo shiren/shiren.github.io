@@ -235,6 +235,7 @@ const Article = styled.article`
 `;
 
 const CC = styled.p`
+  padding-top: 30px;
   font-size: 13px;
   line-height: 1;
 
