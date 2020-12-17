@@ -146,7 +146,7 @@ const Icon = styled.span`
 const Title = styled.h3`
   border-bottom: 1px solid #000;
   color: #000;
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-style: normal;
   font-weight: 800;
 

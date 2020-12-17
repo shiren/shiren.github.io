@@ -38,7 +38,7 @@ const Title = styled.h2`
   margin: 0 auto;
   line-height: 1;
   font-size: 40px;
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   letter-spacing: 2.5px;
   color: #444;
 `;
@@ -51,7 +51,7 @@ const Logo = styled.img`
 const Desc = styled.p`
   margin-top: -2px;
   text-transform: lowercase;
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #636f88;
   font-size: 12px;
   letter-spacing: -0.1px;

@@ -53,7 +53,7 @@ const Date = styled.p`
   display: inline-block;
   margin: 0;
   padding: 0;
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 300;
   font-size: 14px;
   line-height: 1.5;
@@ -84,7 +84,7 @@ const PostHeader = styled.h3`
 
 const PostEntry = styled.p`
   margin: 10px 0 5px;
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 `;
 
 const Icon = styled.span`

@@ -127,7 +127,7 @@ const MenuButton = styled.button`
 
 const MenuList = styled.ul`
   float: right;
-  padding: 0;
+  padding: 3px 0;
   margin: 0;
 
   & ul {
@@ -152,7 +152,7 @@ const MenuList = styled.ul`
     letter-spacing: 1px;
     color: #000;
     text-decoration: none;
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     cursor: pointer;
   }
 
@@ -204,7 +204,7 @@ const LogoButton = styled.a`
   font-weight: 800;
   color: #000;
   text-decoration: none;
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
   & > img {
     width: 30px;

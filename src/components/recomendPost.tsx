@@ -88,7 +88,7 @@ const Item = styled.div`
 
 const Date = styled.p`
   margin: 10px 0 0 0;
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 300;
   font-size: 14px;
   line-height: 1.5;

@@ -49,7 +49,7 @@ const PaginationLink = styled(Link)<{ align: string }>`
   text-decoration: none;
   font-weight: 800;
   font-size: 14px;
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #404040;
 
   &:hover {
