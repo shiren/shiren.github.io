@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { graphql } from 'gatsby';
 
 import styled from 'styled-components';
@@ -87,8 +87,6 @@ const addAdsenseToHtml = (html: string): string => {
 };
 
 const Post: React.FC<Props> = ({ data }) => {
-  const [recomendPost, setRecomendPost] = useState<RecomendPostData[]>([]);
-
   const post = data.markdownRemark;
 
   const foundedImageFromContentsOrNot = (post.html.match(/<img.*?src="(.*?)"/) || [])[1];
@@ -116,27 +114,25 @@ const Post: React.FC<Props> = ({ data }) => {
       (window as any).adsbygoogle.push({});
       adLength -= 1;
     }
+  }, [data, post]);
 
-    const recomendPostCandidates = [...data.recomendPost.nodes, ...data.recentPost.nodes]
-      .map<RecomendPostData>((node) => ({
-        title: node.frontmatter.title,
-        slug: node.fields.slug,
-        excerpt: node.excerpt,
-        date: node.frontmatter.date,
-        categories: node.frontmatter.categories.split(', '),
-      }))
-      .filter((node) => node.slug !== post.fields.slug)
-      .reduce<RecomendPostData[]>(
-        (unique, node) =>
-          unique.find((unode) => unode.slug === node.slug) ? unique : [...unique, node],
-        []
-      )
-      .sort((node) => (node.categories.includes('translation') ? 1 : Math.random() * 2 - 1));
+  const recomendPost: RecomendPostData[] = [...data.recomendPost.nodes, ...data.recentPost.nodes]
+    .map<RecomendPostData>((node) => ({
+      title: node.frontmatter.title,
+      slug: node.fields.slug,
+      excerpt: node.excerpt,
+      date: node.frontmatter.date,
+      categories: node.frontmatter.categories.split(', '),
+    }))
+    .filter((node) => node.slug !== post.fields.slug)
+    .reduce<RecomendPostData[]>(
+      (unique, node) =>
+        unique.find((unode) => unode.slug === node.slug) ? unique : [...unique, node],
+      []
+    )
+    .sort((node) => (node.categories.includes('translation') ? 1 : Math.random() * 2 - 1));
 
-    recomendPostCandidates.splice(4, recomendPostCandidates.length - 4);
-
-    setRecomendPost(recomendPostCandidates);
-  }, [data, post, setRecomendPost]);
+  recomendPost.splice(4, recomendPost.length - 4);
 
   return (
     <>
