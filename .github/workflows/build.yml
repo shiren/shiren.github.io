@@ -9,7 +9,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [ 14.x ]
+        node-version: [ 15.x ]
 
     steps:
       - name: Checkout v2 branch
@@ -31,23 +31,22 @@ jobs:
         id: gatsby-cache-folder
         with:
           path: .cache
-          key: ${{ runner.os }}-cache-gatsby
+          key: ${{ runner.os }}-cache-gatsby-2
           restore-keys: |
-            ${{ runner.os }}-cache-gatsby
+            ${{ runner.os }}-cache-gatsby-2
       - name: Gatsby Public Folder
         uses: actions/cache@v2
         id: gatsby-public-folder
         with:
           path: public/
-          key: ${{ runner.os }}-public-gatsby
+          key: ${{ runner.os }}-public-gatsby-2
           restore-keys: |
-            ${{ runner.os }}-public-gatsby
+            ${{ runner.os }}-public-gatsby-2
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
       - name: Build
         run: npx gatsby build
         env:
-          GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES: true
           NODE_ENV: production
       - name: Checkout gh-pages branch
         uses: actions/checkout@v2.3.2
