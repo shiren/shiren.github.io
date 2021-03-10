@@ -1,0 +1,26 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "target": "ESNext",
+    "module": "commonJS",
+    "strict": true,
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": false,
+    "sourceMap": true,
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "types": ["node", "jest"],
+    "downlevelIteration": true,
+    "baseUrl": "./",
+    "paths": {
+      "@src/*": ["src/*"]
+    },
+    "outDir": ".",
+    "jsx": "react"
+  },
+  "include": ["src/**/*.js", "src/**/*.ts", "src/**/*.tsx"]
+}
