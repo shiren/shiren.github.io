@@ -173,5 +173,8 @@ module.exports = {
         head: true,
       },
     },
+    {
+      resolve: 'gatsby-disco-wrysium'
+    }
   ],
 };

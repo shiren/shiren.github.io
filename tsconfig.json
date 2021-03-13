@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "noEmit": true,
-    "target": "es5",
+    "target": "es6",
     "module": "ESNext",
     "strict": true,
     "importHelpers": true,
@@ -52,6 +52,9 @@
     "src/**/*.ts",
     "stories/**/*.ts",
     "stories/**/*.js",
-    "tests/**/*.ts"
+    "tests/**/*.ts",
+    "plugins/**/*.js",
+    "plugins/**/*.tsx",
+    "plugins/**/*.ts"
   ]
 }

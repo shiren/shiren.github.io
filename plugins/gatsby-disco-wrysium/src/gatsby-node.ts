@@ -1,11 +1,13 @@
+import { GatsbyNode } from 'gatsby';
+
 function testTs(tt: string) {
   return `${tt} hello`;
 }
 
-exports.onPostBuild = ({ reporter }) => {
-  reporter.info(`Your Gatsby site has been built!`);
+export const onPostBuild: GatsbyNode['onPostBuild'] = ({ reporter }) => {
+  reporter.info(`Your Gatsby site has been built222`);
 };
 
-exports.createPages = async () => {
-  console.log(testTs('122222222222222222222222222222222222222'));
+export const createPages: GatsbyNode['createPages'] = async () => {
+  console.log(testTs('12222222222222222222222222222222222222212312312312'));
 };
