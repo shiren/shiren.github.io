@@ -4,7 +4,7 @@
   "description": "Gatsby plugin support Disco elysium like content",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --watch",
     "build": "babel src --extensions .ts,.tsx --out-dir .",
     "develop": "babel src --extensions .ts,.tsx --out-dir . --watch"
   },
@@ -15,9 +15,19 @@
     "@babel/core": "^7.13.10",
     "@babel/preset-env": "^7.13.10",
     "@babel/preset-typescript": "^7.13.0",
-    "babel-preset-gatsby-package": "^1.0.0"
+    "@types/jest": "^26.0.21",
+    "babel-preset-gatsby-package": "^1.0.0",
+    "jest": "^26.6.3",
+    "ts-jest": "^26.5.4",
+    "typescript": "^4.2.3"
   },
   "dependencies": {
-    "@mdx-js/mdx": "^2.0.0-next.8"
+    "@mdx-js/mdx": "^2.0.0-next.8",
+    "micromark": "^2.11.4",
+    "rehype-stringify": "^8.0.0",
+    "remark-parse": "^9.0.0",
+    "remark-rehype": "^8.0.0",
+    "unified": "^9.2.1",
+    "unified-stream": "^1.0.6"
   }
 }
