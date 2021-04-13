@@ -2,9 +2,9 @@
   "compilerOptions": {
     "noEmit": true,
     "target": "es5",
-    "module": "ESNext",
+    "module": "es2015",
     "strict": true,
-    "importHelpers": true,
+    "importHelpers": false,
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "esModuleInterop": true,
