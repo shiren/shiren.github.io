@@ -28,7 +28,6 @@ const ListHeader: React.FC = () => {
 };
 
 const Container = styled.header`
-  margin-top: 150px;
   margin-bottom: 50px;
   text-align: center;
   clear: both;
