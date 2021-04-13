@@ -231,7 +231,7 @@ const Wrapper = styled.nav<{ shortTop: boolean; showMenu: boolean }>`
   left: 0;
   top: 0;
   min-height: 50px;
-  padding: ${({ shortTop }) => (shortTop ? '0' : '20px 0')};
+  padding: ${({ shortTop }) => (shortTop ? '0' : '10px 0')};
   margin-bottom: 20px;
   border-bottom: 1px solid #000;
   background: #fff;

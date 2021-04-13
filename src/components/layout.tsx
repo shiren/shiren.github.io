@@ -43,13 +43,17 @@ const Layout: React.FC<{ indicator: boolean }> = ({ indicator, children }) => {
 };
 
 const Container = styled.div`
-  margin: 120px auto 0;
+  margin: 150px auto 0;
   max-width: 680px;
   padding: 0 15px;
   box-sizing: border-box;
 
   @media only screen and (max-width: 768px) {
     width: 100%;
+  }
+
+  @media only screen and (max-width: 460px) {
+    margin: 60px auto 0;
   }
 `;
 
