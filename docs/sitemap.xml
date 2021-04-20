@@ -6,15 +6,15 @@
 <url> <loc>https://blog.shiren.dev/2015-06-23-동적인-자바스크립트-앱을-위한-ES6-사용법/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.shiren.dev/2015-08-03-자바스크립트에서의-커링/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.shiren.dev/2015-09-24-유닛테스트가-해야할-5가지-답변-테스트를-잘-작성하는-방법/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://blog.shiren.dev/2015-10-19-Flux-카툰-가이드/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.shiren.dev/2016-02-15-Webpack으로-자바스크립트-모듈관리-하기/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://blog.shiren.dev/2015-10-19-Flux-카툰-가이드/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.shiren.dev/2016-02-18-네이티브-애드온으로-Node.js의-성능을-향상-시키는-방법/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.shiren.dev/2016-03-23-웹개발자를-위한-크롬-개발자-도구/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.shiren.dev/2016-06-27-클로저,-그리고-캡슐화와-은닉화/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.shiren.dev/2016-08-23-도커로-노드앱을-구축하며-배운것들/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.shiren.dev/2016-11-15-크롬개발자도구를-이용한-프론트엔드-성능측정/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://blog.shiren.dev/2017-02-21-쉽게-이해하는-자바스크립트-프로토타입-체인/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.shiren.dev/2017-01-03-RxJS와-함께하는-함수형-리액티브-프로그래밍/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://blog.shiren.dev/2017-02-21-쉽게-이해하는-자바스크립트-프로토타입-체인/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.shiren.dev/2017-04-10-웹어셈블리-바로-사용-해보기/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.shiren.dev/2017-09-18-웹-기술로-구현하는-Adaptive-HTTP-Streaming/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.shiren.dev/2017-11-13-이맥스와-함께하는-개발환경/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
