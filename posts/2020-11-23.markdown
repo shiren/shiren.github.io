@@ -2,7 +2,7 @@
 layout: post
 title: '누구나 원하는 개발자되기'
 date: 2020-11-23 09:00:00
-categories: recruit
+categories: developer, recruit 
 ---
 
 ![](https://user-images.githubusercontent.com/389021/98948530-e6c58500-2539-11eb-832f-753d5d4d6769.png)
