@@ -7,6 +7,7 @@ import Layout from '../components/layout';
 import SEO from '../components/seo';
 import Share from '../components/share';
 import RecomendPost from '../components/recomendPost';
+import PostImage from '../components/postImage';
 
 import { trackCustomEvent } from 'gatsby-plugin-google-analytics';
 
@@ -19,6 +20,11 @@ type Props = {
         title: string;
         date: string;
         categories: string;
+        image: string;
+        imageAuthor: string;
+        imageAuthorLink: string;
+        imageFrom: string;
+        imageFromLink: string;
       };
       fields: {
         slug: string;
@@ -89,7 +95,8 @@ const addAdsenseToHtml = (html: string): string => {
 const Post: React.FC<Props> = ({ data }) => {
   const post = data.markdownRemark;
 
-  const foundedImageFromContentsOrNot = (post.html.match(/<img.*?src="(.*?)"/) || [])[1];
+  const foundedImageFromContentsOrNot =
+    post.frontmatter.image ?? (post.html.match(/<img.*?src="(.*?)"/) || [])[1];
 
   const sendShareGa = () => {
     trackCustomEvent({
@@ -153,7 +160,19 @@ const Post: React.FC<Props> = ({ data }) => {
           path={post.fields.slug}
           tags={post.frontmatter.categories.split(', ')}
         />
-        <Article dangerouslySetInnerHTML={{ __html: html }} />
+        {post.frontmatter.image ? (
+          <PostImage
+            image={post.frontmatter.image}
+            imageAuthor={post.frontmatter.imageAuthor}
+            imageAuthorLink={post.frontmatter.imageAuthorLink}
+            imageFrom={post.frontmatter.imageFrom}
+            imageFromLink={post.frontmatter.imageFromLink}
+          />
+        ) : null}
+        <Article
+          hasImage={typeof post.frontmatter.image === 'string'}
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
         <BuyMeACoffee
           onClick={sendShareGa}
           href="https://www.buymeacoffee.com/shiren"
@@ -211,7 +230,7 @@ const BuyMeACoffee = styled.a`
 
 const Headline = styled.header`
   position: relative;
-  margin: 130px 0 40px;
+  margin: 0 0 40px;
 
   & > h1 {
     font-size: 50px;
@@ -223,10 +242,15 @@ const Headline = styled.header`
     font-style: italic;
     color: #808080;
   }
+  
+  @media only screen and (max-width: 460px) {
+    & > p {
+      font-size: 12px;
+    }
 `;
 
-const Article = styled.article`
-  margin-top: -86px;
+const Article = styled.article<{ hasImage: boolean }>`
+  margin-top: ${(props) => (props.hasImage ? 0 : `-86px`)};
 
   @media only screen and (max-width: 1080px) {
     margin-top: 0;
@@ -259,6 +283,11 @@ export const query = graphql`
         title
         date(formatString: "DD MMMM, YYYY")
         categories
+        image
+        imageAuthor
+        imageAuthorLink
+        imageFromLink
+        imageFrom
       }
     }
     recomendPost: allMarkdownRemark(
