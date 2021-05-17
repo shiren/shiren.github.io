@@ -38,6 +38,8 @@
 <url> <loc>https://blog.shiren.dev/2021-02-15/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.shiren.dev/2021-02-22/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.shiren.dev/2021-04-20/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://blog.shiren.dev/2021-05-10/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://blog.shiren.dev/2021-05-17/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.shiren.dev/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.shiren.dev/page1</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.shiren.dev/page2</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
@@ -48,6 +50,7 @@
 <url> <loc>https://blog.shiren.dev/page7</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.shiren.dev/aboutme/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.shiren.dev/developer/1</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://blog.shiren.dev/habbit/1</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.shiren.dev/frontend/1</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.shiren.dev/frontend/2</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.shiren.dev/frontend/3</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
@@ -59,7 +62,6 @@
 <url> <loc>https://blog.shiren.dev/productivity/1</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.shiren.dev/refactoring/1</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.shiren.dev/test/1</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://blog.shiren.dev/meditation/1</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.shiren.dev/javascript/1</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.shiren.dev/javascript/2</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.shiren.dev/javascript/3</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
