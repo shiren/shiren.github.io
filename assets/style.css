@@ -47,6 +47,14 @@ code.language-text {
   border-radius: 4px;
 }
 
+pre > code.language-text {
+  padding: 0;
+  border-radius: 0;
+  background: inherit;
+  background-color: initial !important;
+  color: inherit;
+}
+
 div.gatsby-highlight {
   font-size: 0.9em;
 }
